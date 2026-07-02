@@ -1,0 +1,179 @@
+body{
+    margin:0;
+    font-family:Arial;
+    background-color:#F5F5F5;
+}
+
+/* HEADER */
+
+header{
+    background-color:#0B1F3A;
+    padding:20px;
+}
+
+.logo{
+    color:#D4AF37;
+    font-size:40px;
+}
+
+.buscar{
+    width:300px;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+}
+
+.sesion{
+    background-color:#D4AF37;
+    color:#0B1F3A;
+    text-decoration:none;
+    padding:10px 20px;
+    border-radius:8px;
+}
+
+.carrito{
+    background-color:#D4AF37;
+    border:none;
+    padding:10px;
+    border-radius:8px;
+}
+
+/* MENU */
+
+nav{
+    background-color:#163A70;
+    text-align:center;
+    padding:15px;
+}
+
+.menu{
+    background-color:#37b5d4;
+    color:#0B1F3A;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    margin:10px;
+    font-size:16px;
+}
+
+/* BANNER */
+
+.banner{
+    text-align:center;
+    padding:30px;
+}
+
+.banner h1{
+    color:#0B1F3A;
+    font-size:50px;
+}
+
+.banner p{
+    color:#555;
+    font-size:20px;
+}
+
+.imagen-banner{
+    width:80%;
+    border-radius:15px;
+}
+
+/* PRODUCTOS */
+
+.titulo{
+    color:#0B1F3A;
+    margin-left:40px;
+}
+
+.productos{
+    margin:auto;
+    border-spacing:20px;
+}
+
+.producto{
+    background-color:white;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.camisa{
+    width:180px;
+    height:180px;
+}
+
+.precio{
+    color:#000000;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.disponible{
+    color:green;
+    font-weight:bold;
+}
+
+.agregar{
+    background-color:#0B1F3A;
+    color:white;
+    border:none;
+    padding:10px;
+    border-radius:8px;
+}
+
+/* FOOTER */
+
+footer{
+    background-color:#0B1F3A;
+    color:white;
+    text-align:center;
+    padding:30px;
+    margin-top:30px;
+}
+
+/* LOGIN */
+
+.fondo-login{
+    background-color:#F5F5F5;
+}
+
+.login{
+    width:500px;
+    background-color:white;
+    margin:auto;
+    margin-top:50px;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.login input{
+    width:90%;
+    padding:12px;
+    border:1px solid gray;
+    border-radius:8px;
+}
+
+.boton-login{
+    width:95%;
+    padding:12px;
+    background-color:#0B1F3A;
+    color:white;
+    border:none;
+    border-radius:8px;
+}
+
+.crear{
+    width:95%;
+    padding:12px;
+    background-color:#D4AF37;
+    color:#0B1F3A;
+    border:none;
+    border-radius:8px;
+}
+
+.volver{
+    text-decoration:none;
+    color:#163A70;
+    font-weight:bold;
+}
