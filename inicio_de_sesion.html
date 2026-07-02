@@ -1,0 +1,110 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<head>
+    <meta charset="UTF-8"> 
+    <title>Inicio de sesión - LEGACY JERSEYS</title> <!-- Título que se muestra en la pestaña del navegador -->
+
+    <style>
+        /* --- SECCION DE ESTILOS  --- */
+
+        body {
+            font-family: Arial; 
+            text-align: center; /* Centra los textos y elementos en la pantalla */
+        }
+
+        table {
+            margin: auto; /* Centra la tabla del formulario horizontalmente */
+        }
+
+        td {
+            padding: 20px; /* Añade un espacio de 20px dentro de cada celda para separar los campos */
+        }
+
+        button {
+            padding: 10px; /* Hace el botón de inicio de sesión más grande y cómodo de presionar */
+        }
+
+        /* Aplica un espacio interno de 8px tanto a las cajas de texto (input) como a las listas desplegables (select) */
+        input, select {
+            padding: 8px;
+        }
+    </style>
+
+</head>
+
+<body> <!--Inicio del contenido visible -->
+
+    <header> 
+        <h1>LEGACY JERSEYS</h1> 
+    </header>
+
+   
+
+    <section> <!-- Seccion principal donde se encuentra el formulario -->
+
+        <h2>Inicio de sesión</h2> <!-- Titulo del formulario -->
+        <p>Ingresa tus datos para acceder al sistema.</p> <!-- Instruccion para el usuario -->
+
+        
+        <form>
+
+            <!-- Se usa una tabla con borde para organizar visualmente los campos uno abajo del otro -->
+            <table border="1">
+
+                <tr> <!-- Fila 1: Campo de Correo -->
+                    <td>
+                        <label for="correo">Correo electronico:</label>
+                        <br><br> <!-- <br> produce un salto de linea 
+                        
+                        <!-- input type="email" valida automaticamente que el usuario escriba un formato de correo válido (con @ y dominio) -->
+                        <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com">
+                    </td>
+                </tr>
+
+                <tr> <!-- Fila 2: Campo de Contraseña -->
+                    <td>
+                        <label for="contrasena">Contraseña:</label><br><br>
+                        <!-- input type="password" oculta los caracteres que el usuario escribe  -->
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu contraseña">
+                    </td>
+                </tr>
+
+                <tr> <!-- Fila 3: Casilla de verificación -->
+                    <td>
+                        <!-- input type="checkbox" crea una pequeña casilla cuadrada que se puede marcar o desmarcar -->
+                        <input type="checkbox" id="recordarme" name="recordarme">
+                        <label for="recordarme">Recordarme</label>
+                    </td>
+                </tr>
+
+                <tr> <!-- Fila 4: Boton de envio -->
+                    <td>
+                        <!-- type="submit" le indica al navegador que este boton procesara y enviara el formulario completo al hacer clic -->
+                        <button type="submit">Iniciar sesion</button>
+                    </td>
+                </tr>
+
+            </table>
+
+        </form>
+
+        <br> <!-- Salto de linea para separar el formulario de los enlaces inferiores -->
+
+        <p>¿No tienes cuenta?</p>
+        <!-- La etiqueta <a> crea enlaces. El atributo href="#" es un enlace temporal -->
+        <a href="#">Crear una cuenta</a>
+
+        <br><br>
+
+        <a href="#">¿Olvidaste tu contraseña?</a> <!-- Enlace de recuperacion de cuenta -->
+
+    </section>
+
+    <footer> <!-- Pie de pagina con los derechos de autor -->
+        <p>© 2026 LEGACY JERSEYS</p>
+    </footer>
+
+</body>
+
+</html>
