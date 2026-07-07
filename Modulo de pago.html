@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago | Legacy Jerseys</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="logo" href="../index.html">LEGACY JERSEYS</a>
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input type="search" placeholder="Buscar jerseys">
+        </div>
+
+        <nav class="main-nav">
+            <a href="#">Ofertas</a>
+            <a class="active" href="#">Catálogo</a>
+            <a href="#">Productos destacados</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="#">Inicio de sesión</a>
+            <a class="cart-button" href="carrito.html">
+                <span>🛒</span>
+                <span>3</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="payment-page">
+        <section class="payment-title">
+            <h1>Pago</h1>
+            <p>Completa los datos de tu tarjeta para finalizar la compra.</p>
+        </section>
+
+        <section class="payment-layout">
+            <div>
+                <form class="payment-card" id="payment-form">
+                    <div class="form-group full">
+                        <label for="card-name">Nombre del titular</label>
+                        <input id="card-name" name="card-name" type="text" placeholder="Ej. Juan Pérez" required>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="card-number">Número de tarjeta</label>
+                        <div class="input-icon">
+                            <span>▭</span>
+                            <input id="card-number" name="card-number" type="text" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expiry-date">Fecha de vencimiento</label>
+                        <div class="input-icon">
+                            <input id="expiry-date" name="expiry-date" type="text" placeholder="MM / AA" maxlength="7" required>
+                            <span>□</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="security-code">Código de seguridad</label>
+                        <div class="input-icon">
+                            <input id="security-code" name="security-code" type="password" placeholder="CVV" maxlength="3" required>
+                            <span>?</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="payment-method">Método de pago</label>
+                        <select id="payment-method" name="payment-method" required>
+                            <option value="tarjeta">Tarjeta de crédito o débito</option>
+                            <option value="debito">Tarjeta de débito</option>
+                            <option value="credito">Tarjeta de crédito</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="total-amount">Monto total</label>
+                        <input id="total-amount" type="text" value="$99.96" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Estado de la transacción</label>
+                        <div class="status-box">
+                            <span class="status-badge pending" id="transaction-status">Pendiente</span>
+                        </div>
+                    </div>
+
+                    <p class="form-message" id="form-message"></p>
+
+                    <button class="primary-button" type="submit">Confirmar pago</button>
+                    <a class="secondary-button" href="carrito.html">Volver al carrito</a>
+                </form>
+
+                <div class="secure-note">
+                    <span>♡</span>
+                    <div>
+                        <strong>Pago simulado para fines del sistema.</strong>
+                        <p>Tus datos están 100% protegidos con encriptación SSL.</p>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="summary-card">
+                <h2>Resumen del pedido</h2>
+
+                <article class="summary-product">
+                    <div class="jersey jersey-blue"></div>
+                    <div>
+                        <h3>Equipo Azul</h3>
+                        <p>Jersey deportivo de manga corta</p>
+                        <span>Talla: M</span>
+                        <span>Cantidad: 1</span>
+                    </div>
+                    <strong>$24.99</strong>
+                </article>
+
+                <article class="summary-product">
+                    <div class="jersey jersey-red"></div>
+                    <div>
+                        <h3>Equipo Rojo</h3>
+                        <p>Jersey deportivo de manga corta</p>
+                        <span>Talla: L</span>
+                        <span>Cantidad: 2</span>
+                    </div>
+                    <strong>$49.98</strong>
+                </article>
+
+                <article class="summary-product">
+                    <div class="jersey jersey-white"></div>
+                    <div>
+                        <h3>Equipo Blanco</h3>
+                        <p>Jersey deportivo de manga corta</p>
+                        <span>Talla: S</span>
+                        <span>Cantidad: 1</span>
+                    </div>
+                    <strong>$24.99</strong>
+                </article>
+
+                <div class="summary-line">
+                    <span>Subtotal (3 productos)</span>
+                    <strong>$99.96</strong>
+                </div>
+
+                <div class="summary-line">
+                    <span>Envío</span>
+                    <strong class="free-shipping">Gratis</strong>
+                </div>
+
+                <div class="summary-total">
+                    <span>Total de compra</span>
+                    <strong>$99.96</strong>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
