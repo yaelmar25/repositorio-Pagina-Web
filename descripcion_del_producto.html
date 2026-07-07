@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Legacy Jerseys - Equipo Azul</title>
+    <title>Legacy Jerseys - Detalle del Producto</title>
 </head>
 <body style="font-family: sans-serif; margin: 0; padding: 20px; color: #111111;">
 
@@ -31,28 +31,34 @@
 
     <hr size="1" color="#eeeeee" style="margin-bottom: 20px;">
 
+    <!--línea de texto que ayuda al usuario a ubicarse. Dejamos un contenedor vacío con el atributo id="miga-producto" -->
+    <!--para que JavaScript escriba el nombre del jersey correspondiente más adelante-->
+
+
     <p style="font-size: 14px; color: #666666; margin-left: 10px;">
-        <a href="#" style="color: #0044ff; text-decoration: none;">Catálogo</a> &nbsp;➔&nbsp; Equipo Azul
+        <a href="#" style="color: #0044ff; text-decoration: none;">Catálogo</a> &nbsp;➔&nbsp; <span id="miga-producto">Cargando...</span>
     </p>
 
     <br>
 
+
+    <!--Divide la pantalla en dos grandes secciones: el área visual (izquierda) y el área informativa (derecha) -->
     <table width="100%" border="0" cellpadding="20" cellspacing="0">
         <tr>
             
             <td width="45%" align="center" valign="top" style="border: 1px solid #eeeeee; border-radius: 8px; padding: 20px;">
-                <img src="jersey-azul-frontal.jpg" alt="Jersey Equipo Azul" width="85%" style="display: block; margin-bottom: 20px;">
+                <img id="producto-imagen" src="" alt="Jersey" width="85%" style="display: block; margin-bottom: 20px;">
                 
                 <table width="100%" border="0" cellpadding="5" cellspacing="0">
                     <tr>
                         <td align="center" width="33%">
-                            <img src="mini-frontal.jpg" alt="Vista 1" width="90%" style="border: 2px solid #0044ff; border-radius: 4px; padding: 2px;">
+                            <img id="mini-1" src="" alt="Vista 1" width="90%" style="border: 2px solid #0044ff; border-radius: 4px; padding: 2px;">
                         </td>
                         <td align="center" width="33%">
-                            <img src="mini-espalda.jpg" alt="Vista 2" width="90%" style="border: 1px solid #cccccc; border-radius: 4px; padding: 2px;">
+                            <img id="mini-2" src="" alt="Vista 2" width="90%" style="border: 1px solid #cccccc; border-radius: 4px; padding: 2px;">
                         </td>
                         <td align="center" width="33%">
-                            <img src="mini-detalle.jpg" alt="Vista 3" width="90%" style="border: 1px solid #cccccc; border-radius: 4px; padding: 2px;">
+                            <img id="mini-3" src="" alt="Vista 3" width="90%" style="border: 1px solid #cccccc; border-radius: 4px; padding: 2px;">
                         </td>
                     </tr>
                 </table>
@@ -60,23 +66,21 @@
 
             <td width="55%" align="left" valign="top" style="padding-left: 40px;">
                 
-                <h1 style="color: #001155; font-size: 36px; margin-top: 0; margin-bottom: 25px;">Equipo Azul</h1>
+                <h1 id="producto-titulo" style="color: #001155; font-size: 36px; margin-top: 0; margin-bottom: 25px;">Cargando...</h1>
 
                 <table width="100%" border="0" cellpadding="12" cellspacing="0">
                     <tr style="border-bottom: 1px solid #eeeeee;">
                         <td width="30%" valign="top"><strong>Modelo:</strong></td>
-                        <td width="70%" valign="top" style="color: #555555;">Modelo local 2026</td>
+                        <td id="producto-modelo" width="70%" valign="top" style="color: #555555;">-</td>
                     </tr>
                     <tr>
                         <td valign="top"><strong>Descripción:</strong></td>
-                        <td valign="top" style="color: #555555; line-height: 1.5;">
-                            Jersey deportivo de manga corta, cómodo y ligero, ideal para uso casual o deportivo.
-                        </td>
+                        <td id="producto-descripcion" valign="top" style="color: #555555; line-height: 1.5;">-</td>
                     </tr>
                     <tr>
                         <td valign="middle"><strong>Precio:</strong></td>
                         <td valign="middle">
-                            <span style="font-size: 26px; color: #001155; font-weight: bold;">$24.99</span>
+                            <span id="producto-precio" style="font-size: 26px; color: #001155; font-weight: bold;">-</span>
                         </td>
                     </tr>
                     <tr>
@@ -91,7 +95,7 @@
                     <tr>
                         <td valign="middle"><strong>Cantidad en inventario:</strong></td>
                         <td valign="middle" style="color: #228844; font-weight: bold;">
-                            12 piezas disponibles
+                            <span id="producto-inventario">-</span>
                         </td>
                     </tr>
                     <tr>
@@ -124,5 +128,155 @@
         </tr>
     </table>
 
+    <!-- Guarda la información de cada equipo que está en el catálogo de tu compañero usando una "clave" única (como "real-madrid" o "mexico").-->
+    <script>
+        // Base de datos integrada basada en la imagen del catálogo
+        const productos = {
+            "real-madrid": {
+                titulo: "Real Madrid 24/25",
+                modelo: "Modelo Local Versión Jugador",
+                desc: "Jersey oficial del Real Madrid para la temporada actual. Diseñado con tejidos altamente transpirables y tecnología premium de secado rápido, óptimo para el alto rendimiento.",
+                precio: "$1,699 MXN",
+                inventario: "12 piezas disponibles",
+                img: "img/real_madrid_frontal.jpg",
+                minis: ["img/real_madrid_frontal.jpg", "img/real_madrid_espalda.jpg", "img/real_madrid_detalle.jpg"]
+            },
+            "barcelona": {
+                titulo: "Barcelona 24/25",
+                modelo: "Modelo Local Oficial",
+                desc: "El jersey oficial del FC Barcelona presenta el diseño clásico blaugrana. Confeccionado con poliéster reciclado de alto rendimiento para máxima comodidad dentro y fuera de la cancha.",
+                precio: "$1,699 MXN",
+                inventario: "8 piezas disponibles",
+                img: "img/barcelona_frontal.jpg",
+                minis: ["img/barcelona_frontal.jpg", "img/barcelona_espalda.jpg", "img/barcelona_detalle.jpg"]
+            },
+            "manchester-city": {
+                titulo: "Manchester City 24/25",
+                modelo: "Modelo Local Stadium",
+                desc: "Jersey del Manchester City en el icónico azul celeste. Cuenta con detalles conmemorativos en el cuello y tecnología avanzada de ventilación corporal.",
+                precio: "$1,799 MXN",
+                inventario: "6 piezas disponibles",
+                img: "img/man_city_frontal.jpg",
+                minis: ["img/man_city_frontal.jpg", "img/man_city_espalda.jpg", "img/man_city_detalle.jpg"]
+            },
+            "liverpool": {
+                titulo: "Liverpool FC",
+                modelo: "Modelo Local Match",
+                desc: "Jersey oficial del Liverpool FC con el clásico color rojo pasión. Incluye texturas geométricas y acabados finos en los bordes para un porte elegante.",
+                precio: "$1,699 MXN",
+                inventario: "15 piezas disponibles",
+                img: "img/liverpool_frontal.jpg",
+                minis: ["img/liverpool_frontal.jpg", "img/liverpool_espalda.jpg", "img/liverpool_detalle.jpg"]
+            },
+            "psg": {
+                titulo: "PSG",
+                modelo: "Modelo Local 24/25",
+                desc: "Jersey de local del Paris Saint-Germain. Combina el estilo urbano de París con tecnología textil vanguardista para un confort duradero.",
+                precio: "$1,799 MXN",
+                inventario: "5 piezas disponibles",
+                img: "img/psg_frontal.jpg",
+                minis: ["img/psg_frontal.jpg", "img/psg_espalda.jpg", "img/psg_detalle.jpg"]
+            },
+            "bayern": {
+                titulo: "Bayern Múnich",
+                modelo: "Modelo Local Tradicional",
+                desc: "Muestra tu orgullo bávaro con el jersey oficial del Bayern Múnich. Estructura ligera y ajuste ergonómico perfecto.",
+                precio: "$1,699 MXN",
+                inventario: "9 piezas disponibles",
+                img: "img/bayern_frontal.jpg",
+                minis: ["img/bayern_frontal.jpg", "img/bayern_espalda.jpg", "img/bayern_detalle.jpg"]
+            },
+            "juventus": {
+                titulo: "Juventus",
+                modelo: "Modelo Local Bianconero",
+                desc: "El legendario diseño a rayas blancas y negras de la Juventus de Turín. Material elástico y absorbente de sudor.",
+                precio: "$1,699 MXN",
+                inventario: "10 piezas disponibles",
+                img: "img/juventus_frontal.jpg",
+                minis: ["img/juventus_frontal.jpg", "img/juventus_espalda.jpg", "img/juventus_detalle.jpg"]
+            },
+            "chelsea": {
+                titulo: "Chelsea FC",
+                modelo: "Modelo Local The Blues",
+                desc: "Jersey de local del Chelsea FC. Presenta un patrón dinámico texturizado sobre el clásico azul londinense.",
+                precio: "$1,699 MXN",
+                inventario: "7 piezas disponibles",
+                img: "img/chelsea_frontal.jpg",
+                minis: ["img/chelsea_frontal.jpg", "img/chelsea_espalda.jpg", "img/chelsea_detalle.jpg"]
+            },
+            "mexico": {
+                titulo: "México 2026",
+                modelo: "Edición Nacional Especial",
+                desc: "Jersey de la Selección Nacional de México con patrones y gráficos inspirados en las culturas prehispánicas, optimizado para el máximo orgullo mundialista.",
+                precio: "$1,499 MXN",
+                inventario: "20 piezas disponibles",
+                img: "img/mexico_frontal.jpg",
+                minis: ["img/mexico_frontal.jpg", "img/mexico_espalda.jpg", "img/mexico_detalle.jpg"]
+            },
+            "argentina": {
+                titulo: "Argentina",
+                modelo: "Modelo Albiceleste 3 Estrellas",
+                desc: "Jersey de la Selección de Argentina con las tres estrellas bordadas. Diseño clásico de franjas celestes y blancas con el parche dorado.",
+                precio: "$1,599 MXN",
+                inventario: "14 piezas disponibles",
+                img: "img/argentina_frontal.jpg",
+                minis: ["img/argentina_frontal.jpg", "img/argentina_espalda.jpg", "img/argentina_detalle.jpg"]
+            },
+            "brasil": {
+                titulo: "Brasil",
+                modelo: "Modelo Verdeamarela Oficial",
+                desc: "Jersey oficial de la Selección brasileña. Cuenta con el vibrante color amarillo y detalles texturizados de la fauna y flora del país.",
+                precio: "$1,599 MXN",
+                inventario: "11 piezas disponibles",
+                img: "img/brasil_frontal.jpg",
+                minis: ["img/brasil_frontal.jpg", "img/brasil_espalda.jpg", "img/brasil_detalle.jpg"]
+            },
+            "francia": {
+                titulo: "Francia",
+                modelo: "Modelo Les Bleus",
+                desc: "Jersey oficial de la Selección de Francia en color azul marino profundo. Destaca el imponente escudo del gallo en color dorado en el pecho.",
+                precio: "$1,599 MXN",
+                inventario: "13 piezas disponibles",
+                img: "img/francia_frontal.jpg",
+                minis: ["img/francia_frontal.jpg", "img/francia_espalda.jpg", "img/francia_detalle.jpg"]
+            }
+        };
+
+
+        //Detecta qué producto quiere ver el usuario leyendo la barra de navegación.
+        //  Si la URL dice ...html?id=mexico, la variable idSeleccionado guardará el texto "mexico".
+
+
+        // Captura el parámetro "?id=" desde la barra de direcciones del navegador
+        const urlParams = new URLSearchParams(window.location.search);
+        const idSeleccionado = urlParams.get('id');
+
+        //Busca el producto "mexico" en la lista. Al encontrarlo, toma sus datos (como .titulo o .desc)
+        //  y los escribe directamente sobre los id que dejamos preparados en las tablas del HTML.
+
+        // Si el producto existe en la base de datos, lo dibuja automáticamente
+        if (idSeleccionado && productos[idSeleccionado]) {
+            const prod = productos[idSeleccionado];
+            
+            // Reemplazar textos
+            document.title = "Legacy Jerseys - " + prod.titulo;
+            document.getElementById("miga-producto").innerText = prod.titulo;
+            document.getElementById("producto-titulo").innerText = prod.titulo;
+            document.getElementById("producto-modelo").innerText = prod.modelo;
+            document.getElementById("producto-descripcion").innerText = prod.desc;
+            document.getElementById("producto-precio").innerText = prod.precio;
+            document.getElementById("producto-inventario").innerText = prod.inventario;
+            
+            // Reemplazar imágenes (Nota: Asegúrate de guardar las fotos en una carpeta llamada "img")
+            document.getElementById("producto-imagen").src = prod.img;
+            document.getElementById("mini-1").src = prod.minis[0];
+            document.getElementById("mini-2").src = prod.minis[1];
+            document.getElementById("mini-3").src = prod.minis[2];
+        } else {
+            // En caso de que se acceda directamente sin un id válido muestra un mensaje
+            document.getElementById("producto-titulo").innerText = "Selecciona un jersey en el catálogo";
+            document.getElementById("miga-producto").innerText = "No seleccionado";
+        }
+    </script>
 </body>
 </html>
