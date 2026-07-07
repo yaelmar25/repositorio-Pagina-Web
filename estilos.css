@@ -1,10 +1,12 @@
+/* -------------------- GENERAL -------------------- */
+
 body{
     margin:0;
     font-family:Arial;
     background-color:#F5F5F5;
 }
 
-/* HEADER */
+/* -------------------- HEADER -------------------- */
 
 header{
     background-color:#0B1F3A;
@@ -14,6 +16,7 @@ header{
 .logo{
     color:#D4AF37;
     font-size:40px;
+    font-weight:bold;
 }
 
 .buscar{
@@ -38,7 +41,7 @@ header{
     border-radius:8px;
 }
 
-/* MENU */
+/* -------------------- MENÚ -------------------- */
 
 nav{
     background-color:#163A70;
@@ -47,133 +50,190 @@ nav{
 }
 
 .menu{
-    background-color:#37b5d4;
+    background-color:#37B5D4;
     color:#0B1F3A;
     border:none;
     padding:10px 20px;
     border-radius:8px;
     margin:10px;
     font-size:16px;
+    cursor:pointer;
 }
 
-/* BANNER */
-
-.banner{
-    text-align:center;
-    padding:30px;
+.menu:hover{
+    background-color:#5FD2EE;
 }
 
-.banner h1{
-    color:#0B1F3A;
-    font-size:50px;
-}
-
-.banner p{
-    color:#555;
-    font-size:20px;
-}
-
-.imagen-banner{
-    width:80%;
-    border-radius:15px;
-}
-
-/* PRODUCTOS */
+/* -------------------- TITULOS -------------------- */
 
 .titulo{
     color:#0B1F3A;
-    margin-left:40px;
+    text-align:center;
+    margin-top:30px;
+    font-size:35px;
 }
+
+/* -------------------- BANNER (CORREGIDO) -------------------- */
+
+.banner{
+    text-align:center;
+}
+
+.imagen-banner{
+    display:block;
+    margin: 20px auto;
+    width: 80%;
+    border-radius: 15px;
+}
+
+/* -------------------- PRODUCTOS -------------------- */
 
 .productos{
-    margin:auto;
-    border-spacing:20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
+
+/* -------------------- TARJETAS -------------------- */
 
 .producto{
-    background-color:white;
-    padding:20px;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.producto:hover{
+    transform: scale(1.05);
+}
+
+.producto img{
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.producto h3{
+    font-size: 15px;
+    margin: 10px 0 5px;
+}
+
+.producto p{
+    font-size: 16px;
+    font-weight: bold;
+    color: #0B1F3A;
+}
+
+.producto button{
+    background: #D4AF37;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.producto button:hover{
+    background: #C49A27;
+}
+
+/* -------------------- LOGIN -------------------- */
+
+.volver{
+    display:inline-block;
+    margin:20px;
+    color:#0B1F3A;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.volver:hover{
+    color:#D4AF37;
+}
+
+.contenedor{
+    width:900px;
+    margin:40px auto;
+    display:flex;
+    justify-content:space-between;
+    gap:40px;
+}
+
+.formulario{
+    width:420px;
+    background:white;
+    padding:35px;
     border-radius:15px;
+    box-shadow:0px 5px 15px rgba(0,0,0,.2);
+}
+
+.formulario h1{
     text-align:center;
+    color:#0B1F3A;
+    margin-bottom:30px;
 }
 
-.camisa{
-    width:180px;
-    height:180px;
-}
-
-.precio{
-    color:#000000;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.disponible{
-    color:green;
-    font-weight:bold;
-}
-
-.agregar{
-    background-color:#0B1F3A;
-    color:white;
-    border:none;
-    padding:10px;
-    border-radius:8px;
-}
-
-/* FOOTER */
-
-footer{
-    background-color:#0B1F3A;
-    color:white;
-    text-align:center;
-    padding:30px;
-    margin-top:30px;
-}
-
-/* LOGIN */
-
-.fondo-login{
-    background-color:#F5F5F5;
-}
-
-.login{
-    width:500px;
-    background-color:white;
-    margin:auto;
-    margin-top:50px;
-    padding:30px;
-    border-radius:20px;
-    text-align:center;
-}
-
-.login input{
-    width:90%;
+input{
+    width:100%;
     padding:12px;
-    border:1px solid gray;
+    margin:12px 0;
+    border:1px solid #CCC;
     border-radius:8px;
+    font-size:16px;
+    box-sizing:border-box;
 }
 
-.boton-login{
-    width:95%;
-    padding:12px;
-    background-color:#0B1F3A;
-    color:white;
-    border:none;
-    border-radius:8px;
+input:focus{
+    outline:none;
+    border:2px solid #D4AF37;
 }
 
-.crear{
-    width:95%;
+button{
+    width:100%;
     padding:12px;
-    background-color:#D4AF37;
+    margin-top:15px;
+    background:#D4AF37;
     color:#0B1F3A;
     border:none;
     border-radius:8px;
+    font-size:18px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.volver{
-    text-decoration:none;
-    color:#163A70;
-    font-weight:bold;
+button:hover{
+    background:#C49A27;
+}
+
+p{
+    text-align:center;
+    margin-top:25px;
+    color:#444;
+}
+
+h2{
+    text-align:center;
+    color:#0B1F3A;
+}
+
+/* -------------------- RESPONSIVE -------------------- */
+
+@media(max-width:900px){
+
+    .contenedor{
+        width:95%;
+        flex-direction:column;
+    }
+
+    .formulario{
+        width:100%;
+    }
 }
