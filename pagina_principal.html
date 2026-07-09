@@ -4,6 +4,8 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>LEGACY JERSEYS</title>
 
     <link rel="stylesheet" href="estilos.css">
@@ -12,167 +14,200 @@
 
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header>
 
-    <table width="100%">
+    <div class="logo">
+        <a href="index.html">LEGACY JERSEYS</a>
+    </div>
 
-        <tr>
+    <div class="buscador">
 
-            <td width="30%">
-                <h1 class="logo">LEGACY JERSEYS</h1>
-            </td>
+        <input type="text" placeholder="🔍 Buscar jerseys">
 
-            <td width="40%">
-                <input type="text" class="buscar" placeholder="🔍 Buscar jerseys">
-            </td>
+    </div>
 
-            <td width="30%">
+    <div class="acciones">
 
-                <a href="inicio_de_sesion.html" class="sesion">
-                    👤 Iniciar sesión
-                </a>s
+        <a href="inicio_de_sesion.html">
+            Inicio de sesión
+        </a>
+<a href="carrito de compras.html">
+    🛒 Carrito
+</a>
 
-                <button class="carrito">
-                    🛒
-                </button>
-
-            </td>
-
-        </tr>
-
-    </table>
+    </div>
 
 </header>
 
+<!-- ================= MENU ================= -->
+
 <nav>
 
-    <button class="menu"> Ofertas</button>
+    <a href="ofertas.html">Ofertas</a>
 
-    <button class="menu"> Catálogo</button>
+    <a href="catalogo.html">Catálogo</a>
 
     
 
 </nav>
 
-<div class="banner">
+<!-- ================= BANNER ================= -->
 
-    <h1>LEGACY JERSEYS</h1>
+<section class="banner">
 
-    <p>
-        Las mejores camisetas del fútbol mundial y europeo.
-    </p>
+    <div class="texto-banner">
 
-    <img src="pictures/banner.jpg" class="imagen-banner">
+        <h1>LEGACY JERSEYS</h1>
 
-</div>
+        <p>
+            Encuentra los mejores jerseys nacionales e internacionales.
+        </p>
 
-<h2 class="titulo">
-     Productos destados 
-</h2>
+    </div>
 
-<table class="productos">
+    <div class="imagen-banner">
 
-<tr>
+        <img src="pictures/banner.jpg" alt="Banner">
 
-<td class="producto">
+    </div>
 
-    <img src="pictures/mexico.png" class="camisa">
+</section>
 
-    <h3>México</h3>
+<!-- ================= PRODUCTOS ================= -->
 
-    <p>Marca: Adidas</p>
+<section class="destacados">
 
-    <p class="precio">$899 MXN</p>
+    <h2>
+        ⭐ Productos destacados
+    </h2>
 
-    <p class="disponible">Disponible</p>
+    <div class="contenedor-productos">
 
-    <button class="agregar">
-        Agregar
-    </button>
+        <div class="producto">
 
-</td>
+            <img src="pictures/mexico.png" alt="México">
 
-<td class="producto">
+            <h3>México</h3>
 
-    <img src="pictures/espana.png" class="camisa">
+            <p>Tallas: S, M, L, XL</p>
 
-    <h3>España</h3>
+            <div class="info">
 
-    <p>Marca: Adidas</p>
+                <span class="precio">$899 MXN</span>
 
-    <p class="precio">$949 MXN</p>
+                <span class="stock">
+                    Disponible
+                </span>
 
-    <p class="disponible">Disponible</p>
+            </div>
 
-    <button class="agregar">
-        Agregar
-    </button>
+            <button>
+                🛒 Agregar
+            </button>
 
-</td>
+        </div>
 
-<td class="producto">
+        <div class="producto">
 
-    <img src="pictures/realmadrid.png" class="camisa">
+            <img src="pictures/espana.png" alt="España">
 
-    <h3>Real Madrid</h3>
+            <h3>España</h3>
 
-    <p>Marca: Adidas</p>
+            <p>Tallas: S, M, L, XL</p>
 
-    <p class="precio">$1299 MXN</p>
+            <div class="info">
 
-    <p class="disponible">Disponible</p>
+                <span class="precio">$949 MXN</span>
 
-    <button class="agregar">
-        Agregar
-    </button>
+                <span class="stock">
+                    Disponible
+                </span>
 
-</td>
+            </div>
 
-<td class="producto">
+            <button>
+                🛒 Agregar
+            </button>
 
-    <img src="pictures/barcelona.png" class="camisa">
+        </div>
 
-    <h3>FC Barcelona</h3>
+        <div class="producto">
 
-    <p>Marca: Nike</p>
+            <img src="pictures/realmadrid.png" alt="Real Madrid">
 
-    <p class="precio">$1299 MXN</p>
+            <h3>Real Madrid</h3>
 
-    <p class="disponible">Disponible</p>
+            <p>Tallas: S, M, L, XL</p>
 
-    <button class="agregar">
-        Agregar
-    </button>
+            <div class="info">
 
-</td>
+                <span class="precio">$1299 MXN</span>
 
-</tr>
+                <span class="stock">
+                    Disponible
+                </span>
 
-</table>
+            </div>
+
+            <button>
+                🛒 Agregar
+            </button>
+
+        </div>
+
+        <div class="producto">
+
+            <img src="pictures/barcelona.png" alt="FC Barcelona">
+
+            <h3>FC Barcelona</h3>
+
+            <p>Tallas: S, M, L, XL</p>
+
+            <div class="info">
+
+                <span class="precio">$1299 MXN</span>
+
+                <span class="stock">
+                    Disponible
+                </span>
+
+            </div>
+
+            <button>
+                🛒 Agregar
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
-    <h2>LEGACY JERSEYS</h2>
+    <div>
+        🔒 Pago seguro
+    </div>
 
-    <p>
-        Tu tienda especializada en jerseys de fútbol.
-    </p>
+    <div>
+        🚚 Envíos a todo México
+    </div>
 
-    <p>
-        📍 Zcatepec,tepito
-    </p>
+    <div>
+        ✔ Productos originales
+    </div>
 
-    <p>
+    <div>
         📞 +52 777 447 7773
-    </p>
+    </div>
 
-    <p>
-        ✉ sportsjerseys.com
-    </p>
-
-    <p>
+    <div class="copyright">
         © 2026 LEGACY JERSEYS
-    </p>
+    </div>
 
 </footer>
 

@@ -4,8 +4,9 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Inicio de sesión</title>
+    <title>Inicio de sesión | Legacy Jerseys</title>
 
     <link rel="stylesheet" href="estilos.css">
 
@@ -13,70 +14,101 @@
 
 <body class="fondo-login">
 
-<div class="login">
+    <div class="login">
 
-    <a href="pagina_principal.html" class="volver">
-        ← Volver al inicio
-    </a>
+        <!-- Formulario -->
 
-    <h1>Iniciar sesión</h1>
+        <div class="login-form">
 
-    <input type="email" placeholder="Correo electrónico">
+            <a href="pagina_principal.html" class="volver">
+                ← Volver al inicio
+            </a>
 
-    <br><br>
+            <h1>Inicio de sesión</h1>
 
-    <input type="password" placeholder="Contraseña">
+            <p>Ingresa tus datos para continuar</p>
 
-    <br><br>
+            <input type="email" placeholder="Correo electrónico">
 
-    <button class="boton-login">
-        Iniciar sesión
-    </button>
+            <input type="password" placeholder="Contraseña">
 
-    <br><br>
+            <div class="opciones">
 
-    <p>¿No tienes cuenta?</p>
+                <label>
+                    Recordarme  <a href="#"> ¿Olvidaste tu contraseña?</a>
+                    
+                   
 
-    <button class="crear" onclick="mostrarRegistro()">
-        Crear cuenta
-    </button>
+                </label>
 
-    <div id="registro" style="display:none;">
+                
 
-        <h2>Crear cuenta</h2>
+            </div>
 
-        <input type="text" placeholder="Nombre completo">
+            <button class="boton-login">
+                Iniciar sesión
+            </button>
 
-        <br><br>
+            <button class="crear" onclick="mostrarRegistro()">
+                Crear una cuenta
+            </button>
 
-        <input type="email" placeholder="Correo electrónico">
+            <p class="empleado">
+                ¿Eres empleado?
+                <a href="#">Acceso interno</a>
+            </p>
 
-        <br><br>
+            <div id="registro" style="display:none;">
 
-        <input type="password" placeholder="Contraseña">
+                <h2>Crear cuenta</h2>
 
-        <br><br>
+                <input type="text" placeholder="Nombre completo">
 
-        <input type="password" placeholder="Confirmar contraseña">
+                <input type="email" placeholder="Correo electrónico">
 
-        <br><br>
+                <input type="password" placeholder="Contraseña">
 
-        <button class="boton-login">
-            Registrarse
-        </button>
+                <input type="password" placeholder="Confirmar contraseña">
+
+                <button class="boton-login">
+                    Registrarse
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Imagen -->
+
+        <div class="login-imagen">
+
+            <img src="pictures/futbol.jpg" alt="Jerseys">
+
+            <div class="beneficios">
+
+                
 
     </div>
 
-</div>
+    <script>
 
-<script>
+        function mostrarRegistro() {
 
-function mostrarRegistro()
-{
-    document.getElementById("registro").style.display = "block";
-}
+            var registro = document.getElementById("registro");
 
-</script>
+            if (registro.style.display === "none") {
+
+                registro.style.display = "block";
+
+            } else {
+
+                registro.style.display = "none";
+
+            }
+
+        }
+
+    </script>
 
 </body>
 
