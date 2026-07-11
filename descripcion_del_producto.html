@@ -8,72 +8,217 @@
 
 <title>Detalle del producto | Legacy Jerseys</title>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="estilos.css">
+
+<style>
+    /* Estructura principal en dos columnas */
+    .product-page {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 20px;
+        font-family: sans-serif;
+    }
+
+    .breadcrumb {
+        margin-bottom: 20px;
+        color: #666;
+    }
+
+    .breadcrumb a {
+        color: #1a46a0;
+        text-decoration: none;
+    }
+
+    .product-detail {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    /* Columna Izquierda: Galería */
+    .product-gallery {
+        flex: 1;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .main-product-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        object-fit: contain;
+        background: #f9f9f9;
+        border: 1px solid #eee;
+    }
+
+    .product-thumbnails {
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+    }
+
+    .product-thumbnails img {
+        width: 30%;
+        height: auto;
+        cursor: pointer;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        background: #f9f9f9;
+        transition: border 0.2s;
+    }
+
+    .product-thumbnails img:hover {
+        border-color: #1a46a0;
+    }
+
+    /* Columna Derecha: Información */
+    .product-info-detail {
+        flex: 1;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #f0f0f0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+
+    .product-info-detail h1 {
+        color: #0b2265;
+        margin-top: 0;
+        font-size: 2rem;
+    }
+
+    .product-info-detail h3 {
+        color: #333;
+        margin: 20px 0 5px 0;
+        font-size: 1rem;
+    }
+
+    .product-info-detail p {
+        color: #666;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    #producto-precio {
+        color: #1a66ff;
+        font-size: 1.8rem;
+        margin: 20px 0;
+    }
+
+    /* Botones de Tallas */
+    .sizes {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .sizes button {
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+        background: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #1a46a0;
+    }
+
+    .sizes button:hover {
+        border-color: #1a46a0;
+        background: #f0f4ff;
+    }
+
+    /* Control de cantidad */
+    .quantity {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .quantity button {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ccc;
+        background: #fff;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    /* Botones de acción */
+    .product-info-detail .primary-button,
+    .product-info-detail .secondary-button {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .product-info-detail .primary-button {
+        background: #1a66ff;
+        color: #fff;
+        border: none;
+    }
+
+    .product-info-detail .secondary-button {
+        background: #fff;
+        color: #1a66ff;
+        border: 1px solid #1a66ff;
+    }
+</style>
 
 </head>
 
 
 <body>
 
+<!-- ================= HEADER ================= -->
 
-<header class="site-header">
+<header>
 
-<a class="logo" href="index.html">
-LEGACY JERSEYS
-</a>
+    <div class="logo">
+        <a href="index.html">LEGACY JERSEYS</a>
+    </div>
 
+    <div class="buscador">
 
-<div class="search-box">
+        <input type="text" placeholder="🔍 Buscar jerseys">
 
-<span>⌕</span>
+    </div>
 
-<input type="search" placeholder="Buscar jerseys">
+    <div class="acciones">
 
-</div>
+        <a href="inicio_de_sesion.html">
+            Inicio de sesión
+        </a>
+        <a href="carrito.html">
+            🛒 Carrito
+        </a>
 
-
-
-<nav class="main-nav">
-
-<a href="ofertas.html">
-Ofertas
-</a>
-
-
-<a href="catalogo.html" class="active">
-Catálogo
-</a>
-
-
-</nav>
-
-
-
-
-<div class="header-actions">
-
-<a href="login.html">
-Inicio de sesión
-</a>
-
-
-<a class="cart-button" href="carrito.html">
-
-<span>
-🛒
-</span>
-
-<span>
-3
-</span>
-
-</a>
-
-
-</div>
-
+    </div>
 
 </header>
+
+<!-- ================= MENU ================= -->
+
+<nav>
+
+    <a href="pagina_principal.html">Inicio</a>
+
+    <a href="ofertas.html">Ofertas</a>
+
+    <a href="catalogo.html">Catálogo</a>
+
+</nav>
 
 
 
@@ -305,195 +450,155 @@ Disponibles:
 
 <script>
 
-
+// Objeto de productos ampliado con todos los equipos del catálogo
 const productos = {
 
-
 "real-madrid": {
-
-titulo:"Real Madrid 24/25",
-
-modelo:"Modelo Local Versión Jugador",
-
-descripcion:
-"Jersey oficial del Real Madrid temporada 2025. Fabricado con tela transpirable y tecnología deportiva de alto rendimiento.",
-
-precio:"$1,699 MXN",
-
-inventario:"12 piezas disponibles",
-
-imagen:"img/real_madrid_frontal.jpg",
-
-imagenes:[
-
-"img/real_madrid_frontal.jpg",
-
-"img/real_madrid_espalda.jpg",
-
-"img/real_madrid_detalle.jpg"
-
-]
-
+    titulo: "Real Madrid 24/25",
+    modelo: "Modelo Local Versión Jugador",
+    descripcion: "Jersey oficial del Real Madrid temporada 2025. Fabricado con tela transpirable y tecnología deportiva de alto rendimiento.",
+    precio: "$1,699 MXN",
+    inventario: "12 piezas disponibles",
+    imagen: "pictures/madrid.jpg",
+    imagenes: ["pictures/madrid.jpg", "pictures/madrid.jpg", "pictures/madrid.jpg"]
 },
-
-
 
 "barcelona": {
-
-titulo:"Barcelona 24/25",
-
-modelo:"Modelo Local Oficial",
-
-descripcion:
-"Jersey del FC Barcelona con diseño clásico blaugrana y materiales cómodos para entrenamiento y uso diario.",
-
-precio:"$1,699 MXN",
-
-inventario:"8 piezas disponibles",
-
-imagen:"img/barcelona_frontal.jpg",
-
-imagenes:[
-
-"img/barcelona_frontal.jpg",
-
-"img/barcelona_espalda.jpg",
-
-"img/barcelona_detalle.jpg"
-
-]
-
+    titulo: "Barcelona 24/25",
+    modelo: "Modelo Local Oficial",
+    descripcion: "Jersey del FC Barcelona con diseño clásico blaugrana y materiales cómodos para entrenamiento y uso diario.",
+    precio: "$1,699 MXN",
+    inventario: "8 piezas disponibles",
+    imagen: "pictures/barsa.jpg",
+    imagenes: ["pictures/barsa.jpg", "pictures/barsa.jpg", "pictures/barsa.jpg"]
 },
 
+"manchester-city": {
+    titulo: "Manchester City 24/25",
+    modelo: "Modelo Local Oficial",
+    descripcion: "Jersey oficial del Manchester City con tecnología de ventilación avanzada y el clásico color celeste del club.",
+    precio: "$1,799 MXN",
+    inventario: "10 piezas disponibles",
+    imagen: "pictures/man.jpg",
+    imagenes: ["pictures/man.jpg", "pictures/man.jpg", "pictures/man.jpg"]
+},
 
+"liverpool": {
+    titulo: "Liverpool 24/25",
+    modelo: "Modelo Local Oficial",
+    descripcion: "Camiseta clásica del Liverpool FC con detalles icónicos y tejido cómodo de alta calidad.",
+    precio: "$1,699 MXN",
+    inventario: "14 piezas disponibles",
+    imagen: "pictures/liverpool.jpg",
+    imagenes: ["pictures/liverpool.jpg", "pictures/liverpool.jpg", "pictures/liverpool.jpg"]
+},
 
+"psg": {
+    titulo: "PSG 24/25",
+    modelo: "Modelo Local Versión Estadio",
+    descripcion: "Jersey oficial del Paris Saint-Germain con diseño urbano elegante y materiales reciclados de alto rendimiento.",
+    precio: "$1,799 MXN",
+    inventario: "9 piezas disponibles",
+    imagen: "pictures/psg.jpg",
+    imagenes: ["pictures/psg.jpg", "pictures/psg.jpg", "pictures/psg.jpg"]
+},
+
+"bayern": {
+    titulo: "Bayern Múnich 24/25",
+    modelo: "Modelo Local Oficial",
+    descripcion: "Jersey del Bayern Múnich con el emblemático color rojo del club, diseñado para ofrecer frescura y comodidad extrema.",
+    precio: "$1,699 MXN",
+    inventario: "7 piezas disponibles",
+    imagen: "pictures/bayern.jpg",
+    imagenes: ["pictures/bayern.jpg", "pictures/bayern.jpg", "pictures/bayern.jpg"]
+},
+
+"juventus": {
+    titulo: "Juventus 24/25",
+    modelo: "Modelo Local Oficial",
+    descripcion: "Camiseta oficial de la Juventus con las tradicionales franjas blancas y negras y un estilo moderno.",
+    precio: "$1,699 MXN",
+    inventario: "11 piezas disponibles",
+    imagen: "pictures/juventus.jpg",
+    imagenes: ["pictures/juventus.jpg", "pictures/juventus.jpg", "pictures/juventus.jpg"]
+},
+
+"chelsea": {
+    titulo: "Chelsea 24/25",
+    modelo: "Modelo Local Oficial",
+    descripcion: "Jersey de los 'Blues' de Londres con tejido transpirable y un ajuste perfecto para jugar o alentar.",
+    precio: "$1,699 MXN",
+    inventario: "6 piezas disponibles",
+    imagen: "pictures/chelsea.jpg",
+    imagenes: ["pictures/chelsea.jpg", "pictures/chelsea.jpg", "pictures/chelsea.jpg"]
+},
 
 "mexico": {
+    titulo: "México 2026",
+    modelo: "Edición Nacional Especial",
+    descripcion: "Jersey oficial de la Selección Mexicana con diseño inspirado en la cultura nacional y tecnología deportiva.",
+    precio: "$1,499 MXN",
+    inventario: "20 piezas disponibles",
+    imagen: "pictures/mexico.jpg",
+    imagenes: ["pictures/mexico.jpg", "pictures/mexico.jpg", "pictures/mexico.jpg"]
+},
 
-titulo:"México 2026",
+"argentina": {
+    titulo: "Argentina 24/25",
+    modelo: "Modelo Oficial Campeón",
+    descripcion: "Jersey oficial de la selección albiceleste con las tres estrellas doradas y materiales de élite.",
+    precio: "$1,599 MXN",
+    inventario: "15 piezas disponibles",
+    imagen: "pictures/arg.jpg",
+    imagenes: ["pictures/arg.jpg", "pictures/arg.jpg", "pictures/arg.jpg"]
+},
 
-modelo:"Edición Nacional Especial",
+"brasil": {
+    titulo: "Brasil 24/25",
+    modelo: "Modelo Local Oficial",
+    descripcion: "Camiseta oficial de la 'Canarinha' con el clásico color amarillo y patrones texturizados de la selva brasileña.",
+    precio: "$1,599 MXN",
+    inventario: "18 piezas disponibles",
+    imagen: "pictures/brasil.jpg",
+    imagenes: ["pictures/brasil.jpg", "pictures/brasil.jpg", "pictures/brasil.jpg"]
+},
 
-descripcion:
-"Jersey oficial de la Selección Mexicana con diseño inspirado en la cultura nacional y tecnología deportiva.",
-
-precio:"$1,499 MXN",
-
-inventario:"20 piezas disponibles",
-
-imagen:"img/mexico_frontal.jpg",
-
-imagenes:[
-
-"img/mexico_frontal.jpg",
-
-"img/mexico_espalda.jpg",
-
-"img/mexico_detalle.jpg"
-
-]
-
+"francia": {
+    titulo: "Francia 24/25",
+    modelo: "Modelo Local Oficial",
+    descripcion: "Jersey de 'Les Bleus' con diseño sofisticado, el escudo del gallo sobredimensionado y tela de máxima absorción.",
+    precio: "$1,599 MXN",
+    inventario: "13 piezas disponibles",
+    imagen: "pictures/francia.jpg",
+    imagenes: ["pictures/francia.jpg", "pictures/francia.jpg", "pictures/francia.jpg"]
 }
-
-
 
 };
 
-
-
-
-
-
-
-const url =
-new URLSearchParams(window.location.search);
-
-
-const id =
-url.get("id");
-
-
-
-
+// Proceso para leer la URL y pintar los datos en pantalla
+const url = new URLSearchParams(window.location.search);
+const id = url.get("id");
 
 if(productos[id]){
+    let producto = productos[id];
 
+    document.title = producto.titulo + " | Legacy Jerseys";
+    document.getElementById("miga-producto").textContent = producto.titulo;
+    document.getElementById("producto-titulo").textContent = producto.titulo;
+    document.getElementById("producto-modelo").textContent = producto.modelo;
+    document.getElementById("producto-descripcion").textContent = producto.descripcion;
+    document.getElementById("producto-precio").textContent = producto.precio;
+    document.getElementById("producto-inventario").textContent = producto.inventario;
 
-let producto = productos[id];
-
-
-
-document.title =
-producto.titulo + " | Legacy Jerseys";
-
-
-
-document.getElementById("miga-producto").textContent =
-producto.titulo;
-
-
-
-document.getElementById("producto-titulo").textContent =
-producto.titulo;
-
-
-
-document.getElementById("producto-modelo").textContent =
-producto.modelo;
-
-
-
-document.getElementById("producto-descripcion").textContent =
-producto.descripcion;
-
-
-
-document.getElementById("producto-precio").textContent =
-producto.precio;
-
-
-
-document.getElementById("producto-inventario").textContent =
-producto.inventario;
-
-
-
-
-document.getElementById("producto-imagen").src =
-producto.imagen;
-
-
-
-document.getElementById("mini-1").src =
-producto.imagenes[0];
-
-
-document.getElementById("mini-2").src =
-producto.imagenes[1];
-
-
-document.getElementById("mini-3").src =
-producto.imagenes[2];
-
-
-
+    document.getElementById("producto-imagen").src = producto.imagen;
+    document.getElementById("mini-1").src = producto.imagenes[0];
+    document.getElementById("mini-2").src = producto.imagenes[1];
+    document.getElementById("mini-3").src = producto.imagenes[2];
+} else {
+    document.getElementById("producto-titulo").textContent = "Producto no encontrado";
 }
-
-else{
-
-
-document.getElementById("producto-titulo").textContent =
-"Producto no encontrado";
-
-
-}
-
-
-
-
 
 </script>
-
 
 
 </body>

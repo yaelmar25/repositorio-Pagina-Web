@@ -10,14 +10,124 @@
 
     <link rel="stylesheet" href="estilos.css">
 
+    <!-- Estilos específicos para maquetar la vista dividida exactamente como la imagen -->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: sans-serif;
+            background-color: #f7f9fa;
+        }
+
+        .login {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .login-form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            box-sizing: border-box;
+            background-color: #ffffff;
+        }
+
+        .volver {
+            color: #1a56db;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .login-form h1 {
+            color: #0b2265;
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+        }
+
+        .login-form p {
+            color: #777;
+            margin: 0 0 30px 0;
+        }
+
+        .login-form input[type="email"],
+        .login-form input[type="password"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        .opciones {
+            margin-bottom: 30px;
+            font-size: 1rem;
+            color: #000;
+        }
+
+        .opciones a {
+            color: #78288f;
+            text-decoration: underline;
+            margin-left: 5px;
+        }
+
+        .boton-login, .crear {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .boton-login {
+            background-color: #1a66ff;
+            color: white;
+            border: none;
+        }
+
+        .crear {
+            background-color: transparent;
+            color: #1a66ff;
+            border: 2px solid #1a66ff;
+        }
+
+        .login-imagen {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+    </style>
+
 </head>
 
 <body class="fondo-login">
 
     <div class="login">
 
-        <!-- Formulario -->
-
+        <!-- Formulario Izquierda -->
         <div class="login-form">
 
             <a href="pagina_principal.html" class="volver">
@@ -33,16 +143,9 @@
             <input type="password" placeholder="Contraseña">
 
             <div class="opciones">
-
                 <label>
-                    Recordarme  <a href="#"> ¿Olvidaste tu contraseña?</a>
-                    
-                   
-
+                    Recordarme <a href="#">¿Olvidaste tu contraseña?</a>
                 </label>
-
-                
-
             </div>
 
             <button class="boton-login">
@@ -53,61 +156,37 @@
                 Crear una cuenta
             </button>
 
-            <p class="empleado">
-                ¿Eres empleado?
-                <a href="#">Acceso interno</a>
-            </p>
-
-            <div id="registro" style="display:none;">
-
+            <!-- Contenedor oculto de registro por si el usuario presiona "Crear una cuenta" -->
+            <div id="registro" style="display:none; margin-top: 20px; border-top: 1px solid #ccc; padding-top: 20px;">
                 <h2>Crear cuenta</h2>
-
                 <input type="text" placeholder="Nombre completo">
-
                 <input type="email" placeholder="Correo electrónico">
-
                 <input type="password" placeholder="Contraseña">
-
                 <input type="password" placeholder="Confirmar contraseña">
-
                 <button class="boton-login">
                     Registrarse
                 </button>
-
             </div>
 
         </div>
 
-        <!-- Imagen -->
-
+        <!-- Imagen Derecha -->
         <div class="login-imagen">
-
             <img src="pictures/futbol.jpg" alt="Jerseys">
-
-            <div class="beneficios">
-
-                
+            <div class="beneficios"></div>
+        </div>
 
     </div>
 
     <script>
-
         function mostrarRegistro() {
-
             var registro = document.getElementById("registro");
-
             if (registro.style.display === "none") {
-
                 registro.style.display = "block";
-
             } else {
-
                 registro.style.display = "none";
-
             }
-
         }
-
     </script>
 
 </body>
