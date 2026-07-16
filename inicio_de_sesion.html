@@ -8,187 +8,223 @@
 
     <title>Inicio de sesión | Legacy Jerseys</title>
 
-    <link rel="stylesheet" href="CSS/estilos.css">
-
-    <!-- Estilos específicos para maquetar la vista dividida exactamente como la imagen -->
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: sans-serif;
-            background-color: #f7f9fa;
-        }
-
-        .login {
-            display: flex;
-            height: 100vh;
-            width: 100%;
-        }
-
-        .login-form {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
-            box-sizing: border-box;
-            background-color: #ffffff;
-        }
-
-        .volver {
-            color: #1a56db;
-            text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 25px;
-            display: inline-block;
-        }
-
-        .login-form h1 {
-            color: #0b2265;
-            font-size: 2.5rem;
-            margin: 0 0 10px 0;
-        }
-
-        .login-form p {
-            color: #777;
-            margin: 0 0 30px 0;
-        }
-
-        .login-form input[type="email"],
-        .login-form input[type="password"] {
-            width: 100%;
-            max-width: 400px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-
-        .opciones {
-            margin-bottom: 30px;
-            font-size: 1rem;
-            color: #000;
-        }
-
-        .opciones a {
-            color: #78288f;
-            text-decoration: underline;
-            margin-left: 5px;
-        }
-
-        .boton-login, .crear {
-            width: 100%;
-            max-width: 400px;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            text-align: center;
-        }
-
-        .boton-login {
-            background-color: #1a66ff;
-            color: white;
-            border: none;
-        }
-
-        .crear {
-            background-color: transparent;
-            color: #1a66ff;
-            border: 2px solid #1a66ff;
-        }
-
-        .login-imagen {
-            flex: 1;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login-imagen img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-    </style>
+    <link rel="stylesheet" href="/CSS/estilos.css">
 
 </head>
 
-<body class="fondo-login">
+<body>
 
-    <div class="login">
+<div class="login">
 
-        <!-- Formulario Izquierda -->
-        <div class="login-form">
+    <!-- FORMULARIO -->
 
-            <a href="pagina_principal.html" class="volver">
-                ← Volver al inicio
-            </a>
+    <div class="login-form">
 
-            <h1>Inicio de sesión</h1>
+        <a href="pagina_principal.html" class="volver">
+            ← Volver al inicio
+        </a>
 
-            <p>Ingresa tus datos para continuar</p>
+        <h1>Inicio de sesión</h1>
 
-            <input type="email" placeholder="Correo electrónico">
+        <p class="descripcion">
+            Ingresa tus datos para continuar
+        </p>
 
-            <input type="password" placeholder="Contraseña">
+        <!-- INICIO DE SESIÓN -->
 
-            <div class="opciones">
-                <label>
-                    Recordarme <a href="#">¿Olvidaste tu contraseña?</a>
-                </label>
-            </div>
+        <input
+            type="email"
+            id="correoLogin"
+            placeholder="Correo electrónico">
 
-            <button class="boton-login">
-                Iniciar sesión
+        <input
+            type="password"
+            id="contrasenaLogin"
+            placeholder="Contraseña">
+
+        <button
+            class="boton-login"
+            onclick="iniciarSesion()">
+
+            Iniciar sesión
+
+        </button>
+
+        <button
+            class="crear"
+            onclick="mostrarRegistro()">
+
+            Crear una cuenta
+
+        </button>
+
+        <!-- REGISTRO -->
+
+        <div id="registro" style="display:none;">
+
+            <h2>Crear cuenta</h2>
+
+            <input
+                type="text"
+                id="nombre"
+                placeholder="Nombre completo">
+
+            <input
+                type="email"
+                id="correo"
+                placeholder="Correo electrónico">
+
+            <input
+                type="password"
+                id="contrasena"
+                placeholder="Contraseña">
+
+            <input
+                type="password"
+                id="confirmar"
+                placeholder="Confirmar contraseña">
+
+            <button
+                class="boton-login"
+                onclick="registrar()">
+
+                Registrarse
+
             </button>
 
-            <button class="crear" onclick="mostrarRegistro()">
-                Crear una cuenta
-            </button>
-
-            <!-- Contenedor oculto de registro por si el usuario presiona "Crear una cuenta" -->
-            <div id="registro" style="display:none; margin-top: 20px; border-top: 1px solid #ccc; padding-top: 20px;">
-                <h2>Crear cuenta</h2>
-                <input type="text" placeholder="Nombre completo">
-                <input type="email" placeholder="Correo electrónico">
-                <input type="password" placeholder="Contraseña">
-                <input type="password" placeholder="Confirmar contraseña">
-                <button class="boton-login">
-                    Registrarse
-                </button>
-            </div>
-
-        </div>
-
-        <!-- Imagen Derecha -->
-        <div class="login-imagen">
-            <img src="pictures/futbol.jpg" alt="Jerseys">
-            <div class="beneficios"></div>
         </div>
 
     </div>
 
-    <script>
-        function mostrarRegistro() {
-            var registro = document.getElementById("registro");
-            if (registro.style.display === "none") {
-                registro.style.display = "block";
-            } else {
-                registro.style.display = "none";
-            }
-        }
-    </script>
+    <!-- IMAGEN -->
+
+    <div class="login-imagen">
+
+        <img src="pictures/futbol.jpg" alt="Jerseys">
+
+    </div>
+
+</div>
+<script>
+
+// Mostrar u ocultar el formulario de registro
+function mostrarRegistro() {
+
+    let registro = document.getElementById("registro");
+
+    if (registro.style.display === "block") {
+        registro.style.display = "none";
+    } else {
+        registro.style.display = "block";
+    }
+
+}
+
+
+// Registrar usuario
+function registrar() {
+
+    let nombre = document.getElementById("nombre").value.trim();
+    let correo = document.getElementById("correo").value.trim();
+    let contrasena = document.getElementById("contrasena").value;
+    let confirmar = document.getElementById("confirmar").value;
+
+    // Validar campos vacíos
+    if (nombre === "" || correo === "" || contrasena === "" || confirmar === "") {
+        alert("Todos los campos son obligatorios.");
+        return;
+    }
+
+    // Validar nombre
+    if (nombre.length < 3) {
+        alert("El nombre debe tener al menos 3 caracteres.");
+        return;
+    }
+
+    if (/\d/.test(nombre)) {
+        alert("El nombre no puede contener números.");
+        return;
+    }
+
+    // Validar correo
+    if (!correo.includes("@") || !correo.includes(".")) {
+        alert("Ingresa un correo válido.");
+        return;
+    }
+
+    // Validar contraseña
+    if (contrasena.length < 6) {
+        alert("La contraseña debe tener al menos 6 caracteres.");
+        return;
+    }
+
+    if (contrasena.includes(" ")) {
+        alert("La contraseña no puede contener espacios.");
+        return;
+    }
+
+    // Confirmar contraseña
+    if (contrasena !== confirmar) {
+        alert("Las contraseñas no coinciden.");
+        return;
+    }
+
+    // Guardar usuario en el navegador
+    localStorage.setItem("usuario", correo);
+    localStorage.setItem("password", contrasena);
+    localStorage.setItem("nombre", nombre);
+
+    alert("¡Registro exitoso!");
+
+    // Limpiar formulario
+    document.getElementById("nombre").value = "";
+    document.getElementById("correo").value = "";
+    document.getElementById("contrasena").value = "";
+    document.getElementById("confirmar").value = "";
+
+    // Ocultar formulario
+    document.getElementById("registro").style.display = "none";
+}
+// Iniciar sesión
+function iniciarSesion() {
+
+    let correo = document.getElementById("correoLogin").value.trim();
+    let contrasena = document.getElementById("contrasenaLogin").value;
+
+    // Validar campos vacíos
+    if (correo === "" || contrasena === "") {
+        alert("Ingresa tu correo y contraseña.");
+        return;
+    }
+
+    // Obtener datos guardados
+    let correoGuardado = localStorage.getItem("usuario");
+    let contrasenaGuardada = localStorage.getItem("password");
+    let nombre = localStorage.getItem("nombre");
+
+    // Verificar si existe una cuenta
+    if (correoGuardado === null || contrasenaGuardada === null) {
+        alert("No hay ninguna cuenta registrada. Crea una cuenta primero.");
+        return;
+    }
+
+    // Validar credenciales
+    if (correo === correoGuardado && contrasena === contrasenaGuardada) {
+
+        alert("¡Bienvenido " + nombre + "!");
+
+        // Redirigir a la página principal
+        window.location.href = "pagina_principal.html";
+
+    } else {
+
+        alert("Correo o contraseña incorrectos.");
+
+    }
+
+}
+
+</script>
 
 </body>
-
 </html>
