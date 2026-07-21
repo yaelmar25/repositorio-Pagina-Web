@@ -15,7 +15,7 @@ function getRows() {
 }
 
 function updateCart() {
-    let productCount = getRows().length;
+    let productCount = 0;
     let cartSubtotal = 0;
 
     getRows().forEach((row) => {
@@ -24,14 +24,15 @@ function updateCart() {
         const subtotal = price * qty;
 
         row.querySelector(".line-subtotal").textContent = moneyFormatter.format(subtotal);
+        productCount += qty;
         cartSubtotal += subtotal;
     });
 
-    itemTotal.textContent = productCount;
-    cartCount.textContent = productCount;
-    summaryProducts.textContent = productCount;
-    summarySubtotal.textContent = moneyFormatter.format(cartSubtotal);
-    summaryTotal.textContent = moneyFormatter.format(cartSubtotal);
+    if (itemTotal) itemTotal.textContent = productCount;
+    if (cartCount) cartCount.textContent = productCount;
+    if (summaryProducts) summaryProducts.textContent = productCount;
+    if (summarySubtotal) summarySubtotal.textContent = moneyFormatter.format(cartSubtotal);
+    if (summaryTotal) summaryTotal.textContent = moneyFormatter.format(cartSubtotal);
 
     if (getRows().length === 0 && !document.querySelector(".empty-cart")) {
         const emptyMessage = document.createElement("p");
