@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ofertas | Legacy Jerseys</title>
+
+    <link rel="stylesheet" href="CSS/estilos.css">
+
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+            <a href="index.php">LEGACY JERSEYS</a>
+        </div>
+
+        <div class="buscador">
+
+            <input type="text" placeholder="🔍 Buscar jerseys">
+
+        </div>
+
+        <div class="acciones">
+
+            <a href="inicio_de_sesion.php">
+                Inicio de sesión
+            </a>
+            <a href="Carrito de compras.php">
+                🛒 Carrito
+            </a>
+
+        </div>
+
+    </header>
+
+    <!-- ================= MENU ================= -->
+
+    <nav>
+
+        <a href="index.php">Inicio</a>
+
+        <a href="catalogo.php">Catálogo</a>
+
+    </nav>
+
+    <!-- ================= SECCIÓN OFERTAS ================= -->
+
+    <section class="ofertas">
+
+        <h2>🔥 Ofertas Especiales 🔥</h2>
+
+        <div class="productos">
+
+            <!-- JERSEY REAL MADRID -->
+            <div class="producto">
+
+                <span class="oferta">🔥 -25%</span>
+
+                <img src="pictures/madrid.jpg" alt="Jersey Real Madrid">
+
+                <div class="info">
+
+                    <h3>Real Madrid 2025</h3>
+
+                    <p class="precio-anterior">$1,899 MXN</p>
+
+                    <p class="precio-oferta">$1,424 MXN</p>
+
+                    <button class="btn-oferta">
+                        Comprar ahora
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- JERSEY BARCELONA -->
+            <div class="producto">
+
+                <span class="oferta">🔥 -30%</span>
+
+                <img src="pictures/barsa.jpg" alt="Jersey Barcelona">
+
+                <div class="info">
+
+                    <h3>Barcelona 2025</h3>
+
+                    <p class="precio-anterior">$1,799 MXN</p>
+
+                    <p class="precio-oferta">$1,259 MXN</p>
+
+                    <button class="btn-oferta">
+                        Comprar ahora
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- JERSEY MÉXICO -->
+            <div class="producto">
+
+                <span class="oferta">🔥 -20%</span>
+
+                <img src="pictures/mexico.jpg" alt="Jersey México">
+
+                <div class="info">
+
+                    <h3>México Local 2025</h3>
+
+                    <p class="precio-anterior">$1,699 MXN</p>
+
+                    <p class="precio-oferta">$1,359 MXN</p>
+
+                    <button class="btn-oferta">
+                        Comprar ahora
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div>
+            🔒 Pago seguro
+        </div>
+
+        <div>
+            🚚 Envíos a todo México
+        </div>
+
+        <div>
+            ✔ Productos originales
+        </div>
+
+        <div>
+            📞 +52 777 447 7773
+        </div>
+
+        <div class="copyright">
+            © 2026 LEGACY JERSEYS
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

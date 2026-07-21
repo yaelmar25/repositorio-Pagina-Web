@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LEGACY JERSEYS</title>
+
+    <link rel="stylesheet" href="CSS/estilos.css">
+
+</head>
+
+<body>
+
+
+
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+            <a href="index.php">LEGACY JERSEYS</a>
+        </div>
+
+        <div class="buscador">
+
+            <input type="text" placeholder="🔍 Buscar jerseys">
+
+        </div>
+
+        <div class="acciones">
+
+            <a href="inicio_de_sesion.php">
+                Inicio de sesión
+            </a>
+            <a href="Carrito de compras.php">
+                🛒 Carrito
+            </a>
+
+            </a>
+
+        </div>
+
+    </header>
+
+    <!-- ================= MENU ================= -->
+
+    <nav>
+
+        <a href="ofertas.php">Ofertas</a>
+
+        <a href="catalogo.php">Catálogo</a>
+
+
+
+    </nav>
+
+    <!-- ================= BANNER ================= -->
+
+    <section class="banner">
+
+        <div class="texto-banner">
+
+            <h1>LEGACY JERSEYS</h1>
+
+            <p>
+                Encuentra los mejores jerseys nacionales e internacionales.
+            </p>
+
+        </div>
+
+        <div class="imagen-banner">
+
+            <img src="pictures/banner.jpg" alt="Banner">
+
+        </div>
+
+    </section>
+
+    <!-- ================= PRODUCTOS ================= -->
+
+    <section class="destacados">
+
+        <h2>
+            ⭐ Productos destacados
+        </h2>
+
+        <div class="contenedor-productos">
+
+            <div class="producto">
+
+                <img src="pictures/mexico.png" alt="México">
+
+                <h3>México</h3>
+
+                <p>Tallas: S, M, L, XL</p>
+
+                <div class="info">
+
+                    <span class="precio">$899 MXN</span>
+
+                    <span class="stock">
+                        Disponible
+                    </span>
+
+                </div>
+
+                <button>
+                    🛒 Agregar
+                </button>
+
+            </div>
+
+            <div class="producto">
+
+                <img src="pictures/espana.png" alt="España">
+
+                <h3>España</h3>
+
+                <p>Tallas: S, M, L, XL</p>
+
+                <div class="info">
+
+                    <span class="precio">$949 MXN</span>
+
+                    <span class="stock">
+                        Disponible
+                    </span>
+
+                </div>
+
+                <button>
+                    🛒 Agregar
+                </button>
+
+            </div>
+
+            <div class="producto">
+
+                <img src="pictures/realmadrid.png" alt="Real Madrid">
+
+                <h3>Real Madrid</h3>
+
+                <p>Tallas: S, M, L, XL</p>
+
+                <div class="info">
+
+                    <span class="precio">$1299 MXN</span>
+
+                    <span class="stock">
+                        Disponible
+                    </span>
+
+                </div>
+
+                <button>
+                    🛒 Agregar
+                </button>
+
+            </div>
+
+            <div class="producto">
+
+                <img src="pictures/barcelona.png" alt="FC Barcelona">
+
+                <h3>FC Barcelona</h3>
+
+                <p>Tallas: S, M, L, XL</p>
+
+                <div class="info">
+
+                    <span class="precio">$1299 MXN</span>
+
+                    <span class="stock">
+                        Disponible
+                    </span>
+
+                </div>
+
+                <button>
+                    🛒 Agregar
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div>
+            🔒 Pago seguro
+        </div>
+
+        <div>
+            🚚 Envíos a todo México
+        </div>
+
+        <div>
+            ✔ Productos originales
+        </div>
+
+        <div>
+            📞 +52 777 447 7773
+        </div>
+
+        <div class="copyright">
+            © 2026 LEGACY JERSEYS
+        </div>
+
+    </footer>
+    <script src="script/scrip.js"></script>
+
+
+</body>
+
+</html>

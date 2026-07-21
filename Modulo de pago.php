@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago | Legacy Jerseys</title>
+
+    <link rel="stylesheet" href="CSS/styles.css">
+</head>
+
+
+<body>
+
+
+    <header class="site-header">
+
+        <a class="logo" href="index.php">
+            LEGACY JERSEYS
+        </a>
+
+
+        <div class="search-box">
+
+            <span>⌕</span>
+
+            <input type="search" placeholder="Buscar jerseys">
+
+        </div>
+
+
+
+        <nav class="main-nav">
+
+            <a href="ofertas.php">
+                Ofertas
+            </a>
+
+
+            <a class="active" href="catalogo.php">
+                Catálogo
+            </a>
+
+
+        </nav>
+
+
+
+        <div class="header-actions">
+
+            <a href="inicio_de_sesion.php">
+                Inicio de sesión
+            </a>
+
+
+            <a class="cart-button" href="Carrito de compras.php">
+
+                <span>🛒</span>
+
+                <span>3</span>
+
+            </a>
+
+        </div>
+
+
+    </header>
+
+
+
+
+
+    <main class="payment-page">
+
+
+
+        <section class="payment-title">
+
+            <h1>
+                Pago
+            </h1>
+
+
+            <p>
+                Completa los datos de tu tarjeta para finalizar la compra.
+            </p>
+
+
+        </section>
+
+
+
+
+
+        <section class="payment-layout">
+
+
+
+            <div>
+
+
+
+                <form class="payment-card" id="payment-form">
+
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Nombre del titular
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Ej. Juan Pérez"
+                            required>
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group full">
+
+
+                        <label>
+                            Número de tarjeta
+                        </label>
+
+
+                        <div class="input-icon">
+
+
+                            <span>▭</span>
+
+
+                            <input
+                                type="text"
+                                placeholder="1234 5678 9012 3456"
+                                maxlength="19"
+                                required>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+
+
+                        <label>
+                            Fecha de vencimiento
+                        </label>
+
+
+                        <div class="input-icon">
+
+
+                            <input
+                                type="text"
+                                placeholder="MM / AA"
+                                maxlength="7"
+                                required>
+
+
+                            <span>□</span>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+
+
+                        <label>
+                            Código de seguridad
+                        </label>
+
+
+                        <div class="input-icon">
+
+
+                            <input
+                                type="password"
+                                placeholder="CVV"
+                                maxlength="3"
+                                required>
+
+
+                            <span>?</span>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group full">
+
+
+                        <label>
+                            Método de pago
+                        </label>
+
+
+                        <select required>
+
+                            <option>
+                                Tarjeta de crédito o débito
+                            </option>
+
+                            <option>
+                                Tarjeta de débito
+                            </option>
+
+                            <option>
+                                Tarjeta de crédito
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+
+
+                        <label>
+                            Monto total
+                        </label>
+
+
+                        <input
+                            type="text"
+                            value="$99.96"
+                            readonly>
+
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+
+
+                        <label>
+                            Estado de la transacción
+                        </label>
+
+
+                        <div class="status-box">
+
+
+                            <span class="status-badge pending">
+                                Pendiente
+                            </span>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                    <p class="form-message"></p>
+
+
+
+                    <button class="primary-button">
+
+                        Confirmar pago
+
+                    </button>
+
+
+
+
+                    <a class="secondary-button" href="Carrito de compras.php">
+
+                        Volver al carrito
+
+                    </a>
+
+
+
+
+                </form>
+
+
+
+
+
+                <div class="secure-note">
+
+
+                    <span>
+                        ♡
+                    </span>
+
+
+                    <div>
+
+
+                        <strong>
+                            Pago simulado para fines del sistema.
+                        </strong>
+
+
+                        <p>
+                            Tus datos están 100% protegidos con encriptación SSL.
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <aside class="summary-card">
+
+
+                <h2>
+                    Resumen del pedido
+                </h2>
+
+
+
+
+
+                <article class="summary-product">
+
+
+                    <img src="pictures/madrid.jpg" alt="Real Madrid">
+
+
+                    <div>
+
+
+                        <h3>
+                            Jersey Real Madrid
+                        </h3>
+
+
+                        <p>
+                            Camisa oficial de fútbol temporada 2025.
+                        </p>
+
+
+                        <span>
+                            Talla: M
+                        </span>
+
+
+                        <span>
+                            Cantidad: 1
+                        </span>
+
+
+                    </div>
+
+
+
+                    <strong>
+                        $24.99
+                    </strong>
+
+
+
+                </article>
+
+
+
+
+
+
+
+
+                <article class="summary-product">
+
+
+                    <img src="pictures/barsa.jpg" alt="Barcelona">
+
+
+                    <div>
+
+
+                        <h3>
+                            Jersey Barcelona
+                        </h3>
+
+
+                        <p>
+                            Jersey deportivo cómodo para partidos y entrenamiento.
+                        </p>
+
+
+                        <span>
+                            Talla: L
+                        </span>
+
+
+                        <span>
+                            Cantidad: 2
+                        </span>
+
+
+                    </div>
+
+
+
+                    <strong>
+                        $49.98
+                    </strong>
+
+
+
+                </article>
+
+
+
+
+
+
+
+
+                <article class="summary-product">
+
+
+                    <img src="pictures/mexico.png" alt="México">
+
+
+                    <div>
+
+
+                        <h3>
+                            Jersey México
+                        </h3>
+
+
+                        <p>
+                            Camisa ligera con diseño deportivo moderno.
+                        </p>
+
+
+                        <span>
+                            Talla: S
+                        </span>
+
+
+                        <span>
+                            Cantidad: 1
+                        </span>
+
+
+                    </div>
+
+
+
+                    <strong>
+                        $24.99
+                    </strong>
+
+
+
+                </article>
+
+
+
+
+
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Subtotal (3 productos)
+                    </span>
+
+
+                    <strong>
+                        $99.96
+                    </strong>
+
+
+                </div>
+
+
+
+
+
+                <div class="summary-line">
+
+
+                    <span>
+                        Envío
+                    </span>
+
+
+                    <strong class="free-shipping">
+                        Gratis
+                    </strong>
+
+
+                </div>
+
+
+
+
+
+                <div class="summary-total">
+
+
+                    <span>
+                        Total de compra
+                    </span>
+
+
+                    <strong>
+                        $99.96
+                    </strong>
+
+
+                </div>
+
+
+
+            </aside>
+
+
+
+
+
+        </section>
+
+
+
+    </main>
+
+
+
+
+
+
+    <script src="script/script.js"></script>
+
+
+</body>
+
+</html>
