@@ -2183,3 +2183,207 @@ h6{
     }
 
 }
+
+.mensaje-usuario {
+    margin: 15px 0;
+    padding: 12px;
+    font-size: 0.9rem;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.mensaje-usuario.error {
+    color: #a40000;
+    background: #ffe8e8;
+    border: 1px solid #e9a4a4;
+}
+
+.mensaje-usuario.exito {
+    color: #176b27;
+    background: #e8f8ec;
+    border: 1px solid #9dd5a8;
+}
+
+#registro {
+    margin-top: 20px;
+}
+
+
+.registro-panel {
+    display: none;
+    margin-top: 20px;
+}
+
+.registro-panel.registro-visible {
+    display: block;
+}
+
+
+
+/* =========================================================
+   ACCIONES DEL ENCABEZADO
+========================================================= */
+
+.acciones {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+
+/* =========================================================
+   INFORMACIÓN DEL USUARIO
+========================================================= */
+
+.sesion-usuario {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    color: #333;
+    background: #f4f6fb;
+    border: 1px solid #dbe2f2;
+    border-radius: 20px;
+}
+
+.icono-usuario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    font-size: 0.9rem;
+    background: white;
+    border-radius: 50%;
+}
+
+.saludo-usuario {
+    color: #333;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.saludo-usuario strong {
+    color: #174eaf;
+}
+
+
+/* =========================================================
+   INICIAR Y CERRAR SESIÓN
+========================================================= */
+
+.boton-iniciar-sesion,
+.boton-cerrar-sesion {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 14px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 5px;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.boton-iniciar-sesion {
+    color: white;
+    background: #174eaf;
+    border: 1px solid #174eaf;
+}
+
+.boton-iniciar-sesion:hover {
+    background: #103a85;
+}
+
+.boton-cerrar-sesion {
+    color: #174eaf;
+    background: white;
+    border: 1px solid #174eaf;
+}
+
+.boton-cerrar-sesion:hover {
+    color: white;
+    background: #174eaf;
+}
+
+
+/* =========================================================
+   ENLACE DEL CARRITO
+========================================================= */
+
+.enlace-carrito {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 12px;
+    color: #174eaf;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.enlace-carrito:hover {
+    background: #f0f4ff;
+}
+
+
+/* =========================================================
+   CONTADOR DEL CARRITO
+========================================================= */
+
+.contador-carrito {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 21px;
+    height: 21px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    background: #174eaf;
+    border-radius: 20px;
+}
+
+
+/* =========================================================
+   ENCABEZADO RESPONSIVO
+========================================================= */
+
+@media screen and (max-width: 850px) {
+
+    .acciones {
+        gap: 8px;
+    }
+
+    .saludo-usuario {
+        display: none;
+    }
+
+    .sesion-usuario {
+        padding: 7px;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .boton-cerrar-sesion,
+    .boton-iniciar-sesion {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+
+    .enlace-carrito {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+}

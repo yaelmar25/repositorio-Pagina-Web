@@ -577,7 +577,7 @@
 
 
 
-    <script src="script/script.js"></script>
+    <script src="script/pago.js"></script>
 
 
 </body>

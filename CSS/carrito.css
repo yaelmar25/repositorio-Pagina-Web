@@ -1,0 +1,468 @@
+/* =========================================================
+   PÁGINA GENERAL
+========================================================= */
+
+.cart-page {
+    min-height: calc(100vh - 150px);
+    padding-bottom: 40px;
+    background: #f4f6fb;
+}
+
+.cart-title {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px 10px;
+    box-sizing: border-box;
+}
+
+.cart-title h1 {
+    margin: 0 0 5px;
+    color: #174eaf;
+    font-size: 2rem;
+}
+
+.cart-title p {
+    margin: 0;
+    color: #444;
+}
+
+
+/* =========================================================
+   DISTRIBUCIÓN DEL CARRITO
+========================================================= */
+
+.cart-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px 40px;
+    box-sizing: border-box;
+}
+
+.cart-panel {
+    flex: 1;
+    min-width: 0;
+    padding: 24px;
+    overflow-x: auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   COLUMNAS
+========================================================= */
+
+.cart-head,
+.cart-row {
+    display: grid;
+    grid-template-columns:
+        minmax(300px, 2.8fr)
+        70px
+        175px
+        125px
+        125px
+        80px;
+    align-items: center;
+    gap: 16px;
+    min-width: 900px;
+}
+
+.cart-head {
+    padding: 12px 0 18px;
+    color: #444;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+.cart-row {
+    padding: 22px 0;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+
+/* =========================================================
+   INFORMACIÓN DEL PRODUCTO
+========================================================= */
+
+.product-info {
+    display: grid;
+    grid-template-columns: 85px minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.product-image {
+    width: 85px;
+    height: 95px;
+    object-fit: contain;
+    border-radius: 7px;
+    background: #fafafa;
+}
+
+.sin-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 85px;
+    height: 95px;
+    color: #777;
+    font-size: 0.75rem;
+    text-align: center;
+    background: #eee;
+    border-radius: 7px;
+}
+
+.product-name {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    line-height: 1.25;
+}
+
+.product-name a {
+    color: #173f97;
+    text-decoration: none;
+}
+
+.product-name a:hover {
+    text-decoration: underline;
+}
+
+.product-description {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    color: #666;
+    font-size: 0.83rem;
+    line-height: 1.35;
+
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.cart-discount {
+    margin: 6px 0 0;
+    color: green;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   TALLA
+========================================================= */
+
+.size-badge {
+    display: inline-block;
+    width: fit-content;
+    min-width: 38px;
+    padding: 7px 10px;
+    color: #174eaf;
+    font-weight: bold;
+    text-align: center;
+    background: white;
+    border: 1px solid #174eaf;
+    border-radius: 5px;
+}
+
+
+/* =========================================================
+   CANTIDAD
+========================================================= */
+
+.qty-form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.qty-form button {
+    height: 32px;
+    cursor: pointer;
+}
+
+.qty-minus,
+.qty-plus {
+    width: 32px;
+    color: #222;
+    background: #f3f3f3;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+.qty-minus:hover,
+.qty-plus:hover {
+    background: #e5e5e5;
+}
+
+.qty-input {
+    width: 48px;
+    height: 32px;
+    padding: 0 4px;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+.update-button {
+    width: 34px;
+    color: #174eaf;
+    font-weight: bold;
+    background: white;
+    border: 1px solid #174eaf;
+    border-radius: 4px;
+}
+
+.update-button:hover {
+    color: white;
+    background: #174eaf;
+}
+
+
+/* =========================================================
+   PRECIOS
+========================================================= */
+
+.unit-price {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    color: #111;
+    line-height: 1.25;
+}
+
+.previous-price {
+    color: #777;
+    font-size: 0.75rem;
+}
+
+.line-subtotal {
+    color: #111;
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   ELIMINAR
+========================================================= */
+
+.remove-form {
+    margin: 0;
+}
+
+.remove-button {
+    padding: 6px 0;
+    color: #d00000;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   NOTA INFERIOR
+========================================================= */
+
+.secure-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    color: #174eaf;
+}
+
+.secure-note p {
+    margin: 3px 0 0;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   CARRITO VACÍO
+========================================================= */
+
+.empty-cart {
+    padding: 55px 20px;
+    text-align: center;
+}
+
+.empty-cart h2 {
+    margin-top: 0;
+    color: #174eaf;
+}
+
+.empty-cart a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 11px 22px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    background: #174eaf;
+    border-radius: 5px;
+}
+
+
+/* =========================================================
+   RESUMEN
+========================================================= */
+
+.summary-card {
+    position: sticky;
+    top: 20px;
+    flex: 0 0 320px;
+    width: 320px;
+    padding: 24px;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.summary-card h2 {
+    margin: 0 0 18px;
+    color: #174eaf;
+    font-size: 1.55rem;
+}
+
+.summary-line,
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.summary-line {
+    margin-bottom: 16px;
+}
+
+.summary-line strong {
+    text-align: right;
+}
+
+.free-shipping {
+    color: green;
+}
+
+.summary-total {
+    margin: 5px 0 20px;
+    padding-top: 17px;
+    font-size: 1.1rem;
+    border-top: 1px solid #ddd;
+}
+
+.summary-total strong {
+    text-align: right;
+}
+
+
+/* =========================================================
+   BOTONES DEL RESUMEN
+========================================================= */
+
+.cart-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.payment-button,
+.continue-button,
+.empty-button {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    box-sizing: border-box;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.payment-button {
+    color: white;
+    background: #174eaf;
+    border: 1px solid #174eaf;
+}
+
+.payment-button:hover {
+    background: #103a85;
+}
+
+.continue-button {
+    color: #333;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+}
+
+.continue-button:hover {
+    background: #e8e8e8;
+}
+
+.empty-form {
+    width: 100%;
+}
+
+.empty-button {
+    color: #d00000;
+    background: white;
+    border: 1px solid #e00000;
+}
+
+.empty-button:hover {
+    background: #fff1f1;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media screen and (max-width: 950px) {
+
+    .cart-layout {
+        flex-direction: column;
+    }
+
+    .cart-panel {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .summary-card {
+        position: static;
+        width: 100%;
+        flex-basis: auto;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .cart-title {
+        padding-top: 20px;
+    }
+
+    .cart-title h1 {
+        font-size: 1.6rem;
+    }
+
+    .cart-panel {
+        padding: 15px;
+    }
+
+}
