@@ -1,9 +1,11 @@
 <?php
+
 require_once __DIR__ . "/config/conexion.php";
 
 /* =========================================================
    1. OBTENER EL PRODUCTO DESDE LA URL
 ========================================================= */
+
 $slug = trim($_GET["id"] ?? "");
 
 if ($slug === "") {
@@ -14,6 +16,7 @@ if ($slug === "") {
 /* =========================================================
    2. CONSULTAR LA INFORMACIÓN DEL PRODUCTO
 ========================================================= */
+
 $consultaProducto = $conexion->prepare(
     "SELECT
         id_producto,
@@ -25,7 +28,8 @@ $consultaProducto = $conexion->prepare(
         precio,
         descuento
     FROM productos
-    WHERE slug = ?"
+    WHERE slug = ?
+    LIMIT 1"
 );
 
 if (!$consultaProducto) {
@@ -46,6 +50,7 @@ if (!$producto) {
 /* =========================================================
    3. CONSULTAR LAS IMÁGENES DEL PRODUCTO
 ========================================================= */
+
 $consultaImagenes = $conexion->prepare(
     "SELECT ruta_imagen
     FROM imagenes_producto
@@ -70,6 +75,7 @@ while ($registroImagen = $resultadoImagenes->fetch_assoc()) {
 /* =========================================================
    4. CONSULTAR TALLAS E INVENTARIO
 ========================================================= */
+
 $consultaTallas = $conexion->prepare(
     "SELECT
         talla,
@@ -87,6 +93,7 @@ $consultaTallas->bind_param("i", $producto["id_producto"]);
 $consultaTallas->execute();
 
 $resultadoTallas = $consultaTallas->get_result();
+
 $tallas = [];
 $stockTotal = 0;
 
@@ -99,6 +106,7 @@ while ($registroTalla = $resultadoTallas->fetch_assoc()) {
 /* =========================================================
    5. CALCULAR PRECIO Y DESCUENTO
 ========================================================= */
+
 $precioNormal = (float) $producto["precio"];
 $descuento = (float) $producto["descuento"];
 $precioFinal = $precioNormal;
@@ -106,64 +114,65 @@ $precioFinal = $precioNormal;
 if ($descuento > 0) {
     $precioFinal = $precioNormal - ($precioNormal * $descuento / 100);
 }
+
+/* =========================================================
+   6. CERRAR CONSULTAS PREPARADAS
+========================================================= */
+
+$consultaProducto->close();
+$consultaImagenes->close();
+$consultaTallas->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?> | Legacy Jerseys</title>
+    
     <link rel="stylesheet" href="CSS/estilos.css">
     <link rel="stylesheet" href="CSS/descripcion_producto.css">
 </head>
+
 <body>
 
-    <!-- ================= HEADER ================= -->
-    <header>
-        <div class="logo">
-            <a href="index.php">LEGACY JERSEYS</a>
-        </div>
-
-        <div class="buscador">
-            <input type="text" placeholder="🔍 Buscar jerseys">
-        </div>
-
-        <div class="acciones">
-            <a href="inicio_de_sesion.php">Inicio de sesión</a>
-            <a href="carrito_de_compras.php">🛒 Carrito</a>
-        </div>
-    </header>
-
-    <!-- ================= MENÚ ================= -->
-    <nav>
-        <a href="index.php">Inicio</a>
-        <a href="ofertas.php">Ofertas</a>
-        <a href="catalogo.php">Catálogo</a>
-    </nav>
+    <!-- ================= ENCABEZADO REUTILIZABLE ================= -->
+    <?php require_once __DIR__ . "/header/header.php"; ?>
 
     <!-- ================= CONTENIDO PRINCIPAL ================= -->
     <main class="product-page">
 
-        <!-- RUTA DE NAVEGACIÓN -->
+        <!-- ================= RUTA DE NAVEGACIÓN ================= -->
         <p class="breadcrumb">
-            <a href="catalogo.php">Catálogo</a> ➜ 
-            <span id="miga-producto"><?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?></span>
+            <a href="catalogo.php">Catálogo</a> ➜
+            <span id="miga-producto">
+                <?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>
+            </span>
         </p>
 
-        <!-- DETALLE DEL PRODUCTO -->
+        <!-- ================= DETALLE DEL PRODUCTO ================= -->
         <section class="product-detail">
 
             <!-- ================= GALERÍA ================= -->
             <div class="product-gallery">
                 <?php if (!empty($imagenes)): ?>
-                    <img id="producto-imagen" src="<?= htmlspecialchars($imagenes[0], ENT_QUOTES, "UTF-8") ?>" alt="<?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>" class="main-product-image">
-                    
+                    <img
+                        id="producto-imagen"
+                        class="main-product-image"
+                        src="<?= htmlspecialchars($imagenes[0], ENT_QUOTES, "UTF-8") ?>"
+                        alt="<?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>"
+                    >
+
                     <div class="product-thumbnails">
                         <?php foreach ($imagenes as $indice => $rutaImagen): ?>
-                            <img src="<?= htmlspecialchars($rutaImagen, ENT_QUOTES, "UTF-8") ?>" 
-                                 alt="Vista <?= $indice + 1 ?> de <?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>" 
-                                 data-ruta="<?= htmlspecialchars($rutaImagen, ENT_QUOTES, "UTF-8") ?>" 
-                                 class="miniatura-producto <?= $indice === 0 ? "selected-image" : "" ?>">
+                            <img
+                                src="<?= htmlspecialchars($rutaImagen, ENT_QUOTES, "UTF-8") ?>"
+                                alt="Vista <?= $indice + 1 ?> de <?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>"
+                                data-ruta="<?= htmlspecialchars($rutaImagen, ENT_QUOTES, "UTF-8") ?>"
+                                class="miniatura-producto<?= $indice === 0 ? " selected-image" : "" ?>"
+                            >
                         <?php endforeach; ?>
                     </div>
                 <?php else: ?>
@@ -175,16 +184,29 @@ if ($descuento > 0) {
 
             <!-- ================= INFORMACIÓN ================= -->
             <div class="product-info-detail">
-                <h1 id="producto-titulo"><?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?></h1>
 
+                <!-- NOMBRE -->
+                <h1 id="producto-titulo">
+                    <?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>
+                </h1>
+
+                <!-- EQUIPO -->
                 <h3>Equipo</h3>
-                <p><?= htmlspecialchars($producto["equipo"], ENT_QUOTES, "UTF-8") ?></p>
+                <p>
+                    <?= htmlspecialchars($producto["equipo"], ENT_QUOTES, "UTF-8") ?>
+                </p>
 
+                <!-- MODELO -->
                 <h3>Modelo</h3>
-                <p id="producto-modelo"><?= htmlspecialchars($producto["modelo"], ENT_QUOTES, "UTF-8") ?></p>
+                <p id="producto-modelo">
+                    <?= htmlspecialchars($producto["modelo"], ENT_QUOTES, "UTF-8") ?>
+                </p>
 
+                <!-- DESCRIPCIÓN -->
                 <h3>Descripción</h3>
-                <p id="producto-descripcion"><?= nl2br(htmlspecialchars($producto["descripcion"], ENT_QUOTES, "UTF-8")) ?></p>
+                <p id="producto-descripcion">
+                    <?= nl2br(htmlspecialchars($producto["descripcion"], ENT_QUOTES, "UTF-8")) ?>
+                </p>
 
                 <!-- ================= PRECIO ================= -->
                 <div id="producto-precio">
@@ -210,12 +232,14 @@ if ($descuento > 0) {
                 <div class="sizes">
                     <?php if (!empty($tallas)): ?>
                         <?php foreach ($tallas as $registroTalla): ?>
-                            <button type="button" 
-                                    class="size-button" 
-                                    data-talla="<?= htmlspecialchars($registroTalla["talla"], ENT_QUOTES, "UTF-8") ?>" 
-                                    data-stock="<?= (int) $registroTalla["stock"] ?>" 
-                                    <?= $registroTalla["stock"] <= 0 ? "disabled" : "" ?>>
-                                <?= htmlspecialchars($registroTalla["talla"], ENT_QUOTES, "UTF-8") ?> 
+                            <button
+                                type="button"
+                                class="size-button"
+                                data-talla="<?= htmlspecialchars($registroTalla["talla"], ENT_QUOTES, "UTF-8") ?>"
+                                data-stock="<?= (int) $registroTalla["stock"] ?>"
+                                <?= $registroTalla["stock"] <= 0 ? "disabled" : "" ?>
+                            >
+                                <?= htmlspecialchars($registroTalla["talla"], ENT_QUOTES, "UTF-8") ?>
                                 (<?= (int) $registroTalla["stock"] ?>)
                             </button>
                         <?php endforeach; ?>
@@ -226,8 +250,10 @@ if ($descuento > 0) {
 
                 <!-- ================= INVENTARIO ================= -->
                 <p class="stock">
-                    Disponibles: 
-                    <strong id="producto-inventario"><?= $stockTotal ?> piezas en total</strong>
+                    Disponibles:
+                    <strong id="producto-inventario">
+                        <?= $stockTotal ?> <?= $stockTotal === 1 ? "pieza" : "piezas" ?> en total
+                    </strong>
                 </p>
 
                 <!-- ================= CANTIDAD ================= -->
@@ -244,7 +270,12 @@ if ($descuento > 0) {
                     <input type="hidden" name="talla" id="talla-seleccionada" value="">
                     <input type="hidden" name="cantidad" id="cantidad-seleccionada" value="1">
 
-                    <button type="submit" class="primary-button" id="agregar-carrito" <?= $stockTotal <= 0 ? "disabled" : "" ?>>
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="agregar-carrito"
+                        <?= $stockTotal <= 0 ? "disabled" : "" ?>
+                    >
                         🛒 Agregar al carrito
                     </button>
                 </form>
@@ -252,8 +283,17 @@ if ($descuento > 0) {
             </div>
 
         </section>
+
     </main>
 
+    <!-- ================= JAVASCRIPT ================= -->
     <script src="script/descripcion_producto.js"></script>
+
 </body>
+
 </html>
+<?php
+
+$conexion->close();
+
+?>

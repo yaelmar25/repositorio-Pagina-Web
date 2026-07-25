@@ -2387,3 +2387,152 @@ h6{
     }
 
 }
+
+.formulario-cerrar-sesion {
+    margin: 0;
+}
+
+
+nav a.enlace-activo {
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+
+
+}
+
+
+
+/* =========================================================
+   INFORMACIÓN DEL CATÁLOGO
+========================================================= */
+
+.modelo-producto {
+    min-height: 40px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.precio-catalogo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 10px 0 15px;
+}
+
+.precio-anterior {
+    color: #777;
+    font-size: 0.85rem;
+}
+
+.precio-actual {
+    color: #174eaf;
+    font-size: 1.1rem;
+}
+
+.descuento-producto {
+    color: #16802d;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.producto-sin-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 220px;
+    color: #777;
+    background: #eeeeee;
+    border-radius: 6px;
+}
+
+.catalogo-vacio {
+    width: 100%;
+    padding: 40px;
+    text-align: center;
+}
+
+
+/* =========================================================
+   PRODUCTOS DESTACADOS DINÁMICOS
+========================================================= */
+
+.enlace-imagen-producto {
+    display: block;
+    text-decoration: none;
+}
+
+.modelo-destacado {
+    min-height: 40px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.descuento-destacado {
+    margin: 8px 0;
+    color: #16802d;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.producto-sin-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 220px;
+    color: #777;
+    background: #eeeeee;
+    border-radius: 6px;
+}
+
+.destacados-vacios {
+    width: 100%;
+    padding: 40px;
+    text-align: center;
+}
+
+
+/* =========================================================
+   BOTÓN DE INICIO DE SESIÓN
+========================================================= */
+
+.acciones .boton-iniciar-sesion {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 18px;
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: #1f5cc4;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.acciones .boton-iniciar-sesion:visited {
+    color: #ffffff;
+}
+
+.acciones .boton-iniciar-sesion:hover {
+    color: #ffffff;
+    background-color: #174a9f;
+    transform: translateY(-1px);
+}
+
+.acciones .boton-iniciar-sesion:active {
+    color: #ffffff;
+    background-color: #123b80;
+}
+
+.acciones .boton-iniciar-sesion:focus-visible {
+    color: #ffffff;
+    outline: 3px solid rgba(31, 92, 196, 0.3);
+    outline-offset: 2px;
+}

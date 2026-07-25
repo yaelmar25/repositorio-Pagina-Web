@@ -1,7 +1,6 @@
 <?php
 
-session_start();
-
+require_once __DIR__ . "/config/sesion.php";
 require_once __DIR__ . "/config/conexion.php";
 
 /* =========================================================
@@ -35,10 +34,8 @@ $consultaProducto = $conexion->prepare(
             LIMIT 1
         ) AS imagen
     FROM productos p
-    INNER JOIN producto_tallas pt
-        ON pt.id_producto = p.id_producto
-    WHERE p.id_producto = ?
-      AND pt.talla = ?"
+    INNER JOIN producto_tallas pt ON pt.id_producto = p.id_producto
+    WHERE p.id_producto = ? AND pt.talla = ?"
 );
 
 if (!$consultaProducto) {
@@ -51,134 +48,106 @@ if (!$consultaProducto) {
 
 foreach ($carritoSesion as $clave => $itemSesion) {
     $idProducto = (int) ($itemSesion["id_producto"] ?? 0);
-    $talla = strtoupper(trim($itemSesion["talla"] ?? ""));
-    $cantidad = (int) ($itemSesion["cantidad"] ?? 0);
+    $talla      = strtoupper(trim($itemSesion["talla"] ?? ""));
+    $cantidad   = (int) ($itemSesion["cantidad"] ?? 0);
 
-    /*
-    | Ignorar registros incompletos.
-    */
+    // Ignorar registros incompletos
     if ($idProducto <= 0 || $talla === "" || $cantidad <= 0) {
         continue;
     }
 
-    /*
-    | Consultar el producto y el stock de su talla.
-    */
+    // Consultar el producto y el stock correspondiente a la talla
     $consultaProducto->bind_param("is", $idProducto, $talla);
     $consultaProducto->execute();
-
+    
     $resultadoProducto = $consultaProducto->get_result();
-    $producto = $resultadoProducto->fetch_assoc();
+    $producto          = $resultadoProducto->fetch_assoc();
 
-    /*
-    | Si el producto o la talla ya no existen, no se muestran en el carrito.
-    */
+    // Eliminar de la sesión productos o tallas inexistentes
     if (!$producto) {
+        unset($_SESSION["carrito"][$clave]);
         continue;
     }
 
-    /*
-    | Calcular el precio con descuento.
-    */
-    $precioNormal = (float) $producto["precio"];
-    $descuento = (float) $producto["descuento"];
+    $stockDisponible = (int) $producto["stock"];
+
+    // Eliminar el producto si ya no hay existencias
+    if ($stockDisponible <= 0) {
+        unset($_SESSION["carrito"][$clave]);
+        continue;
+    }
+
+    // Ajustar cantidad si el stock cambió
+    if ($cantidad > $stockDisponible) {
+        $cantidad = $stockDisponible;
+        $_SESSION["carrito"][$clave]["cantidad"] = $cantidad;
+    }
+
+    // Calcular precio con descuento
+    $precioNormal   = (float) $producto["precio"];
+    $descuento      = (float) $producto["descuento"];
     $precioUnitario = $precioNormal;
 
     if ($descuento > 0) {
         $precioUnitario = $precioNormal - ($precioNormal * $descuento / 100);
     }
 
-    /*
-    | Evitar mostrar una cantidad superior al stock actual.
-    */
-    $stockDisponible = (int) $producto["stock"];
-
-    if ($cantidad > $stockDisponible) {
-        $cantidad = $stockDisponible;
-    }
-
-    if ($cantidad <= 0) {
-        continue;
-    }
-
-    /*
-    | Calcular el subtotal del producto.
-    */
+    // Subtotal del producto
     $subtotal = $precioUnitario * $cantidad;
 
-    /*
-    | Acumular totales.
-    */
-    $cantidadTotal += $cantidad;
+    // Acumular cantidades y totales
+    $cantidadTotal   += $cantidad;
     $subtotalGeneral += $subtotal;
 
-    /*
-    | Preparar la información que se mostrará.
-    */
+    // Preparar información para la vista
     $productosCarrito[] = [
-        "clave" => $clave,
-        "id_producto" => $idProducto,
-        "slug" => $producto["slug"],
-        "nombre" => $producto["nombre"],
-        "descripcion" => $producto["descripcion"],
-        "imagen" => $producto["imagen"],
-        "talla" => $talla,
-        "cantidad" => $cantidad,
-        "stock" => $stockDisponible,
-        "precio_normal" => $precioNormal,
-        "descuento" => $descuento,
+        "clave"           => $clave,
+        "id_producto"     => $idProducto,
+        "slug"            => $producto["slug"],
+        "nombre"          => $producto["nombre"],
+        "descripcion"     => $producto["descripcion"],
+        "imagen"          => $producto["imagen"],
+        "talla"           => $talla,
+        "cantidad"        => $cantidad,
+        "stock"           => $stockDisponible,
+        "precio_normal"   => $precioNormal,
+        "descuento"       => $descuento,
         "precio_unitario" => $precioUnitario,
-        "subtotal" => $subtotal
+        "subtotal"        => $subtotal
     ];
 }
 
+/* =========================================================
+   4. CERRAR CONSULTA Y CONEXIÓN
+========================================================= */
+
 $consultaProducto->close();
+$conexion->close();
 
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de compras | Legacy Jerseys</title>
+    
     <link rel="stylesheet" href="CSS/estilos.css">
     <link rel="stylesheet" href="CSS/carrito.css">
 </head>
-
 <body>
 
-    <!-- ================= HEADER ================= -->
-    <header>
-        <div class="logo">
-            <a href="index.php">LEGACY JERSEYS</a>
-        </div>
+    <!-- ================= ENCABEZADO REUTILIZABLE ================= -->
+    <?php require_once __DIR__ . "/header/header.php"; ?>
 
-        <div class="buscador">
-            <input type="text" placeholder="🔍 Buscar jerseys">
-        </div>
-
-        <div class="acciones">
-            <a href="inicio_de_sesion.php">Inicio de sesión</a>
-            <a href="carrito_de_compras.php">🛒 Carrito</a>
-        </div>
-    </header>
-
-    <!-- ================= MENÚ ================= -->
-    <nav>
-        <a href="index.php">Inicio</a>
-        <a href="ofertas.php">Ofertas</a>
-        <a href="catalogo.php">Catálogo</a>
-    </nav>
-
-    <!-- ================= CONTENIDO ================= -->
+    <!-- ================= CONTENIDO DEL CARRITO ================= -->
     <main class="cart-page">
 
         <!-- ================= TÍTULO ================= -->
         <section class="cart-title">
             <h1>Carrito de compras</h1>
             <p>
-                <span id="item-total"><?= $cantidadTotal ?></span>
+                <span id="item-total"><?= (int) $cantidadTotal ?></span>
                 <?= $cantidadTotal === 1 ? "producto" : "productos" ?> en tu carrito
             </p>
         </section>
@@ -187,7 +156,6 @@ $consultaProducto->close();
 
             <!-- ================= PANEL DE PRODUCTOS ================= -->
             <div class="cart-panel">
-
                 <?php if (!empty($productosCarrito)): ?>
 
                     <!-- ENCABEZADOS -->
@@ -260,7 +228,13 @@ $consultaProducto->close();
                                 >
 
                                 <button type="button" class="qty-plus" aria-label="Aumentar cantidad">+</button>
-                                <button type="submit" class="update-button" title="Actualizar cantidad">✓</button>
+
+                                <button 
+                                    type="submit" 
+                                    class="update-button" 
+                                    title="Actualizar cantidad" 
+                                    aria-label="Actualizar cantidad"
+                                >✓</button>
                             </form>
 
                             <!-- PRECIO UNITARIO -->
@@ -270,7 +244,6 @@ $consultaProducto->close();
                                         <del>$<?= number_format($item["precio_normal"], 2) ?></del>
                                     </small>
                                 <?php endif; ?>
-
                                 <strong>$<?= number_format($item["precio_unitario"], 2) ?> MXN</strong>
                             </div>
 
@@ -291,7 +264,7 @@ $consultaProducto->close();
 
                     <!-- MENSAJE INFORMATIVO -->
                     <div class="secure-note">
-                        <span>♡</span>
+                        <span aria-hidden="true">♡</span>
                         <div>
                             <strong>Revisa los productos de tu carrito</strong>
                             <p>Confirma las tallas y cantidades antes de continuar con el pago.</p>
@@ -308,7 +281,6 @@ $consultaProducto->close();
                     </div>
 
                 <?php endif; ?>
-
             </div>
 
             <!-- ================= RESUMEN DEL PEDIDO ================= -->
@@ -317,12 +289,10 @@ $consultaProducto->close();
 
                 <div class="summary-line">
                     <span>
-                        Subtotal (<span id="summary-products"><?= $cantidadTotal ?></span>
+                        Subtotal (<span id="summary-products"><?= (int) $cantidadTotal ?></span> 
                         <?= $cantidadTotal === 1 ? "producto" : "productos" ?>)
                     </span>
-                    <strong id="summary-subtotal">
-                        $<?= number_format($subtotalGeneral, 2) ?> MXN
-                    </strong>
+                    <strong id="summary-subtotal">$<?= number_format($subtotalGeneral, 2) ?> MXN</strong>
                 </div>
 
                 <div class="summary-line">
@@ -332,9 +302,7 @@ $consultaProducto->close();
 
                 <div class="summary-total">
                     <span>Total de compra</span>
-                    <strong id="summary-total">
-                        $<?= number_format($subtotalGeneral, 2) ?> MXN
-                    </strong>
+                    <strong id="summary-total">$<?= number_format($subtotalGeneral, 2) ?> MXN</strong>
                 </div>
 
                 <div class="cart-actions">
@@ -351,12 +319,7 @@ $consultaProducto->close();
                     <?php if (!empty($productosCarrito)): ?>
                         <form action="procesos/carrito_acciones.php" method="POST" class="empty-form">
                             <input type="hidden" name="accion" value="vaciar">
-                            <button
-                           type="submit"
-                         class="empty-button"
-                            >
-                             Vaciar carrito
-                          </button>
+                            <button type="submit" class="empty-button">Vaciar carrito</button>
                         </form>
                     <?php endif; ?>
                 </div>
@@ -366,10 +329,8 @@ $consultaProducto->close();
 
     </main>
 
-    
-    
+    <!-- ================= JAVASCRIPT ================= -->
     <script src="script/carrito.js"></script>
 
 </body>
-
 </html>

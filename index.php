@@ -1,27 +1,59 @@
 <?php
-session_start();
+
+require_once __DIR__ . "/config/conexion.php";
 
 /* =========================================================
-   OBTENER INFORMACIÓN DEL USUARIO
+   CONSULTAR PRODUCTOS DESTACADOS
 ========================================================= */
-$usuario = $_SESSION["usuario"] ?? null;
-$nombreUsuario = "";
 
-if ($usuario) {
-    $nombreCompleto = trim($usuario["nombre"] ?? "");
-    $partesNombre = preg_split("/\s+/", $nombreCompleto);
-    $nombreUsuario = $partesNombre[0] ?? "";
+$consultaDestacados = $conexion->prepare(
+    "SELECT
+        p.id_producto,
+        p.slug,
+        p.nombre,
+        p.modelo,
+        p.precio,
+        p.descuento,
+        (
+            SELECT ip.ruta_imagen
+            FROM imagenes_producto ip
+            WHERE ip.id_producto = p.id_producto
+            ORDER BY ip.id_imagen
+            LIMIT 1
+        ) AS imagen,
+        (
+            SELECT COALESCE(SUM(pt.stock), 0)
+            FROM producto_tallas pt
+            WHERE pt.id_producto = p.id_producto
+        ) AS stock_total,
+        (
+            SELECT GROUP_CONCAT(
+                pt.talla
+                ORDER BY pt.id_producto_talla
+                SEPARATOR ', '
+            )
+            FROM producto_tallas pt
+            WHERE pt.id_producto = p.id_producto
+              AND pt.stock > 0
+        ) AS tallas_disponibles
+    FROM productos p
+    WHERE EXISTS (
+        SELECT 1
+        FROM producto_tallas pt
+        WHERE pt.id_producto = p.id_producto
+          AND pt.stock > 0
+    )
+    ORDER BY p.id_producto
+    LIMIT 4"
+);
+
+if (!$consultaDestacados) {
+    die("Error al preparar los productos destacados: " . $conexion->error);
 }
 
-/* =========================================================
-   CALCULAR PRODUCTOS DEL CARRITO
-========================================================= */
-$carrito = $_SESSION["carrito"] ?? [];
-$cantidadCarrito = 0;
+$consultaDestacados->execute();
+$resultadoDestacados = $consultaDestacados->get_result();
 
-foreach ($carrito as $item) {
-    $cantidadCarrito += (int) ($item["cantidad"] ?? 0);
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,113 +61,107 @@ foreach ($carrito as $item) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEGACY JERSEYS</title>
+    <title>Legacy Jerseys</title>
     <link rel="stylesheet" href="CSS/estilos.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
-    <header>
-        <div class="logo">
-            <a href="index.php">LEGACY JERSEYS</a>
-        </div>
-
-        <div class="buscador">
-            <input type="text" placeholder="🔍 Buscar jerseys">
-        </div>
-
-        <div class="acciones">
-            <?php if ($usuario): ?>
-                <span class="saludo-usuario">
-                    Hola, <?= htmlspecialchars($nombreUsuario, ENT_QUOTES, "UTF-8") ?>
-                </span>
-                <a href="cerrar_sesion.php">Cerrar sesión</a>
-            <?php else: ?>
-                <a href="inicio_de_sesion.php">Inicio de sesión</a>
-            <?php endif; ?>
-
-            <a href="carrito_de_compras.php" class="enlace-carrito">
-                🛒 Carrito
-                <?php if ($cantidadCarrito > 0): ?>
-                    <span class="contador-carrito"><?= $cantidadCarrito ?></span>
-                <?php endif; ?>
-            </a>
-        </div>
-    </header>
-
-    <!-- ================= MENÚ ================= -->
-    <nav>
-        <a href="ofertas.php">Ofertas</a>
-        <a href="catalogo.php">Catálogo</a>
-    </nav>
+    <!-- ================= ENCABEZADO REUTILIZABLE ================= -->
+    <?php require_once __DIR__ . "/header/header.php"; ?>
 
     <!-- ================= BANNER ================= -->
     <section class="banner">
         <div class="texto-banner">
             <h1>LEGACY JERSEYS</h1>
             <p>Encuentra los mejores jerseys nacionales e internacionales.</p>
+            <a href="catalogo.php" class="boton-banner">Ver catálogo</a>
         </div>
 
         <div class="imagen-banner">
-            <img src="pictures/banner.jpg" alt="Banner de Legacy Jerseys">
+            <img src="pictures/banner.jpg" alt="Colección de jerseys de fútbol">
         </div>
     </section>
 
-    <!-- ================= PRODUCTOS ================= -->
+    <!-- ================= PRODUCTOS DESTACADOS ================= -->
     <section class="destacados">
         <h2>⭐ Productos destacados</h2>
 
         <div class="contenedor-productos">
+            <?php if ($resultadoDestacados->num_rows > 0): ?>
 
-            <!-- MÉXICO -->
-            <div class="producto">
-                <img src="pictures/mexico.png" alt="Jersey de México">
-                <h3>México</h3>
-                <p>Tallas: S, M, L, XL</p>
-                <div class="info">
-                    <span class="precio">$899 MXN</span>
-                    <span class="stock">Disponible</span>
+                <?php while ($producto = $resultadoDestacados->fetch_assoc()): ?>
+                    <?php
+                    $precioNormal = (float) $producto["precio"];
+                    $descuento    = (float) $producto["descuento"];
+                    $precioFinal  = $precioNormal;
+
+                    if ($descuento > 0) {
+                        $precioFinal = $precioNormal - ($precioNormal * $descuento / 100);
+                    }
+                    ?>
+
+                    <article class="producto">
+
+                        <!-- IMAGEN -->
+                        <a href="descripcion_del_producto.php?id=<?= urlencode($producto["slug"]) ?>" class="enlace-imagen-producto">
+                            <?php if (!empty($producto["imagen"])): ?>
+                                <img src="<?= htmlspecialchars($producto["imagen"], ENT_QUOTES, "UTF-8") ?>" alt="<?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>">
+                            <?php else: ?>
+                                <div class="producto-sin-imagen">Sin imagen disponible</div>
+                            <?php endif; ?>
+                        </a>
+
+                        <!-- NOMBRE -->
+                        <h3>
+                            <?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>
+                        </h3>
+
+                        <!-- MODELO -->
+                        <?php if (!empty($producto["modelo"])): ?>
+                            <p class="modelo-destacado">
+                                <?= htmlspecialchars($producto["modelo"], ENT_QUOTES, "UTF-8") ?>
+                            </p>
+                        <?php endif; ?>
+
+                        <!-- TALLAS -->
+                        <p>
+                            Tallas: <?= htmlspecialchars($producto["tallas_disponibles"] ?? "No disponibles", ENT_QUOTES, "UTF-8") ?>
+                        </p>
+
+                        <!-- PRECIO Y STOCK -->
+                        <div class="info">
+                            <span class="precio">
+                                $<?= number_format($precioFinal, 2) ?> MXN
+                            </span>
+                            <span class="stock">
+                                <?= (int) $producto["stock_total"] > 0 ? "Disponible" : "Agotado" ?>
+                            </span>
+                        </div>
+
+                        <!-- DESCUENTO -->
+                        <?php if ($descuento > 0): ?>
+                            <p class="descuento-destacado">
+                                Antes: <del>$<?= number_format($precioNormal, 2) ?> MXN</del> · <?= number_format($descuento, 0) ?>% de descuento
+                            </p>
+                        <?php endif; ?>
+
+                        <!-- BOTÓN -->
+                        <a href="descripcion_del_producto.php?id=<?= urlencode($producto["slug"]) ?>" class="boton-producto">
+                            Ver producto
+                        </a>
+
+                    </article>
+                <?php endwhile; ?>
+
+            <?php else: ?>
+
+                <div class="destacados-vacios">
+                    <h3>No hay productos destacados</h3>
+                    <p>Actualmente no existen productos con stock disponible.</p>
                 </div>
-                <a href="descripcion_del_producto.php?id=mexico" class="boton-producto">Ver producto</a>
-            </div>
 
-            <!-- ESPAÑA -->
-            <div class="producto">
-                <img src="pictures/espana.png" alt="Jersey de España">
-                <h3>España</h3>
-                <p>Tallas: S, M, L, XL</p>
-                <div class="info">
-                    <span class="precio">$949 MXN</span>
-                    <span class="stock">Disponible</span>
-                </div>
-                <a href="catalogo.php" class="boton-producto">Ver producto</a>
-            </div>
-
-            <!-- REAL MADRID -->
-            <div class="producto">
-                <img src="pictures/realmadrid.png" alt="Jersey del Real Madrid">
-                <h3>Real Madrid</h3>
-                <p>Tallas: S, M, L, XL</p>
-                <div class="info">
-                    <span class="precio">$1299 MXN</span>
-                    <span class="stock">Disponible</span>
-                </div>
-                <a href="descripcion_del_producto.php?id=real-madrid" class="boton-producto">Ver producto</a>
-            </div>
-
-            <!-- BARCELONA -->
-            <div class="producto">
-                <img src="pictures/barcelona.png" alt="Jersey del FC Barcelona">
-                <h3>FC Barcelona</h3>
-                <p>Tallas: S, M, L, XL</p>
-                <div class="info">
-                    <span class="precio">$1299 MXN</span>
-                    <span class="stock">Disponible</span>
-                </div>
-                <a href="descripcion_del_producto.php?id=barcelona" class="boton-producto">Ver producto</a>
-            </div>
-
+            <?php endif; ?>
         </div>
     </section>
 
@@ -148,8 +174,15 @@ foreach ($carrito as $item) {
         <div class="copyright">© 2026 LEGACY JERSEYS</div>
     </footer>
 
+    <!-- ================= JAVASCRIPT ================= -->
     <script src="script/index.js"></script>
 
 </body>
 
 </html>
+<?php
+
+$consultaDestacados->close();
+$conexion->close();
+
+?>
