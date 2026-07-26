@@ -3,9 +3,7 @@
 require_once __DIR__ . "/config/sesion.php";
 require_once __DIR__ . "/config/conexion.php";
 
-/* =========================================================
-   1. OBTENER EL CARRITO GUARDADO EN LA SESIÓN
-========================================================= */
+
 
 $carritoSesion = $_SESSION["carrito"] ?? [];
 
@@ -13,9 +11,6 @@ $productosCarrito = [];
 $cantidadTotal = 0;
 $subtotalGeneral = 0;
 
-/* =========================================================
-   2. PREPARAR LA CONSULTA DE PRODUCTOS
-========================================================= */
 
 $consultaProducto = $conexion->prepare(
     "SELECT
@@ -42,9 +37,7 @@ if (!$consultaProducto) {
     die("Error al preparar la consulta del carrito: " . $conexion->error);
 }
 
-/* =========================================================
-   3. CONSULTAR LOS PRODUCTOS DEL CARRITO
-========================================================= */
+
 
 foreach ($carritoSesion as $clave => $itemSesion) {
     $idProducto = (int) ($itemSesion["id_producto"] ?? 0);
@@ -117,9 +110,7 @@ foreach ($carritoSesion as $clave => $itemSesion) {
     ];
 }
 
-/* =========================================================
-   4. CERRAR CONSULTA Y CONEXIÓN
-========================================================= */
+
 
 $consultaProducto->close();
 $conexion->close();
@@ -137,13 +128,12 @@ $conexion->close();
 </head>
 <body>
 
-    <!-- ================= ENCABEZADO REUTILIZABLE ================= -->
+    
     <?php require_once __DIR__ . "/header/header.php"; ?>
 
-    <!-- ================= CONTENIDO DEL CARRITO ================= -->
+   
     <main class="cart-page">
 
-        <!-- ================= TÍTULO ================= -->
         <section class="cart-title">
             <h1>Carrito de compras</h1>
             <p>
@@ -307,7 +297,7 @@ $conexion->close();
 
                 <div class="cart-actions">
                     <?php if (!empty($productosCarrito)): ?>
-                        <a href="Modulo de pago.php" class="payment-button">
+                        <a href="modulo_de_pago.php" class="payment-button">
                             🛒 Continuar al pago
                         </a>
                     <?php endif; ?>
@@ -329,7 +319,7 @@ $conexion->close();
 
     </main>
 
-    <!-- ================= JAVASCRIPT ================= -->
+    
     <script src="script/carrito.js"></script>
 
 </body>

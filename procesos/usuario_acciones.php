@@ -3,24 +3,18 @@
 require_once __DIR__ . "/../config/sesion.php";
 require_once __DIR__ . "/../config/conexion.php";
 
-/* =========================================================
-   1. VALIDAR EL MÉTODO DE ENVÍO
-========================================================= */
+
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: ../inicio_de_sesion.php");
     exit;
 }
 
-/* =========================================================
-   2. OBTENER LA ACCIÓN SOLICITADA
-========================================================= */
+
 
 $accion = trim($_POST["accion"] ?? "");
 
-/* =========================================================
-   3. FUNCIÓN DE REDIRECCIÓN Y MENSAJES
-========================================================= */
+
 
 function regresarConMensaje(
     string $mensaje,
@@ -35,15 +29,11 @@ function regresarConMensaje(
     exit;
 }
 
-/* =========================================================
-   4. PROCESAR LA ACCIÓN
-========================================================= */
+
 
 switch ($accion) {
 
-    /* =====================================================
-       REGISTRAR USUARIO
-    ===================================================== */
+
     case "registrar":
         $nombre     = trim($_POST["nombre"] ?? "");
         $correo     = strtolower(trim($_POST["correo"] ?? ""));
@@ -140,9 +130,7 @@ switch ($accion) {
             false
         );
 
-    /* =====================================================
-       INICIAR SESIÓN
-    ===================================================== */
+
     case "iniciar":
         $correo     = strtolower(trim($_POST["correo"] ?? ""));
         $contrasena = $_POST["contrasena"] ?? "";
@@ -204,9 +192,7 @@ switch ($accion) {
         header("Location: " . $destino);
         exit;
 
-    /* =====================================================
-       CERRAR SESIÓN
-    ===================================================== */
+
     case "cerrar":
         /* Eliminar únicamente los datos de usuario conservando el carrito */
         unset($_SESSION["usuario"], $_SESSION["destino_despues_login"]);
@@ -222,9 +208,7 @@ switch ($accion) {
         header("Location: ../inicio_de_sesion.php");
         exit;
 
-    /* =====================================================
-       ACCIÓN NO VÁLIDA
-    ===================================================== */
+
     default:
         regresarConMensaje("La acción solicitada no es válida.");
 }

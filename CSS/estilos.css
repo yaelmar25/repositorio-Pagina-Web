@@ -2536,3 +2536,63 @@ nav a.enlace-activo {
     outline: 3px solid rgba(31, 92, 196, 0.3);
     outline-offset: 2px;
 }
+
+
+
+
+/* =========================================================
+   BARRA DE BÚSQUEDA
+========================================================= */
+
+.buscador {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 42%;
+    margin: 0;
+}
+
+.buscador input {
+    width: 100%;
+    height: 54px;
+    padding: 0 55px 0 18px;
+    border: 1px solid #d5d5d5;
+    border-radius: 8px;
+    font-size: 17px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.buscador input:focus {
+    border-color: #1755bd;
+    box-shadow: 0 0 0 3px rgba(23, 85, 189, 0.12);
+}
+
+.boton-busqueda {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.boton-busqueda:hover {
+    background-color: #eef3ff;
+}
+
+.boton-busqueda:focus {
+    outline: 2px solid #1755bd;
+    outline-offset: 1px;
+}

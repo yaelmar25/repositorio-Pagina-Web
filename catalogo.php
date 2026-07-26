@@ -1,10 +1,28 @@
 <?php
 
+require_once __DIR__ . "/config/sesion.php";
 require_once __DIR__ . "/config/conexion.php";
 
-/* =========================================================
-   CONSULTAR LOS PRODUCTOS
-========================================================= */
+
+$buscar = "";
+
+if (isset($_GET["buscar"]) && is_string($_GET["buscar"])) {
+    $buscar = trim($_GET["buscar"]);
+}
+
+/*
+ * Cambiar varios espacios seguidos por uno solo.
+ * Ejemplo: "Real    Madrid" → "Real Madrid"
+ */
+$buscar = preg_replace("/\s+/", " ", $buscar);
+
+/*
+ * Limitar la búsqueda a 100 caracteres.
+ */
+if (strlen($buscar) > 100) {
+    $buscar = substr($buscar, 0, 100);
+}
+
 
 $sql = "
     SELECT
@@ -13,6 +31,7 @@ $sql = "
         p.nombre,
         p.equipo,
         p.modelo,
+        p.descripcion,
         p.precio,
         p.descuento,
         (
@@ -23,14 +42,48 @@ $sql = "
             LIMIT 1
         ) AS imagen
     FROM productos p
-    ORDER BY p.id_producto
 ";
 
-$resultadoProductos = $conexion->query($sql);
 
-if (!$resultadoProductos) {
-    die("Error al consultar los productos: " . $conexion->error);
+
+if ($buscar !== "") {
+    $sql .= "
+        WHERE (
+            p.nombre LIKE ?
+            OR p.equipo LIKE ?
+            OR p.modelo LIKE ?
+            OR p.descripcion LIKE ?
+        )
+    ";
 }
+
+
+$sql .= " ORDER BY p.id_producto ";
+
+
+$consultaProductos = $conexion->prepare($sql);
+
+if (!$consultaProductos) {
+    die("Error al preparar la consulta de productos: " . $conexion->error);
+}
+
+
+
+if ($buscar !== "") {
+    $terminoBusqueda = "%" . $buscar . "%";
+    $consultaProductos->bind_param(
+        "ssss",
+        $terminoBusqueda,
+        $terminoBusqueda,
+        $terminoBusqueda,
+        $terminoBusqueda
+    );
+}
+
+
+
+$consultaProductos->execute();
+$resultadoProductos = $consultaProductos->get_result();
 
 ?>
 <!DOCTYPE html>
@@ -41,28 +94,40 @@ if (!$resultadoProductos) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo | Legacy Jerseys</title>
     <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="CSS/catalogo.css">
 </head>
 
 <body>
 
-    <!-- ================= ENCABEZADO REUTILIZABLE ================= -->
+    
     <?php require_once __DIR__ . "/header/header.php"; ?>
 
-    <!-- ================= TÍTULO ================= -->
+  
     <section class="titulo">
         <h2>CATÁLOGO DE CAMISETAS</h2>
         <p>Explora nuestra colección de clubes y selecciones nacionales.</p>
     </section>
 
-    <!-- ================= PRODUCTOS ================= -->
+    
+    <?php if ($buscar !== ""): ?>
+        <section class="resultado-busqueda">
+            <div>
+                <span>Resultados de búsqueda para:</span>
+                <strong>“<?= htmlspecialchars($buscar, ENT_QUOTES, "UTF-8") ?>”</strong>
+            </div>
+            <a href="catalogo.php" class="limpiar-busqueda">Limpiar búsqueda</a>
+        </section>
+    <?php endif; ?>
+
     <section class="productos">
+
         <?php if ($resultadoProductos->num_rows > 0): ?>
 
             <?php while ($producto = $resultadoProductos->fetch_assoc()): ?>
                 <?php
                 $precioNormal = (float) $producto["precio"];
-                $descuento    = (float) $producto["descuento"];
-                $precioFinal  = $precioNormal;
+                $descuento = (float) $producto["descuento"];
+                $precioFinal = $precioNormal;
 
                 if ($descuento > 0) {
                     $precioFinal = $precioNormal - ($precioNormal * $descuento / 100);
@@ -74,16 +139,26 @@ if (!$resultadoProductos) {
                     <!-- IMAGEN -->
                     <?php if (!empty($producto["imagen"])): ?>
                         <a href="descripcion_del_producto.php?id=<?= urlencode($producto["slug"]) ?>">
-                            <img src="<?= htmlspecialchars($producto["imagen"], ENT_QUOTES, "UTF-8") ?>" alt="<?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>">
+                            <img 
+                                src="<?= htmlspecialchars($producto["imagen"], ENT_QUOTES, "UTF-8") ?>" 
+                                alt="<?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>"
+                            >
                         </a>
                     <?php else: ?>
-                        <div class="producto-sin-imagen">Sin imagen disponible</div>
+                        <div class="producto-sin-imagen">
+                            Sin imagen disponible
+                        </div>
                     <?php endif; ?>
 
                     <!-- NOMBRE -->
-                    <h3>
-                        <?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>
-                    </h3>
+                    <h3><?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?></h3>
+
+                    <!-- EQUIPO -->
+                    <?php if (!empty($producto["equipo"])): ?>
+                        <p class="equipo-producto">
+                            <?= htmlspecialchars($producto["equipo"], ENT_QUOTES, "UTF-8") ?>
+                        </p>
+                    <?php endif; ?>
 
                     <!-- MODELO -->
                     <?php if (!empty($producto["modelo"])): ?>
@@ -108,7 +183,7 @@ if (!$resultadoProductos) {
                         </strong>
                     </div>
 
-                    <!-- ENLACE -->
+                 
                     <a href="descripcion_del_producto.php?id=<?= urlencode($producto["slug"]) ?>" class="boton-producto">
                         Ver producto
                     </a>
@@ -119,14 +194,26 @@ if (!$resultadoProductos) {
         <?php else: ?>
 
             <div class="catalogo-vacio">
-                <h3>No hay productos disponibles</h3>
-                <p>Actualmente no existen productos registrados en el catálogo.</p>
+                <?php if ($buscar !== ""): ?>
+                    <h3>No se encontraron productos</h3>
+                    <p>
+                        No existen jerseys relacionados con 
+                        <strong>“<?= htmlspecialchars($buscar, ENT_QUOTES, "UTF-8") ?>”</strong>
+                    </p>
+                    <a href="catalogo.php" class="boton-ver-catalogo">
+                        Ver todo el catálogo
+                    </a>
+                <?php else: ?>
+                    <h3>No hay productos disponibles</h3>
+                    <p>Actualmente no existen productos registrados en el catálogo.</p>
+                <?php endif; ?>
             </div>
 
         <?php endif; ?>
+
     </section>
 
-    <!-- ================= FOOTER ================= -->
+   
     <footer>
         <h3>LEGACY JERSEYS</h3>
         <p>Encuentra camisetas originales, retro y ediciones especiales de los mejores clubes y selecciones.</p>
@@ -139,6 +226,7 @@ if (!$resultadoProductos) {
 <?php
 
 $resultadoProductos->free();
+$consultaProductos->close();
 $conexion->close();
 
 ?>

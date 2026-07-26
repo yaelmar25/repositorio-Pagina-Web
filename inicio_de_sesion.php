@@ -2,24 +2,18 @@
 
 session_start();
 
-/* =========================================================
-   EVITAR QUE UN USUARIO AUTENTICADO VUELVA AL LOGIN
-========================================================= */
+
 if (isset($_SESSION["usuario"])) {
     header("Location: index.php");
     exit;
 }
 
-/* =========================================================
-   OBTENER MENSAJES TEMPORALES
-========================================================= */
+
 $mensaje         = $_SESSION["mensaje_usuario"] ?? "";
 $tipoMensaje     = $_SESSION["tipo_mensaje_usuario"] ?? "";
 $mostrarRegistro = $_SESSION["mostrar_registro"] ?? false;
 
-/* =========================================================
-   ELIMINAR MENSAJES DESPUÉS DE LEERLOS
-========================================================= */
+
 unset(
     $_SESSION["mensaje_usuario"],
     $_SESSION["tipo_mensaje_usuario"],
@@ -41,7 +35,7 @@ unset(
 
     <main class="login">
 
-        <!-- ================= FORMULARIOS ================= -->
+
         <section class="login-form">
 
             <a href="index.php" class="volver">
@@ -54,7 +48,7 @@ unset(
                 Ingresa tus datos para continuar
             </p>
 
-            <!-- ================= MENSAJE ================= -->
+            
             <?php if ($mensaje !== ""): ?>
                 <div class="mensaje-usuario <?= htmlspecialchars($tipoMensaje, ENT_QUOTES, "UTF-8") ?>" role="alert">
                     <?= htmlspecialchars($mensaje, ENT_QUOTES, "UTF-8") ?>
@@ -155,7 +149,7 @@ unset(
 
         </section>
 
-        <!-- ================= IMAGEN ================= -->
+        
         <section class="login-imagen">
             <img src="pictures/futbol.jpg" alt="Jugador de fútbol usando un jersey">
         </section>

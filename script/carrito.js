@@ -2,25 +2,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const formulariosCantidad = document.querySelectorAll(".qty-form");
 
-    /* =====================================================
-       CONFIGURAR CADA CONTROL DE CANTIDAD
-    ===================================================== */
+
     formulariosCantidad.forEach(function (formulario) {
 
         const campoCantidad = formulario.querySelector(".qty-input");
         const botonRestar = formulario.querySelector(".qty-minus");
         const botonSumar = formulario.querySelector(".qty-plus");
 
-        /*
-        | Evitar errores si falta algún elemento.
-        */
+       
         if (!campoCantidad || !botonRestar || !botonSumar) {
             return;
         }
 
-        /* =================================================
-           OBTENER LÍMITES DE CANTIDAD
-        ================================================= */
+
         function obtenerCantidadMinima() {
             const cantidadMinima = Number(campoCantidad.min);
             return Number.isNaN(cantidadMinima) ? 1 : cantidadMinima;
@@ -31,9 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return Number.isNaN(cantidadMaxima) ? Infinity : cantidadMaxima;
         }
 
-        /* =================================================
-           RESTAR CANTIDAD
-        ================================================= */
+
         botonRestar.addEventListener("click", function () {
             const cantidadActual = Number(campoCantidad.value);
             const cantidadMinima = obtenerCantidadMinima();
@@ -45,9 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        /* =================================================
-           SUMAR CANTIDAD
-        ================================================= */
+
         botonSumar.addEventListener("click", function () {
             const cantidadActual = Number(campoCantidad.value);
             const cantidadMaxima = obtenerCantidadMaxima();
@@ -60,9 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        /* =================================================
-           VALIDAR CANTIDAD ESCRITA MANUALMENTE
-        ================================================= */
+    
         campoCantidad.addEventListener("input", function () {
             let cantidad = Number(campoCantidad.value);
             const cantidadMinima = obtenerCantidadMinima();
@@ -88,9 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
             campoCantidad.value = cantidad;
         });
 
-        /* =================================================
-           VALIDAR ANTES DE ACTUALIZAR
-        ================================================= */
+      
         formulario.addEventListener("submit", function (evento) {
             let cantidad = Number(campoCantidad.value);
             const cantidadMinima = obtenerCantidadMinima();
@@ -112,9 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    /* =====================================================
-       CONFIRMAR ELIMINACIÓN DE UN PRODUCTO
-    ===================================================== */
+
     const formulariosEliminar = document.querySelectorAll(".remove-form");
 
     formulariosEliminar.forEach(function (formulario) {
@@ -127,9 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    /* =====================================================
-       CONFIRMAR VACIADO DEL CARRITO
-    ===================================================== */
+
     const formularioVaciar = document.querySelector(".empty-form");
 
     if (formularioVaciar) {

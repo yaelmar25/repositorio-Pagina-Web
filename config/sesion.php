@@ -1,17 +1,10 @@
 <?php
 
-/* =========================================================
-   INICIAR LA SESIÓN
-========================================================= */
-
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
 
-/* =========================================================
-   COMPROBAR SI EL USUARIO INICIÓ SESIÓN
-========================================================= */
 
 function usuarioAutenticado(): bool
 {
@@ -23,9 +16,6 @@ function usuarioAutenticado(): bool
 }
 
 
-/* =========================================================
-   OBTENER LOS DATOS DEL USUARIO ACTUAL
-========================================================= */
 
 function obtenerUsuarioActual(): ?array
 {
@@ -36,10 +26,6 @@ function obtenerUsuarioActual(): ?array
     return $_SESSION["usuario"];
 }
 
-
-/* =========================================================
-   OBTENER EL PRIMER NOMBRE DEL USUARIO
-========================================================= */
 
 function obtenerPrimerNombreUsuario(): string
 {
@@ -61,9 +47,6 @@ function obtenerPrimerNombreUsuario(): string
 }
 
 
-/* =========================================================
-   CONTAR LAS PIEZAS DEL CARRITO
-========================================================= */
 
 function obtenerCantidadCarrito(): int
 {
@@ -78,9 +61,6 @@ function obtenerCantidadCarrito(): int
 }
 
 
-/* =========================================================
-   EXIGIR QUE EL USUARIO INICIE SESIÓN
-========================================================= */
 
 function requerirInicioSesion(string $rutaLogin = "inicio_de_sesion.php"): void
 {

@@ -5,9 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formularioLogin = document.getElementById("formulario-login");
     const formularioRegistro = document.getElementById("formulario-registro");
 
-    /* =====================================================
-       MOSTRAR U OCULTAR EL FORMULARIO DE REGISTRO
-    ===================================================== */
+    
     function actualizarEstadoRegistro() {
         if (!botonMostrarRegistro || !panelRegistro) {
             return;
@@ -28,9 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         actualizarEstadoRegistro();
     }
 
-    /* =====================================================
-       VALIDAR INICIO DE SESIÓN
-    ===================================================== */
+ 
     if (formularioLogin) {
         formularioLogin.addEventListener("submit", function (evento) {
             const correoLogin = document.getElementById("correoLogin").value.trim();
@@ -43,9 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    /* =====================================================
-       VALIDAR REGISTRO
-    ===================================================== */
+    
     if (formularioRegistro) {
         formularioRegistro.addEventListener("submit", function (evento) {
             const nombre = document.getElementById("nombre").value.trim();

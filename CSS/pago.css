@@ -1,0 +1,490 @@
+.payment-page {
+    width: 100%;
+    min-height: calc(100vh - 150px);
+    padding: 35px 25px 60px;
+    box-sizing: border-box;
+    background: #f4f6fb;
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.payment-title {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 25px;
+}
+
+.payment-title h1 {
+    margin: 0 0 8px;
+    color: #174eaf;
+    font-size: 2.2rem;
+    line-height: 1.2;
+}
+
+.payment-title p {
+    margin: 0;
+    color: #667085;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   DISTRIBUCIÓN PRINCIPAL
+========================================================= */
+
+.payment-layout {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(420px, 480px);
+    align-items: start;
+    gap: 35px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   FORMULARIO
+========================================================= */
+
+.payment-card {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 30px;
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #dfe4ee;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    color: #111827;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 13px 15px;
+    box-sizing: border-box;
+    color: #111827;
+    font: inherit;
+    background: #ffffff;
+    border: 1px solid #cfd7e6;
+    border-radius: 7px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group textarea {
+    min-height: 105px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #1d5ed6;
+    box-shadow: 0 0 0 3px rgba(29, 94, 214, 0.12);
+}
+
+.form-group input[readonly] {
+    color: #0b2b69;
+    font-weight: bold;
+    background: #f7f9fc;
+}
+
+
+/* =========================================================
+   CAMPOS CON ICONO
+========================================================= */
+
+.input-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.input-icon input {
+    flex: 1;
+    min-width: 0;
+}
+
+.input-icon span {
+    flex-shrink: 0;
+    color: #48618f;
+}
+
+
+/* =========================================================
+   ESTADO DE LA TRANSACCIÓN
+========================================================= */
+
+.status-box {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    background: #f7f9fc;
+    border: 1px solid #cfd7e6;
+    border-radius: 7px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 15px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.status-badge.pending {
+    color: #815600;
+    background: #fff1c9;
+}
+
+.status-badge.approved {
+    color: #116329;
+    background: #dff5e5;
+}
+
+.status-badge.rejected {
+    color: #a40000;
+    background: #ffe2e2;
+}
+
+
+/* =========================================================
+   MENSAJES
+========================================================= */
+
+.form-message {
+    grid-column: 1 / -1;
+    min-height: 20px;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.form-message.success {
+    color: #098437;
+}
+
+.form-message.error {
+    color: #bf0000;
+}
+
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+.payment-card .primary-button,
+.payment-card .secondary-button {
+    grid-column: 1 / -1;
+    display: block;
+    width: 100%;
+    padding: 14px;
+    box-sizing: border-box;
+    font: inherit;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.payment-card .primary-button {
+    color: #ffffff;
+    background: #1761e8;
+    border: 1px solid #1761e8;
+}
+
+.payment-card .primary-button:hover {
+    color: #ffffff;
+    background: #104dbb;
+}
+
+.payment-card .secondary-button {
+    color: #1761e8;
+    background: #ffffff;
+    border: 1px solid #1761e8;
+}
+
+.payment-card .secondary-button:hover {
+    color: #ffffff;
+    background: #1761e8;
+}
+
+
+/* =========================================================
+   NOTA DE SEGURIDAD
+========================================================= */
+
+.payment-page .secure-note {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    padding: 18px;
+    color: #174eaf;
+    background: #ffffff;
+    border: 1px solid #dfe4ee;
+    border-radius: 10px;
+}
+
+.payment-page .secure-note strong {
+    display: block;
+}
+
+.payment-page .secure-note p {
+    margin: 4px 0 0;
+    color: #667085;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   RESUMEN DEL PEDIDO
+========================================================= */
+
+.payment-page .summary-card {
+    position: sticky;
+    top: 20px;
+    width: 100%;
+    min-width: 0;
+    padding: 26px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #dfe4ee;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.payment-page .summary-card h2 {
+    margin: 0 0 22px;
+    color: #0b2b69;
+    font-size: 1.6rem;
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   PRODUCTOS DEL RESUMEN
+========================================================= */
+
+.payment-page .summary-product {
+    display: grid;
+    grid-template-columns:
+        80px
+        minmax(0, 1fr)
+        auto;
+    align-items: start;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid #e6e9ef;
+}
+
+.payment-page .summary-product img,
+.summary-product-no-image {
+    width: 80px;
+    height: 95px;
+    object-fit: contain;
+    box-sizing: border-box;
+    background: #fafafa;
+    border: 1px solid #dfe4ee;
+    border-radius: 7px;
+}
+
+.summary-product-no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777777;
+    font-size: 0.7rem;
+    text-align: center;
+}
+
+.payment-page .summary-product > div {
+    min-width: 0;
+}
+
+.payment-page .summary-product h3 {
+    margin: 0 0 6px;
+    color: #174eaf;
+    font-size: 1rem;
+    line-height: 1.3;
+}
+
+.payment-page .summary-product p {
+    margin: 0 0 9px;
+    color: #667085;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.payment-page .summary-product span {
+    display: block;
+    margin-top: 3px;
+    color: #333333;
+    font-size: 0.8rem;
+    line-height: 1.35;
+}
+
+.payment-page .summary-product > strong {
+    padding-top: 4px;
+    color: #111827;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    text-align: right;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TOTALES
+========================================================= */
+
+.payment-page .summary-line,
+.payment-page .summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.payment-page .summary-line {
+    margin-top: 18px;
+    color: #333333;
+    line-height: 1.4;
+}
+
+.payment-page .summary-line strong {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.payment-page .free-shipping {
+    color: #16802d;
+}
+
+.payment-page .summary-total {
+    margin-top: 18px;
+    padding-top: 18px;
+    color: #111827;
+    font-size: 1.1rem;
+    border-top: 1px solid #dfe4ee;
+}
+
+.payment-page .summary-total strong {
+    color: #174eaf;
+    text-align: right;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   RESPONSIVO PARA TABLETAS
+========================================================= */
+
+@media screen and (max-width: 1100px) {
+
+    .payment-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-page .summary-card {
+        position: static;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVO PARA MÓVILES
+========================================================= */
+
+@media screen and (max-width: 650px) {
+
+    .payment-page {
+        padding: 25px 15px 45px;
+    }
+
+    .payment-title h1 {
+        font-size: 1.7rem;
+    }
+
+    .payment-card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .form-group,
+    .form-group.full {
+        grid-column: 1;
+    }
+
+    .payment-page .summary-card {
+        padding: 20px;
+    }
+
+    .payment-page .summary-product {
+        grid-template-columns:
+            65px
+            minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .payment-page .summary-product img,
+    .summary-product-no-image {
+        width: 65px;
+        height: 80px;
+    }
+
+    .payment-page .summary-product > strong {
+        grid-column: 2;
+        padding-top: 4px;
+        text-align: left;
+    }
+
+    .payment-page .summary-line,
+    .payment-page .summary-total {
+        gap: 12px;
+        font-size: 0.9rem;
+    }
+
+}

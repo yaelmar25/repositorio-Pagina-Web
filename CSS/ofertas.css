@@ -1,0 +1,246 @@
+.ofertas-page {
+    min-height: calc(100vh - 150px);
+    padding: 40px 20px 60px;
+    background: #f4f6fb;
+}
+
+.ofertas-section {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+.ofertas-titulo {
+    margin: 0 0 8px;
+    color: #174eaf;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.ofertas-descripcion {
+    margin: 0 0 35px;
+    color: #666;
+    text-align: center;
+}
+
+
+/* =========================================================
+   CUADRÍCULA
+========================================================= */
+
+.ofertas-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(250px, 1fr)
+    );
+    align-items: stretch;
+    gap: 28px;
+}
+
+
+/* =========================================================
+   TARJETA
+========================================================= */
+
+.oferta-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.1);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.oferta-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 9px 24px rgba(0, 0, 0, 0.14);
+}
+
+
+/* =========================================================
+   ETIQUETA DEL DESCUENTO
+========================================================= */
+
+.oferta-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    padding: 8px 13px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background: #ef0000;
+    border-radius: 22px;
+}
+
+
+/* =========================================================
+   IMAGEN
+========================================================= */
+
+.oferta-imagen-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-decoration: none;
+    background: #ffffff;
+}
+
+.oferta-imagen {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.oferta-sin-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #777;
+    text-align: center;
+    background: #eeeeee;
+    border-radius: 7px;
+}
+
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+.oferta-contenido {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+}
+
+.oferta-nombre {
+    margin: 0 0 12px;
+    color: #111;
+    font-size: 1.2rem;
+    line-height: 1.3;
+}
+
+.oferta-modelo {
+    min-height: 42px;
+    margin: 0 0 15px;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.oferta-precio-anterior {
+    margin: 0 0 8px;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.oferta-precio-final {
+    margin: 0 0 10px;
+    color: #174eaf;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.oferta-stock {
+    margin: 0 0 18px;
+    color: #16802d;
+    font-size: 0.88rem;
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   BOTÓN
+========================================================= */
+
+.oferta-boton {
+    display: block;
+    width: 100%;
+    margin-top: auto;
+    padding: 12px;
+    box-sizing: border-box;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background: #ed0000;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.oferta-boton:visited {
+    color: #ffffff;
+}
+
+.oferta-boton:hover {
+    color: #ffffff;
+    background: #bd0000;
+}
+
+
+/* =========================================================
+   SIN OFERTAS
+========================================================= */
+
+.ofertas-vacias {
+    grid-column: 1 / -1;
+    padding: 50px 20px;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 12px;
+}
+
+.ofertas-vacias h3 {
+    margin-top: 0;
+    color: #174eaf;
+}
+
+.ofertas-vacias a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 11px 22px;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    background: #174eaf;
+    border-radius: 5px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media screen and (max-width: 600px) {
+
+    .ofertas-page {
+        padding: 25px 15px 40px;
+    }
+
+    .ofertas-titulo {
+        font-size: 1.6rem;
+    }
+
+    .ofertas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .oferta-imagen-link {
+        height: 250px;
+    }
+}

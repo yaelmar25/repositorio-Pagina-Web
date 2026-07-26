@@ -1,163 +1,155 @@
+<?php
+
+require_once __DIR__ . "/config/conexion.php";
+
+
+
+$sql = "
+    SELECT
+        p.id_producto,
+        p.slug,
+        p.nombre,
+        p.equipo,
+        p.modelo,
+        p.precio,
+        p.descuento,
+        (
+            SELECT ip.ruta_imagen
+            FROM imagenes_producto ip
+            WHERE ip.id_producto = p.id_producto
+            ORDER BY ip.id_imagen
+            LIMIT 1
+        ) AS imagen,
+        (
+            SELECT COALESCE(SUM(pt.stock), 0)
+            FROM producto_tallas pt
+            WHERE pt.id_producto = p.id_producto
+        ) AS stock_total
+    FROM productos p
+    WHERE p.descuento > 0
+      AND EXISTS (
+            SELECT 1
+            FROM producto_tallas pt
+            WHERE pt.id_producto = p.id_producto
+              AND pt.stock > 0
+      )
+    ORDER BY
+        p.descuento DESC,
+        p.id_producto ASC
+";
+
+$resultadoOfertas = $conexion->query($sql);
+
+if (!$resultadoOfertas) {
+    die("Error al consultar las ofertas: " . $conexion->error);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Ofertas | Legacy Jerseys</title>
 
     <link rel="stylesheet" href="CSS/estilos.css">
-
+    <link rel="stylesheet" href="CSS/ofertas.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    
+    <?php require_once __DIR__ . "/header/header.php"; ?>
 
-    <header>
+    
+    <main class="ofertas-page">
+        <section class="ofertas-section">
 
-        <div class="logo">
-            <a href="index.php">LEGACY JERSEYS</a>
-        </div>
+            <h1 class="ofertas-titulo">🔥 Ofertas especiales 🔥</h1>
+            <p class="ofertas-descripcion">Aprovecha nuestros descuentos disponibles por tiempo limitado.</p>
 
-        <div class="buscador">
+            <div class="ofertas-grid">
+                <?php if ($resultadoOfertas->num_rows > 0): ?>
+                    <?php while ($producto = $resultadoOfertas->fetch_assoc()): ?>
+                        <?php
+                        $precioNormal = (float) $producto["precio"];
+                        $descuento    = (float) $producto["descuento"];
+                        $precioOferta = $precioNormal - ($precioNormal * $descuento / 100);
+                        $stockTotal   = (int) $producto["stock_total"];
+                        ?>
 
-            <input type="text" placeholder="🔍 Buscar jerseys">
+                        <article class="oferta-card">
+                            <!-- DESCUENTO -->
+                            <span class="oferta-badge">
+                                🔥 -<?= number_format($descuento, 0) ?>%
+                            </span>
 
-        </div>
+                            <!-- IMAGEN -->
+                            <a href="descripcion_del_producto.php?id=<?= urlencode($producto["slug"]) ?>" class="oferta-imagen-link">
+                                <?php if (!empty($producto["imagen"])): ?>
+                                    <img 
+                                        class="oferta-imagen" 
+                                        src="<?= htmlspecialchars($producto["imagen"], ENT_QUOTES, "UTF-8") ?>" 
+                                        alt="<?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>"
+                                    >
+                                <?php else: ?>
+                                    <div class="oferta-sin-imagen">Sin imagen disponible</div>
+                                <?php endif; ?>
+                            </a>
 
-        <div class="acciones">
+                            <!-- CONTENIDO -->
+                            <div class="oferta-contenido">
+                                <h2 class="oferta-nombre">
+                                    <?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>
+                                </h2>
 
-            <a href="inicio_de_sesion.php">
-                Inicio de sesión
-            </a>
-            <a href="Carrito de compras.php">
-                🛒 Carrito
-            </a>
+                                <p class="oferta-modelo">
+                                    <?= htmlspecialchars($producto["modelo"], ENT_QUOTES, "UTF-8") ?>
+                                </p>
 
-        </div>
+                                <p class="oferta-precio-anterior">
+                                    Antes: <del>$<?= number_format($precioNormal, 2) ?> MXN</del>
+                                </p>
 
-    </header>
+                                <p class="oferta-precio-final">
+                                    $<?= number_format($precioOferta, 2) ?> MXN
+                                </p>
 
-    <!-- ================= MENU ================= -->
+                                <p class="oferta-stock">
+                                    <?= $stockTotal === 1 ? "1 pieza disponible" : $stockTotal . " piezas disponibles" ?>
+                                </p>
 
-    <nav>
-
-        <a href="index.php">Inicio</a>
-
-        <a href="catalogo.php">Catálogo</a>
-
-    </nav>
-
-    <!-- ================= SECCIÓN OFERTAS ================= -->
-
-    <section class="ofertas">
-
-        <h2>🔥 Ofertas Especiales 🔥</h2>
-
-        <div class="productos">
-
-            <!-- JERSEY REAL MADRID -->
-            <div class="producto">
-
-                <span class="oferta">🔥 -25%</span>
-
-                <img src="pictures/madrid.jpg" alt="Jersey Real Madrid">
-
-                <div class="info">
-
-                    <h3>Real Madrid 2025</h3>
-
-                    <p class="precio-anterior">$1,899 MXN</p>
-
-                    <p class="precio-oferta">$1,424 MXN</p>
-
-                    <button class="btn-oferta">
-                        Comprar ahora
-                    </button>
-
-                </div>
-
+                                <a href="descripcion_del_producto.php?id=<?= urlencode($producto["slug"]) ?>" class="oferta-boton">
+                                    Comprar ahora
+                                </a>
+                            </div>
+                        </article>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <div class="ofertas-vacias">
+                        <h3>No hay ofertas disponibles</h3>
+                        <p>Actualmente no existen productos con descuento y existencias disponibles.</p>
+                        <a href="catalogo.php">Ver catálogo</a>
+                    </div>
+                <?php endif; ?>
             </div>
 
-            <!-- JERSEY BARCELONA -->
-            <div class="producto">
-
-                <span class="oferta">🔥 -30%</span>
-
-                <img src="pictures/barsa.jpg" alt="Jersey Barcelona">
-
-                <div class="info">
-
-                    <h3>Barcelona 2025</h3>
-
-                    <p class="precio-anterior">$1,799 MXN</p>
-
-                    <p class="precio-oferta">$1,259 MXN</p>
-
-                    <button class="btn-oferta">
-                        Comprar ahora
-                    </button>
-
-                </div>
-
-            </div>
-
-            <!-- JERSEY MÉXICO -->
-            <div class="producto">
-
-                <span class="oferta">🔥 -20%</span>
-
-                <img src="pictures/mexico.jpg" alt="Jersey México">
-
-                <div class="info">
-
-                    <h3>México Local 2025</h3>
-
-                    <p class="precio-anterior">$1,699 MXN</p>
-
-                    <p class="precio-oferta">$1,359 MXN</p>
-
-                    <button class="btn-oferta">
-                        Comprar ahora
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ================= FOOTER ================= -->
+        </section>
+    </main>
 
     <footer>
-
-        <div>
-            🔒 Pago seguro
-        </div>
-
-        <div>
-            🚚 Envíos a todo México
-        </div>
-
-        <div>
-            ✔ Productos originales
-        </div>
-
-        <div>
-            📞 +52 777 447 7773
-        </div>
-
-        <div class="copyright">
-            © 2026 LEGACY JERSEYS
-        </div>
-
+        <div>🔒 Pago seguro</div>
+        <div>🚚 Envíos a todo México</div>
+        <div>✔ Productos originales</div>
+        <div>📞 +52 777 447 7773</div>
+        <div class="copyright">© 2026 LEGACY JERSEYS</div>
     </footer>
 
 </body>
-
 </html>
+
+<?php
+$resultadoOfertas->free();
+$conexion->close();
+?>

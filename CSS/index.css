@@ -1,0 +1,232 @@
+.destacados {
+    width: 100%;
+    padding: 40px 30px 70px;
+    box-sizing: border-box;
+    background: #f4f6fb;
+}
+
+.destacados > h2 {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 35px;
+    color: #174eaf;
+    font-size: 2rem;
+}
+
+
+/* =========================================================
+   CUADRÍCULA
+========================================================= */
+
+.destacados .contenedor-productos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 28px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+.destacados .producto {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 570px;
+    padding: 22px;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.1);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.destacados .producto:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 9px 24px rgba(0, 0, 0, 0.14);
+}
+
+
+/* =========================================================
+   IMAGEN
+========================================================= */
+
+.destacados .enlace-imagen-producto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 280px;
+    margin-bottom: 18px;
+    text-decoration: none;
+}
+
+.destacados .producto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   INFORMACIÓN
+========================================================= */
+
+.destacados .producto h3 {
+    margin: 0 0 12px;
+    color: #111111;
+    font-size: 1.2rem;
+    line-height: 1.3;
+}
+
+.destacados .modelo-destacado {
+    min-height: 42px;
+    margin: 0 0 14px;
+    color: #666666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.destacados .producto > p {
+    margin-top: 0;
+}
+
+.destacados .producto .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0;
+}
+
+.destacados .precio {
+    color: #174eaf;
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+
+.destacados .stock {
+    display: inline-block;
+    padding: 5px 12px;
+    color: #16802d;
+    font-size: 0.85rem;
+    background: #e5f8e8;
+    border-radius: 5px;
+}
+
+.destacados .descuento-destacado {
+    margin: 0 0 16px;
+    color: #16802d;
+    font-size: 0.85rem;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   BOTÓN
+========================================================= */
+
+.destacados .boton-producto {
+    display: block;
+    width: 100%;
+    margin-top: auto;
+    padding: 12px;
+    box-sizing: border-box;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background: #174eaf;
+    border-radius: 6px;
+}
+
+.destacados .boton-producto:visited {
+    color: #ffffff;
+}
+
+.destacados .boton-producto:hover {
+    color: #ffffff;
+    background: #103a85;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media screen and (max-width: 1150px) {
+
+    .destacados .contenedor-productos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media screen and (max-width: 650px) {
+
+    .destacados {
+        padding: 30px 15px 50px;
+    }
+
+    .destacados > h2 {
+        font-size: 1.6rem;
+    }
+
+    .destacados .contenedor-productos {
+        grid-template-columns: 1fr;
+    }
+
+    .destacados .producto {
+        min-height: 0;
+    }
+
+}
+
+/* =========================================================
+   MENSAJE DE COMPRA
+========================================================= */
+
+.mensaje-compra {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.mensaje-compra.exito {
+    color: #176b27;
+    background: #e8f8ec;
+    border: 1px solid #9dd5a8;
+}
+
+.mensaje-compra strong {
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 600px) {
+
+    .mensaje-compra {
+        flex-direction: column;
+    }
+
+}

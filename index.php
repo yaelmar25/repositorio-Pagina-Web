@@ -1,13 +1,23 @@
 <?php
 
+require_once __DIR__ . "/config/sesion.php";
 require_once __DIR__ . "/config/conexion.php";
 
-/* =========================================================
-   CONSULTAR PRODUCTOS DESTACADOS
-========================================================= */
 
-$consultaDestacados = $conexion->prepare(
-    "SELECT
+
+$mensajeCompra = $_SESSION["mensaje_compra"] ?? "";
+$tipoMensajeCompra = $_SESSION["tipo_mensaje_compra"] ?? "";
+
+
+
+unset(
+    $_SESSION["mensaje_compra"],
+    $_SESSION["tipo_mensaje_compra"]
+);
+
+
+
+$queryDestacados = "SELECT
         p.id_producto,
         p.slug,
         p.nombre,
@@ -44,8 +54,9 @@ $consultaDestacados = $conexion->prepare(
           AND pt.stock > 0
     )
     ORDER BY p.id_producto
-    LIMIT 4"
-);
+    LIMIT 4";
+
+$consultaDestacados = $conexion->prepare($queryDestacados);
 
 if (!$consultaDestacados) {
     die("Error al preparar los productos destacados: " . $conexion->error);
@@ -62,15 +73,25 @@ $resultadoDestacados = $consultaDestacados->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legacy Jerseys</title>
+
     <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="CSS/index.css">
 </head>
 
 <body>
 
-    <!-- ================= ENCABEZADO REUTILIZABLE ================= -->
+    
     <?php require_once __DIR__ . "/header/header.php"; ?>
 
-    <!-- ================= BANNER ================= -->
+    <!-- ================= MENSAJE DE COMPRA ================= -->
+    <?php if ($mensajeCompra !== ""): ?>
+        <div class="mensaje-compra <?= htmlspecialchars($tipoMensajeCompra, ENT_QUOTES, "UTF-8") ?>" role="alert">
+            <strong>Compra finalizada:</strong>
+            <span><?= htmlspecialchars($mensajeCompra, ENT_QUOTES, "UTF-8") ?></span>
+        </div>
+    <?php endif; ?>
+
+ 
     <section class="banner">
         <div class="texto-banner">
             <h1>LEGACY JERSEYS</h1>
@@ -83,18 +104,17 @@ $resultadoDestacados = $consultaDestacados->get_result();
         </div>
     </section>
 
-    <!-- ================= PRODUCTOS DESTACADOS ================= -->
+   
     <section class="destacados">
         <h2>⭐ Productos destacados</h2>
 
         <div class="contenedor-productos">
             <?php if ($resultadoDestacados->num_rows > 0): ?>
-
                 <?php while ($producto = $resultadoDestacados->fetch_assoc()): ?>
                     <?php
                     $precioNormal = (float) $producto["precio"];
-                    $descuento    = (float) $producto["descuento"];
-                    $precioFinal  = $precioNormal;
+                    $descuento = (float) $producto["descuento"];
+                    $precioFinal = $precioNormal;
 
                     if ($descuento > 0) {
                         $precioFinal = $precioNormal - ($precioNormal * $descuento / 100);
@@ -102,7 +122,6 @@ $resultadoDestacados = $consultaDestacados->get_result();
                     ?>
 
                     <article class="producto">
-
                         <!-- IMAGEN -->
                         <a href="descripcion_del_producto.php?id=<?= urlencode($producto["slug"]) ?>" class="enlace-imagen-producto">
                             <?php if (!empty($producto["imagen"])): ?>
@@ -113,9 +132,7 @@ $resultadoDestacados = $consultaDestacados->get_result();
                         </a>
 
                         <!-- NOMBRE -->
-                        <h3>
-                            <?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?>
-                        </h3>
+                        <h3><?= htmlspecialchars($producto["nombre"], ENT_QUOTES, "UTF-8") ?></h3>
 
                         <!-- MODELO -->
                         <?php if (!empty($producto["modelo"])): ?>
@@ -131,9 +148,7 @@ $resultadoDestacados = $consultaDestacados->get_result();
 
                         <!-- PRECIO Y STOCK -->
                         <div class="info">
-                            <span class="precio">
-                                $<?= number_format($precioFinal, 2) ?> MXN
-                            </span>
+                            <span class="precio">$<?= number_format($precioFinal, 2) ?> MXN</span>
                             <span class="stock">
                                 <?= (int) $producto["stock_total"] > 0 ? "Disponible" : "Agotado" ?>
                             </span>
@@ -150,22 +165,17 @@ $resultadoDestacados = $consultaDestacados->get_result();
                         <a href="descripcion_del_producto.php?id=<?= urlencode($producto["slug"]) ?>" class="boton-producto">
                             Ver producto
                         </a>
-
                     </article>
                 <?php endwhile; ?>
-
             <?php else: ?>
-
                 <div class="destacados-vacios">
                     <h3>No hay productos destacados</h3>
                     <p>Actualmente no existen productos con stock disponible.</p>
                 </div>
-
             <?php endif; ?>
         </div>
     </section>
 
-    <!-- ================= FOOTER ================= -->
     <footer>
         <div>🔒 Pago seguro</div>
         <div>🚚 Envíos a todo México</div>
@@ -174,15 +184,13 @@ $resultadoDestacados = $consultaDestacados->get_result();
         <div class="copyright">© 2026 LEGACY JERSEYS</div>
     </footer>
 
-    <!-- ================= JAVASCRIPT ================= -->
+   
     <script src="script/index.js"></script>
 
 </body>
-
 </html>
-<?php
 
+<?php
 $consultaDestacados->close();
 $conexion->close();
-
 ?>

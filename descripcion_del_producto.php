@@ -2,9 +2,7 @@
 
 require_once __DIR__ . "/config/conexion.php";
 
-/* =========================================================
-   1. OBTENER EL PRODUCTO DESDE LA URL
-========================================================= */
+
 
 $slug = trim($_GET["id"] ?? "");
 
@@ -13,9 +11,7 @@ if ($slug === "") {
     die("No se indicó ningún producto.");
 }
 
-/* =========================================================
-   2. CONSULTAR LA INFORMACIÓN DEL PRODUCTO
-========================================================= */
+
 
 $consultaProducto = $conexion->prepare(
     "SELECT
@@ -47,9 +43,6 @@ if (!$producto) {
     die("El producto solicitado no existe.");
 }
 
-/* =========================================================
-   3. CONSULTAR LAS IMÁGENES DEL PRODUCTO
-========================================================= */
 
 $consultaImagenes = $conexion->prepare(
     "SELECT ruta_imagen
@@ -72,9 +65,6 @@ while ($registroImagen = $resultadoImagenes->fetch_assoc()) {
     $imagenes[] = $registroImagen["ruta_imagen"];
 }
 
-/* =========================================================
-   4. CONSULTAR TALLAS E INVENTARIO
-========================================================= */
 
 $consultaTallas = $conexion->prepare(
     "SELECT
@@ -103,9 +93,6 @@ while ($registroTalla = $resultadoTallas->fetch_assoc()) {
     $stockTotal += $registroTalla["stock"];
 }
 
-/* =========================================================
-   5. CALCULAR PRECIO Y DESCUENTO
-========================================================= */
 
 $precioNormal = (float) $producto["precio"];
 $descuento = (float) $producto["descuento"];
@@ -115,9 +102,7 @@ if ($descuento > 0) {
     $precioFinal = $precioNormal - ($precioNormal * $descuento / 100);
 }
 
-/* =========================================================
-   6. CERRAR CONSULTAS PREPARADAS
-========================================================= */
+
 
 $consultaProducto->close();
 $consultaImagenes->close();
@@ -138,10 +123,9 @@ $consultaTallas->close();
 
 <body>
 
-    <!-- ================= ENCABEZADO REUTILIZABLE ================= -->
     <?php require_once __DIR__ . "/header/header.php"; ?>
 
-    <!-- ================= CONTENIDO PRINCIPAL ================= -->
+   
     <main class="product-page">
 
         <!-- ================= RUTA DE NAVEGACIÓN ================= -->
@@ -152,10 +136,10 @@ $consultaTallas->close();
             </span>
         </p>
 
-        <!-- ================= DETALLE DEL PRODUCTO ================= -->
+       
         <section class="product-detail">
 
-            <!-- ================= GALERÍA ================= -->
+            
             <div class="product-gallery">
                 <?php if (!empty($imagenes)): ?>
                     <img
@@ -286,7 +270,6 @@ $consultaTallas->close();
 
     </main>
 
-    <!-- ================= JAVASCRIPT ================= -->
     <script src="script/descripcion_producto.js"></script>
 
 </body>
