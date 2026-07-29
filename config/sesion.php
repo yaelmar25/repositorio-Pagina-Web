@@ -5,7 +5,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 }
 
 
-
 function usuarioAutenticado(): bool
 {
     return (
@@ -27,6 +26,32 @@ function obtenerUsuarioActual(): ?array
 }
 
 
+
+function obtenerRolUsuario(): string
+{
+    $usuario = obtenerUsuarioActual();
+
+    if ($usuario === null) {
+        return "";
+    }
+
+    return $usuario["rol"] ?? "cliente";
+}
+
+
+
+
+function usuarioEsAdministrador(): bool
+{
+    return (
+        usuarioAutenticado() &&
+        obtenerRolUsuario() === "administrador"
+    );
+}
+
+
+
+
 function obtenerPrimerNombreUsuario(): string
 {
     $usuario = obtenerUsuarioActual();
@@ -35,58 +60,93 @@ function obtenerPrimerNombreUsuario(): string
         return "";
     }
 
-    $nombreCompleto = trim($usuario["nombre"] ?? "");
+    $nombreCompleto = trim(
+        $usuario["nombre"] ?? ""
+    );
 
     if ($nombreCompleto === "") {
         return "Usuario";
     }
 
-    $partesNombre = preg_split("/\s+/", $nombreCompleto);
+    $partesNombre = preg_split(
+        "/\s+/",
+        $nombreCompleto
+    );
 
     return $partesNombre[0] ?? "Usuario";
 }
 
 
 
+
 function obtenerCantidadCarrito(): int
 {
-    $carrito = $_SESSION["carrito"] ?? [];
+    $carrito =
+        $_SESSION["carrito"] ?? [];
+
     $cantidadTotal = 0;
 
     foreach ($carrito as $item) {
-        $cantidadTotal += (int) ($item["cantidad"] ?? 0);
+        $cantidadTotal +=
+            (int) ($item["cantidad"] ?? 0);
     }
 
     return $cantidadTotal;
 }
 
 
+function requerirInicioSesion(
+    string $rutaLogin = "inicio_de_sesion.php"
+): void {
 
-function requerirInicioSesion(string $rutaLogin = "inicio_de_sesion.php"): void
-{
-    /*
-    | Si el usuario ya inició sesión,
-    | puede continuar en la página.
-    */
     if (usuarioAutenticado()) {
         return;
     }
 
-    /*
-    | Guardar la página que el usuario
-    | estaba intentando visitar.
-    */
-    $_SESSION["destino_despues_login"] = $_SERVER["REQUEST_URI"] ?? "/";
+    $_SESSION["destino_despues_login"] =
+        $_SERVER["REQUEST_URI"] ?? "/";
 
-    /*
-    | Crear un mensaje para el formulario.
-    */
-    $_SESSION["mensaje_usuario"] = "Debes iniciar sesión para continuar.";
-    $_SESSION["tipo_mensaje_usuario"] = "error";
+    $_SESSION["mensaje_usuario"] =
+        "Debes iniciar sesión para continuar.";
 
-    /*
-    | Enviar al inicio de sesión.
-    */
+    $_SESSION["tipo_mensaje_usuario"] =
+        "error";
+
     header("Location: " . $rutaLogin);
     exit;
+}
+
+
+
+function requerirAdministrador(
+    string $rutaLogin = "../inicio_de_sesion.php",
+    string $rutaInicio = "../index.php"
+): void {
+
+    if (!usuarioAutenticado()) {
+
+        $_SESSION["destino_despues_login"] =
+            $_SERVER["REQUEST_URI"] ?? "/admin/index.php";
+
+        $_SESSION["mensaje_usuario"] =
+            "Debes iniciar sesión como administrador.";
+
+        $_SESSION["tipo_mensaje_usuario"] =
+            "error";
+
+        header("Location: " . $rutaLogin);
+        exit;
+    }
+
+    if (!usuarioEsAdministrador()) {
+
+        $_SESSION["mensaje_usuario"] =
+            "No tienes permisos para acceder al panel administrativo.";
+
+        $_SESSION["tipo_mensaje_usuario"] =
+            "error";
+
+        header("Location: " . $rutaInicio);
+        exit;
+    }
 }

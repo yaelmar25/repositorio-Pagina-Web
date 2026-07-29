@@ -1,9 +1,8 @@
 <?php
 
-session_start();
+require_once __DIR__ . "/config/sesion.php";
 
-
-if (isset($_SESSION["usuario"])) {
+if (usuarioAutenticado()) {
     header("Location: index.php");
     exit;
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-07-2026 a las 05:41:14
+-- Tiempo de generación: 30-07-2026 a las 00:12:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,7 +44,8 @@ INSERT INTO `detalle_pedido` (`id_detalle`, `id_pedido`, `id_producto`, `talla`,
 (1, 1, 2, 'S', 1, 1359.20),
 (2, 1, 5, 'S', 1, 1349.25),
 (3, 2, 3, 'M', 1, 1799.00),
-(4, 3, 3, 'L', 1, 1799.00);
+(4, 3, 3, 'L', 1, 1799.00),
+(5, 4, 13, 'XS', 1, 1840.00);
 
 -- --------------------------------------------------------
 
@@ -74,7 +75,8 @@ INSERT INTO `imagenes_producto` (`id_imagen`, `id_producto`, `ruta_imagen`) VALU
 (9, 9, 'pictures/mexico.jpg'),
 (10, 10, 'pictures/arg.jpg'),
 (11, 11, 'pictures/brasil.jpg'),
-(12, 12, 'pictures/francia.jpg');
+(12, 12, 'pictures/francia.jpg'),
+(13, 13, 'pictures/productos/barcelona-local-2026-27e98037d1605a59.png');
 
 -- --------------------------------------------------------
 
@@ -87,17 +89,19 @@ CREATE TABLE `pedidos` (
   `id_usuario` int(11) NOT NULL,
   `direccion` varchar(255) NOT NULL,
   `total` decimal(10,2) NOT NULL,
-  `estado` varchar(30) NOT NULL DEFAULT 'pendiente'
+  `estado` varchar(30) NOT NULL DEFAULT 'pendiente',
+  `fecha_pedido` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`id_pedido`, `id_usuario`, `direccion`, `total`, `estado`) VALUES
-(1, 2, 'Zacatepec Col Centro', 2708.45, 'pendiente'),
-(2, 1, 'Zacatepec Col Centro', 1799.00, 'pendiente'),
-(3, 1, 'Zacatepec Col Centro', 1799.00, 'pendiente');
+INSERT INTO `pedidos` (`id_pedido`, `id_usuario`, `direccion`, `total`, `estado`, `fecha_pedido`) VALUES
+(1, 2, 'Zacatepec Col Centro', 2708.45, 'cancelado', '2026-07-29 15:21:35'),
+(2, 1, 'Zacatepec Col Centro', 1799.00, 'cancelado', '2026-07-29 15:21:35'),
+(3, 1, 'Zacatepec Col Centro', 1799.00, 'cancelado', '2026-07-29 15:21:35'),
+(4, 2, 'Zacatepec Col Centro', 1840.00, 'pendiente', '2026-07-29 16:01:36');
 
 -- --------------------------------------------------------
 
@@ -132,7 +136,8 @@ INSERT INTO `productos` (`id_producto`, `slug`, `nombre`, `equipo`, `modelo`, `d
 (9, 'mexico', 'México 2026', 'México', 'Edición Nacional Especial', 'Jersey oficial de la Selección Mexicana.', 1499.00, 15.00),
 (10, 'argentina', 'Argentina 24/25', 'Argentina', 'Modelo Oficial Campeón', 'Jersey oficial de Argentina con tres estrellas.', 1599.00, 0.00),
 (11, 'brasil', 'Brasil 24/25', 'Brasil', 'Modelo Local Oficial', 'Camiseta oficial de Brasil con el clásico color amarillo.', 1599.00, 0.00),
-(12, 'francia', 'Francia 24/25', 'Francia', 'Modelo Local Oficial', 'Jersey oficial de Francia con diseño sofisticado.', 1599.00, 0.00);
+(12, 'francia', 'Francia 24/25', 'Francia', 'Modelo Local Oficial', 'Jersey oficial de Francia con diseño sofisticado.', 1599.00, 30.00),
+(13, 'barcelona-local-2026', 'Barcelona Local-2026', 'Fc Barcelona', 'Local 2026/27', 'Corte	Ajuste entallado\r\nTejido	Tejido ultrafino y aerodinámico\r\nEscudos y logos	Detalles de goma termosellados\r\nTecnología transpirable	Tecnología de máximo rendimiento\r\nDobladillo interior	Acabado termosellado para mejorar la libertad de movimiento', 2300.00, 20.00);
 
 -- --------------------------------------------------------
 
@@ -156,19 +161,15 @@ INSERT INTO `producto_tallas` (`id_producto_talla`, `id_producto`, `talla`, `sto
 (2, 1, 'M', 4),
 (3, 1, 'L', 3),
 (4, 1, 'XL', 2),
-(49, 2, 'S', 0),
-(50, 2, 'M', 3),
-(51, 2, 'L', 2),
-(52, 2, 'XL', 2),
 (53, 3, 'S', 2),
-(54, 3, 'M', 2),
-(55, 3, 'L', 2),
+(54, 3, 'M', 3),
+(55, 3, 'L', 3),
 (56, 3, 'XL', 2),
 (57, 4, 'S', 3),
 (58, 4, 'M', 4),
 (59, 4, 'L', 4),
 (60, 4, 'XL', 3),
-(61, 5, 'S', 1),
+(61, 5, 'S', 2),
 (62, 5, 'M', 3),
 (63, 5, 'L', 2),
 (64, 5, 'XL', 2),
@@ -188,18 +189,30 @@ INSERT INTO `producto_tallas` (`id_producto_talla`, `id_producto`, `talla`, `sto
 (78, 9, 'M', 6),
 (79, 9, 'L', 6),
 (80, 9, 'XL', 4),
-(81, 10, 'S', 3),
-(82, 10, 'M', 5),
-(83, 10, 'L', 4),
-(84, 10, 'XL', 3),
 (85, 11, 'S', 4),
 (86, 11, 'M', 5),
 (87, 11, 'L', 5),
 (88, 11, 'XL', 4),
-(89, 12, 'S', 3),
-(90, 12, 'M', 4),
-(91, 12, 'L', 3),
-(92, 12, 'XL', 3);
+(99, 13, 'XS', 0),
+(100, 13, 'S', 3),
+(101, 13, 'M', 3),
+(102, 13, 'L', 1),
+(103, 13, 'XL', 1),
+(104, 13, 'XXL', 1),
+(105, 12, 'S', 3),
+(106, 12, 'M', 4),
+(107, 12, 'L', 3),
+(108, 12, 'XL', 3),
+(124, 10, 'XS', 3),
+(125, 10, 'S', 3),
+(126, 10, 'M', 5),
+(127, 10, 'L', 4),
+(128, 10, 'XL', 3),
+(133, 2, 'XS', 3),
+(134, 2, 'S', 1),
+(135, 2, 'M', 3),
+(136, 2, 'L', 2),
+(137, 2, 'XL', 2);
 
 -- --------------------------------------------------------
 
@@ -211,17 +224,18 @@ CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `correo` varchar(150) NOT NULL,
-  `contrasena` varchar(255) NOT NULL
+  `contrasena` varchar(255) NOT NULL,
+  `rol` enum('cliente','administrador') NOT NULL DEFAULT 'cliente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `contrasena`) VALUES
-(1, 'Gian Uribe', 'gian@gmail.com', '$2y$10$ozk.dHtTwE4JS/.2B9J0aeNFFIjrsiudpC9gyb7dAdFJ59GDSmM8O'),
-(2, 'Maxmiliano Valle', 'max@gmail.com', '$2y$10$6SB1Umtf.L8s0Qy6IIxvxOl8O/7.IAG0Ue7R8v.q1t.GsAA/nvT/e'),
-(3, 'Yael Marin', 'yael@gmail.com', '$2y$10$/MGwQJSGj6LqovmLuj9OkemgzFoYulUIZVd6VKZilTRls72VII/Iq');
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `contrasena`, `rol`) VALUES
+(1, 'Gian Uribe', 'gian@gmail.com', '$2y$10$ozk.dHtTwE4JS/.2B9J0aeNFFIjrsiudpC9gyb7dAdFJ59GDSmM8O', 'administrador'),
+(2, 'Maximiliano Valle', 'max@gmail.com', '$2y$10$6SB1Umtf.L8s0Qy6IIxvxOl8O/7.IAG0Ue7R8v.q1t.GsAA/nvT/e', 'cliente'),
+(3, 'Yael Marin', 'yael@gmail.com', '$2y$10$/MGwQJSGj6LqovmLuj9OkemgzFoYulUIZVd6VKZilTRls72VII/Iq', 'cliente');
 
 --
 -- Índices para tablas volcadas
@@ -278,31 +292,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `imagenes_producto`
 --
 ALTER TABLE `imagenes_producto`
-  MODIFY `id_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `producto_tallas`
 --
 ALTER TABLE `producto_tallas`
-  MODIFY `id_producto_talla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id_producto_talla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

@@ -1,0 +1,2231 @@
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    color: #111111;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6fb;
+}
+
+button,
+a {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   ESTRUCTURA PRINCIPAL
+========================================================= */
+
+.panel-administrativo {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   MENÚ LATERAL
+========================================================= */
+
+.menu-lateral {
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    height: 100vh;
+    padding: 25px 18px;
+
+    background: #ffffff;
+    border-right: 1px solid #dce3ee;
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================================
+   MARCA DEL PANEL
+========================================================= */
+
+.marca-admin {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 0 8px 25px;
+    border-bottom: 1px solid #e5e9f0;
+}
+
+.marca-icono {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 45px;
+    height: 45px;
+
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    background: #174eaf;
+    border-radius: 11px;
+}
+
+.marca-admin h1 {
+    margin: 0 0 3px;
+
+    color: #174eaf;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.marca-admin p {
+    margin: 0;
+
+    color: #777777;
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+.navegacion-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin-top: 28px;
+}
+
+.enlace-admin {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    color: #555555;
+    font-size: 0.93rem;
+    font-weight: bold;
+    text-decoration: none;
+
+    background: transparent;
+    border-radius: 8px;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.enlace-admin span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 24px;
+    height: 24px;
+
+    color: #174eaf;
+    font-size: 1rem;
+}
+
+.enlace-admin:hover {
+    color: #174eaf;
+    background: #edf3ff;
+    transform: translateX(3px);
+}
+
+.enlace-admin.activo {
+    color: #ffffff;
+    background: #174eaf;
+}
+
+.enlace-admin.activo span {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   PARTE INFERIOR DEL MENÚ
+========================================================= */
+
+.menu-lateral-inferior {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-top: auto;
+}
+
+.menu-lateral-inferior form {
+    margin: 0;
+}
+
+.enlace-tienda,
+.boton-cerrar-sesion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 14px;
+
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+
+    border-radius: 7px;
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.enlace-tienda {
+    color: #174eaf;
+    background: #ffffff;
+    border: 1px solid #174eaf;
+}
+
+.enlace-tienda:visited {
+    color: #174eaf;
+}
+
+.enlace-tienda:hover {
+    color: #ffffff;
+    background: #174eaf;
+    transform: translateY(-1px);
+}
+
+.boton-cerrar-sesion {
+    color: #ffffff;
+    background: #174eaf;
+    border: 1px solid #174eaf;
+}
+
+.boton-cerrar-sesion:hover {
+    background: #103a85;
+    border-color: #103a85;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CONTENIDO PRINCIPAL
+========================================================= */
+
+.contenido-admin {
+    min-width: 0;
+    padding: 30px;
+    background: #f4f6fb;
+}
+
+
+/* =========================================================
+   ENCABEZADO
+========================================================= */
+
+.encabezado-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+
+    margin-bottom: 25px;
+}
+
+.encabezado-etiqueta {
+    margin: 0 0 5px;
+
+    color: #777777;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.encabezado-admin h2 {
+    margin: 0;
+
+    color: #174eaf;
+    font-size: 1.8rem;
+}
+
+.administrador-actual {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 9px 14px;
+
+    background: #ffffff;
+    border: 1px solid #dce3ee;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.administrador-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+
+    color: #ffffff;
+    font-weight: bold;
+
+    background: #174eaf;
+    border-radius: 50%;
+}
+
+.administrador-actual div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.administrador-actual strong {
+    color: #222222;
+    font-size: 0.9rem;
+}
+
+.administrador-actual span {
+    color: #777777;
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   BIENVENIDA
+========================================================= */
+
+.bienvenida-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+
+    margin-bottom: 28px;
+    padding: 30px;
+
+    background: #ffffff;
+    border: 1px solid #dce3ee;
+    border-left: 6px solid #174eaf;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+}
+
+.bienvenida-etiqueta {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    color: #174eaf;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+.bienvenida-admin h2 {
+    margin: 0 0 9px;
+
+    color: #174eaf;
+    font-size: 1.55rem;
+}
+
+.bienvenida-admin p {
+    max-width: 700px;
+    margin: 0;
+
+    color: #666666;
+    line-height: 1.5;
+}
+
+.boton-ver-tienda {
+    flex-shrink: 0;
+
+    padding: 11px 18px;
+
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: none;
+
+    background: #174eaf;
+    border: 1px solid #174eaf;
+    border-radius: 7px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.boton-ver-tienda:visited {
+    color: #ffffff;
+}
+
+.boton-ver-tienda:hover {
+    color: #ffffff;
+    background: #103a85;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   TARJETAS DE RESUMEN
+========================================================= */
+
+.tarjetas-resumen {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.tarjeta-resumen {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    min-width: 0;
+    padding: 21px;
+
+    background: #ffffff;
+    border: 1px solid #e1e6ef;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tarjeta-resumen:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 9px 24px rgba(0, 0, 0, 0.11);
+}
+
+.tarjeta-icono {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    width: 48px;
+    height: 48px;
+
+    color: #174eaf;
+    font-size: 1.25rem;
+    font-weight: bold;
+
+    background: #edf3ff;
+    border-radius: 11px;
+}
+
+.tarjeta-resumen div:last-child {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.tarjeta-resumen span {
+    margin-bottom: 5px;
+    overflow: hidden;
+
+    color: #666666;
+    font-size: 0.83rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tarjeta-resumen strong {
+    color: #174eaf;
+    font-size: 1.65rem;
+}
+
+
+/* =========================================================
+   SECCIONES INFERIORES
+========================================================= */
+
+.secciones-admin {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 20px;
+}
+
+.seccion-admin {
+    padding: 24px;
+
+    background: #ffffff;
+    border: 1px solid #e1e6ef;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+}
+
+.seccion-admin-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+
+    margin-bottom: 22px;
+}
+
+.seccion-etiqueta {
+    display: block;
+    margin-bottom: 5px;
+
+    color: #174eaf;
+    font-size: 0.72rem;
+    font-weight: bold;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.seccion-admin h3 {
+    margin: 0;
+
+    color: #222222;
+    font-size: 1.15rem;
+}
+
+.seccion-admin-encabezado > a {
+    color: #174eaf;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.seccion-admin-encabezado > a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   ESTADO DEL INVENTARIO
+========================================================= */
+
+.estado-inventario {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.estado-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 17px;
+
+    background: #f4f6fb;
+    border: 1px solid #e4e9f1;
+    border-radius: 11px;
+}
+
+.estado-indicador {
+    flex-shrink: 0;
+
+    width: 10px;
+    height: 45px;
+
+    border-radius: 20px;
+}
+
+.estado-indicador.advertencia {
+    background: #e4a11b;
+}
+
+.estado-indicador.peligro {
+    background: #d53d3d;
+}
+
+.estado-item strong {
+    color: #174eaf;
+    font-size: 1.4rem;
+}
+
+.estado-item p {
+    margin: 3px 0 0;
+
+    color: #666666;
+    font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   ACCESOS RÁPIDOS
+========================================================= */
+
+.accesos-rapidos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.accesos-rapidos a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    color: #444444;
+    font-size: 0.88rem;
+    font-weight: bold;
+    text-decoration: none;
+
+    background: #f4f6fb;
+    border: 1px solid #e2e7ef;
+    border-radius: 9px;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.accesos-rapidos a span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 31px;
+    height: 31px;
+
+    color: #ffffff;
+    background: #174eaf;
+    border-radius: 7px;
+}
+
+.accesos-rapidos a:hover {
+    color: #174eaf;
+    background: #edf3ff;
+    border-color: #b9cdef;
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   ELEMENTOS DE ENFOQUE
+========================================================= */
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid rgba(23, 78, 175, 0.25);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   RESPONSIVO PARA TABLET
+========================================================= */
+
+@media screen and (max-width: 1100px) {
+
+    .tarjetas-resumen {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .secciones-admin {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVO PARA PANTALLAS PEQUEÑAS
+========================================================= */
+
+@media screen and (max-width: 800px) {
+
+    .panel-administrativo {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-lateral {
+        position: relative;
+
+        width: 100%;
+        height: auto;
+
+        border-right: none;
+        border-bottom: 1px solid #dce3ee;
+    }
+
+    .navegacion-admin {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .menu-lateral-inferior {
+        margin-top: 25px;
+    }
+
+    .contenido-admin {
+        padding: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVO PARA CELULAR
+========================================================= */
+
+@media screen and (max-width: 600px) {
+
+    .contenido-admin {
+        padding: 16px;
+    }
+
+    .encabezado-admin {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .administrador-actual {
+        width: 100%;
+    }
+
+    .bienvenida-admin {
+        flex-direction: column;
+        align-items: flex-start;
+
+        padding: 24px 20px;
+    }
+
+    .boton-ver-tienda {
+        width: 100%;
+        text-align: center;
+    }
+
+    .tarjetas-resumen {
+        grid-template-columns: 1fr;
+    }
+
+    .estado-inventario {
+        grid-template-columns: 1fr;
+    }
+
+    .navegacion-admin {
+        grid-template-columns: 1fr;
+    }
+
+    .seccion-admin {
+        padding: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   ENCABEZADO DE SECCIONES ADMINISTRATIVAS
+========================================================= */
+
+.encabezado-seccion-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+
+    margin-bottom: 20px;
+    padding: 24px 26px;
+
+    background: #ffffff;
+    border: 1px solid #e1e6ef;
+    border-left: 5px solid #174eaf;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+}
+
+.encabezado-seccion-admin h3 {
+    margin: 0 0 7px;
+    color: #174eaf;
+    font-size: 1.35rem;
+}
+
+.encabezado-seccion-admin p {
+    margin: 0;
+    color: #666666;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BOTÓN PRINCIPAL DEL ADMINISTRADOR
+========================================================= */
+
+.boton-admin-principal {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 7px;
+
+    min-height: 43px;
+    padding: 11px 18px;
+
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: none;
+
+    background: #174eaf;
+    border: 1px solid #174eaf;
+    border-radius: 7px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.boton-admin-principal:visited {
+    color: #ffffff;
+}
+
+.boton-admin-principal:hover {
+    color: #ffffff;
+    background: #103a85;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   BARRA DE HERRAMIENTAS
+========================================================= */
+
+.barra-herramientas-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+.formulario-busqueda-admin {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    max-width: 650px;
+}
+
+.formulario-busqueda-admin input {
+    flex: 1;
+    min-width: 0;
+    min-height: 43px;
+    padding: 10px 14px;
+
+    color: #222222;
+    font-size: 0.9rem;
+
+    background: #ffffff;
+    border: 1px solid #ccd5e3;
+    border-radius: 7px;
+    outline: none;
+}
+
+.formulario-busqueda-admin input:focus {
+    border-color: #174eaf;
+    box-shadow: 0 0 0 3px rgba(23, 78, 175, 0.12);
+}
+
+.formulario-busqueda-admin button {
+    min-height: 43px;
+    padding: 10px 20px;
+
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    background: #174eaf;
+    border: 1px solid #174eaf;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.formulario-busqueda-admin button:hover {
+    background: #103a85;
+}
+
+.limpiar-admin {
+    color: #174eaf;
+    font-size: 0.88rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.limpiar-admin:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   MENSAJE DE RESULTADOS
+========================================================= */
+
+.mensaje-resultados-admin {
+    margin-bottom: 18px;
+    padding: 13px 16px;
+
+    color: #444444;
+    font-size: 0.9rem;
+
+    background: #edf3ff;
+    border-left: 4px solid #174eaf;
+    border-radius: 7px;
+}
+
+.mensaje-resultados-admin strong {
+    color: #174eaf;
+}
+
+
+/* =========================================================
+   CONTENEDOR DE LA TABLA
+========================================================= */
+
+.contenedor-tabla-admin {
+    overflow: hidden;
+
+    background: #ffffff;
+    border: 1px solid #e1e6ef;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+}
+
+.tabla-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+/* =========================================================
+   TABLA ADMINISTRATIVA
+========================================================= */
+
+.tabla-admin {
+    width: 100%;
+    min-width: 1050px;
+
+    border-collapse: collapse;
+}
+
+.tabla-admin th,
+.tabla-admin td {
+    padding: 15px 17px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #e8ebf1;
+}
+
+.tabla-admin th {
+    color: #174eaf;
+    font-size: 0.78rem;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    background: #f4f6fb;
+}
+
+.tabla-admin td {
+    color: #444444;
+    font-size: 0.87rem;
+}
+
+.tabla-admin tbody tr:hover {
+    background: #f8faff;
+}
+
+.tabla-admin tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   INFORMACIÓN DEL PRODUCTO EN TABLA
+========================================================= */
+
+.producto-tabla-admin {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 230px;
+}
+
+.producto-tabla-admin img,
+.imagen-vacia-admin {
+    flex-shrink: 0;
+
+    width: 62px;
+    height: 62px;
+
+    object-fit: contain;
+
+    background: #f4f6fb;
+    border: 1px solid #e1e6ef;
+    border-radius: 8px;
+}
+
+.imagen-vacia-admin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 5px;
+    color: #777777;
+    font-size: 0.66rem;
+    text-align: center;
+}
+
+.producto-tabla-admin > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.producto-tabla-admin strong {
+    color: #222222;
+    line-height: 1.35;
+}
+
+.producto-tabla-admin span {
+    color: #888888;
+    font-size: 0.75rem;
+}
+
+.texto-tabla-principal,
+.texto-tabla-secundario {
+    display: block;
+}
+
+.texto-tabla-principal {
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+.texto-tabla-secundario {
+    color: #777777;
+    font-size: 0.78rem;
+}
+
+
+/* =========================================================
+   PRECIOS Y DESCUENTOS
+========================================================= */
+
+.precio-anterior-admin {
+    display: block;
+    margin-bottom: 4px;
+
+    color: #888888;
+    font-size: 0.76rem;
+    text-decoration: line-through;
+}
+
+.precio-actual-admin {
+    color: #174eaf;
+    white-space: nowrap;
+}
+
+.etiqueta-descuento-admin {
+    display: inline-block;
+    padding: 5px 9px;
+
+    color: #16802d;
+    font-size: 0.77rem;
+    font-weight: bold;
+
+    background: #e7f7eb;
+    border-radius: 20px;
+}
+
+.texto-sin-descuento {
+    color: #888888;
+    font-size: 0.78rem;
+}
+
+
+/* =========================================================
+   ESTADOS DEL STOCK
+========================================================= */
+
+.estado-stock {
+    display: inline-block;
+    padding: 6px 10px;
+
+    font-size: 0.76rem;
+    font-weight: bold;
+    white-space: nowrap;
+
+    border-radius: 20px;
+}
+
+.estado-stock.disponible {
+    color: #16802d;
+    background: #e7f7eb;
+}
+
+.estado-stock.bajo {
+    color: #9a6500;
+    background: #fff3d6;
+}
+
+.estado-stock.agotado {
+    color: #b42318;
+    background: #fde8e7;
+}
+
+.cantidad-tallas-admin {
+    display: block;
+    margin-bottom: 4px;
+
+    color: #174eaf;
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+   ACCIONES
+========================================================= */
+
+.acciones-tabla-admin {
+    display: flex;
+    gap: 7px;
+}
+
+.acciones-tabla-admin a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 34px;
+    padding: 7px 11px;
+
+    font-size: 0.78rem;
+    font-weight: bold;
+    text-decoration: none;
+
+    border-radius: 6px;
+}
+
+.accion-ver-admin {
+    color: #174eaf;
+    background: #edf3ff;
+    border: 1px solid #b9cdef;
+}
+
+.accion-editar-admin {
+    color: #ffffff;
+    background: #174eaf;
+    border: 1px solid #174eaf;
+}
+
+.accion-ver-admin:hover {
+    background: #dce8fc;
+}
+
+.accion-editar-admin:hover {
+    color: #ffffff;
+    background: #103a85;
+}
+
+
+/* =========================================================
+   SIN RESULTADOS
+========================================================= */
+
+.admin-sin-resultados {
+    padding: 55px 25px;
+    text-align: center;
+}
+
+.admin-sin-resultados-icono {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 17px;
+
+    font-size: 1.8rem;
+
+    background: #edf3ff;
+    border-radius: 50%;
+}
+
+.admin-sin-resultados h3 {
+    margin: 0 0 10px;
+    color: #174eaf;
+}
+
+.admin-sin-resultados p {
+    margin: 0 0 22px;
+    color: #666666;
+}
+
+
+/* =========================================================
+   RESPONSIVO DE PRODUCTOS
+========================================================= */
+
+@media screen and (max-width: 700px) {
+
+    .encabezado-seccion-admin {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .boton-admin-principal {
+        width: 100%;
+    }
+
+    .barra-herramientas-admin {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .formulario-busqueda-admin {
+        flex-direction: column;
+        max-width: none;
+    }
+
+    .limpiar-admin {
+        text-align: center;
+    }
+
+}
+
+
+/* =========================================================
+   FORMULARIO ADMINISTRATIVO
+========================================================= */
+
+.formulario-admin-contenedor {
+    padding: 28px;
+
+    background: #ffffff;
+    border: 1px solid #e1e6ef;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+}
+
+.formulario-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.formulario-admin-seccion {
+    padding-bottom: 28px;
+    border-bottom: 1px solid #e5e9f0;
+}
+
+.formulario-admin-seccion:last-of-type {
+    border-bottom: none;
+}
+
+.formulario-admin-titulo {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+
+    margin-bottom: 22px;
+}
+
+.formulario-admin-titulo > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    width: 35px;
+    height: 35px;
+
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    background: #174eaf;
+    border-radius: 8px;
+}
+
+.formulario-admin-titulo h3 {
+    margin: 0 0 4px;
+    color: #174eaf;
+    font-size: 1.05rem;
+}
+
+.formulario-admin-titulo p {
+    margin: 0;
+    color: #777777;
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   CUADRÍCULA DE CAMPOS
+========================================================= */
+
+.formulario-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.campo-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo-admin.campo-completo {
+    grid-column: 1 / -1;
+}
+
+.campo-admin label {
+    color: #333333;
+    font-size: 0.87rem;
+    font-weight: bold;
+}
+
+.campo-admin input,
+.campo-admin textarea {
+    width: 100%;
+    padding: 11px 13px;
+
+    color: #222222;
+    font-family: inherit;
+    font-size: 0.9rem;
+
+    background: #ffffff;
+    border: 1px solid #ccd5e3;
+    border-radius: 7px;
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.campo-admin textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.campo-admin input:focus,
+.campo-admin textarea:focus {
+    border-color: #174eaf;
+    box-shadow: 0 0 0 3px rgba(23, 78, 175, 0.12);
+}
+
+.campo-admin small {
+    color: #777777;
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   PRECIO Y DESCUENTO
+========================================================= */
+
+.campo-con-prefijo,
+.campo-con-sufijo {
+    display: flex;
+    align-items: stretch;
+}
+
+.campo-con-prefijo > span,
+.campo-con-sufijo > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 43px;
+    padding: 0 10px;
+
+    color: #174eaf;
+    font-weight: bold;
+
+    background: #edf3ff;
+    border: 1px solid #ccd5e3;
+}
+
+.campo-con-prefijo > span {
+    border-right: none;
+    border-radius: 7px 0 0 7px;
+}
+
+.campo-con-prefijo input {
+    border-radius: 0 7px 7px 0;
+}
+
+.campo-con-sufijo input {
+    border-radius: 7px 0 0 7px;
+}
+
+.campo-con-sufijo > span {
+    border-left: none;
+    border-radius: 0 7px 7px 0;
+}
+
+
+/* =========================================================
+   SUBIDA DE IMAGEN
+========================================================= */
+
+.carga-imagen-contenedor {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 25px;
+    align-items: stretch;
+}
+
+.input-imagen-admin {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.selector-imagen-admin {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    min-height: 105px;
+    padding: 20px;
+
+    background: #f4f6fb;
+    border: 2px dashed #b9c8df;
+    border-radius: 11px;
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.selector-imagen-admin:hover {
+    background: #edf3ff;
+    border-color: #174eaf;
+    transform: translateY(-2px);
+}
+
+.selector-imagen-icono {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    width: 48px;
+    height: 48px;
+
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: bold;
+
+    background: #174eaf;
+    border-radius: 10px;
+}
+
+.selector-imagen-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.selector-imagen-texto strong {
+    color: #174eaf;
+    font-size: 0.95rem;
+}
+
+.selector-imagen-texto small {
+    color: #666666;
+    font-weight: normal;
+}
+
+.nombre-imagen-admin {
+    margin: 3px 0 0;
+    color: #555555;
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
+}
+
+.vista-previa-admin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 220px;
+    padding: 15px;
+    overflow: hidden;
+
+    color: #777777;
+    font-size: 0.85rem;
+    text-align: center;
+
+    background: #f4f6fb;
+    border: 1px solid #dce3ee;
+    border-radius: 11px;
+}
+
+.vista-previa-admin img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   EXISTENCIAS
+========================================================= */
+
+.grupo-stock-admin {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(80px, 1fr));
+    gap: 14px;
+}
+
+.campo-stock-admin {
+    padding: 14px;
+
+    text-align: center;
+
+    background: #f4f6fb;
+    border: 1px solid #e1e6ef;
+    border-radius: 9px;
+}
+
+.campo-stock-admin label {
+    display: block;
+    margin-bottom: 9px;
+
+    color: #174eaf;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.campo-stock-admin input {
+    width: 100%;
+    padding: 9px 7px;
+
+    color: #222222;
+    font-size: 0.9rem;
+    text-align: center;
+
+    background: #ffffff;
+    border: 1px solid #ccd5e3;
+    border-radius: 6px;
+    outline: none;
+}
+
+.campo-stock-admin input:focus {
+    border-color: #174eaf;
+    box-shadow: 0 0 0 3px rgba(23, 78, 175, 0.12);
+}
+
+
+/* =========================================================
+   BOTONES DEL FORMULARIO
+========================================================= */
+
+.acciones-formulario-admin {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.boton-cancelar-admin,
+.boton-guardar-admin,
+.boton-admin-secundario {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 43px;
+    padding: 11px 19px;
+
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: none;
+
+    border-radius: 7px;
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.boton-cancelar-admin,
+.boton-admin-secundario {
+    color: #174eaf;
+    background: #ffffff;
+    border: 1px solid #174eaf;
+}
+
+.boton-cancelar-admin:visited,
+.boton-admin-secundario:visited {
+    color: #174eaf;
+}
+
+.boton-cancelar-admin:hover,
+.boton-admin-secundario:hover {
+    color: #ffffff;
+    background: #174eaf;
+}
+
+.boton-guardar-admin {
+    color: #ffffff;
+    background: #174eaf;
+    border: 1px solid #174eaf;
+}
+
+.boton-guardar-admin:hover {
+    background: #103a85;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MENSAJES
+========================================================= */
+
+.mensaje-admin {
+    margin-bottom: 20px;
+    padding: 14px 17px;
+
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    border-radius: 8px;
+}
+
+.mensaje-admin.exito {
+    color: #176b2c;
+    background: #e7f7eb;
+    border: 1px solid #b9e4c2;
+}
+
+.mensaje-admin.error {
+    color: #a82218;
+    background: #fde8e7;
+    border: 1px solid #f1b9b5;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media screen and (max-width: 950px) {
+
+    .grupo-stock-admin {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .carga-imagen-contenedor {
+        grid-template-columns: 1fr;
+    }
+
+    .vista-previa-admin {
+        min-height: 280px;
+    }
+
+    .vista-previa-admin img {
+        height: 280px;
+    }
+
+}
+
+
+@media screen and (max-width: 650px) {
+
+    .formulario-admin-contenedor {
+        padding: 20px;
+    }
+
+    .formulario-admin-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-admin.campo-completo {
+        grid-column: auto;
+    }
+
+    .grupo-stock-admin {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .selector-imagen-admin {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .acciones-formulario-admin {
+        flex-direction: column-reverse;
+    }
+
+    .boton-cancelar-admin,
+    .boton-guardar-admin {
+        width: 100%;
+    }
+
+}
+
+/* =========================================================
+   INDICACIÓN DEL INVENTARIO
+========================================================= */
+
+.inventario-indicacion {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 18px;
+    padding: 13px 16px;
+
+    color: #555555;
+    font-size: 0.86rem;
+
+    background: #ffffff;
+    border: 1px solid #dce3ee;
+    border-left: 4px solid #174eaf;
+    border-radius: 8px;
+}
+
+.inventario-indicacion strong {
+    color: #174eaf;
+}
+
+
+/* =========================================================
+   TABLA DEL INVENTARIO
+========================================================= */
+
+.tabla-inventario-admin {
+    min-width: 1150px;
+}
+
+.tabla-inventario-admin .columna-talla {
+    min-width: 78px;
+    text-align: center;
+}
+
+.producto-inventario-admin {
+    min-width: 260px;
+}
+
+.celda-stock-admin {
+    text-align: center !important;
+}
+
+
+/* =========================================================
+   CAMPOS DE EXISTENCIAS
+========================================================= */
+
+.campo-stock-tabla {
+    width: 65px;
+    min-height: 38px;
+    padding: 8px 5px;
+
+    color: #222222;
+    font-size: 0.87rem;
+    font-weight: bold;
+    text-align: center;
+
+    background: #ffffff;
+    border: 1px solid #ccd5e3;
+    border-radius: 6px;
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.campo-stock-tabla:focus {
+    border-color: #174eaf;
+    box-shadow: 0 0 0 3px rgba(23, 78, 175, 0.12);
+}
+
+
+/* =========================================================
+   TOTAL DEL INVENTARIO
+========================================================= */
+
+.total-stock-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+}
+
+.total-stock-admin strong {
+    color: #174eaf;
+    font-size: 1.05rem;
+}
+
+.total-stock-admin span {
+    color: #777777;
+    font-size: 0.75rem;
+}
+
+.total-stock-admin.stock-bajo-admin strong {
+    color: #a66d00;
+}
+
+
+/* =========================================================
+   BOTÓN ACTUALIZAR STOCK
+========================================================= */
+
+.boton-actualizar-stock {
+    min-height: 36px;
+    padding: 8px 13px;
+
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: bold;
+
+    background: #174eaf;
+    border: 1px solid #174eaf;
+    border-radius: 6px;
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.boton-actualizar-stock:hover {
+    background: #103a85;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   RESPONSIVO DEL INVENTARIO
+========================================================= */
+
+@media screen and (max-width: 700px) {
+
+    .inventario-indicacion {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   RESUMEN DE PEDIDOS
+========================================================= */
+
+.resumen-pedidos-admin {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.resumen-pedidos-admin article {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 18px;
+
+    background: #ffffff;
+    border: 1px solid #e1e6ef;
+    border-radius: 12px;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05);
+}
+
+.resumen-pedidos-admin span {
+    color: #666666;
+    font-size: 0.8rem;
+}
+
+.resumen-pedidos-admin strong {
+    color: #174eaf;
+    font-size: 1.5rem;
+}
+
+
+/* =========================================================
+   FILTROS DE PEDIDOS
+========================================================= */
+
+.formulario-filtros-pedidos {
+    display: grid;
+    grid-template-columns: minmax(250px, 1fr) 190px auto;
+    gap: 10px;
+    flex: 1;
+    max-width: 800px;
+}
+
+.formulario-filtros-pedidos input,
+.formulario-filtros-pedidos select {
+    min-height: 43px;
+    padding: 10px 13px;
+
+    color: #222222;
+    font-size: 0.88rem;
+
+    background: #ffffff;
+    border: 1px solid #ccd5e3;
+    border-radius: 7px;
+    outline: none;
+}
+
+.formulario-filtros-pedidos input:focus,
+.formulario-filtros-pedidos select:focus {
+    border-color: #174eaf;
+    box-shadow: 0 0 0 3px rgba(23, 78, 175, 0.12);
+}
+
+.formulario-filtros-pedidos button {
+    min-height: 43px;
+    padding: 10px 20px;
+
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: bold;
+
+    background: #174eaf;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.formulario-filtros-pedidos button:hover {
+    background: #103a85;
+}
+
+
+.tabla-pedidos-admin {
+    min-width: 1120px;
+}
+
+.numero-pedido-admin {
+    color: #174eaf;
+    font-size: 1rem;
+}
+
+.direccion-pedido-admin {
+    display: block;
+    max-width: 220px;
+    line-height: 1.45;
+}
+
+.estado-pedido-admin {
+    display: inline-block;
+    padding: 6px 10px;
+
+    font-size: 0.75rem;
+    font-weight: bold;
+
+    border-radius: 20px;
+}
+
+.estado-pedido-admin.pendiente {
+    color: #9a6500;
+    background: #fff3d6;
+}
+
+.estado-pedido-admin.confirmado {
+    color: #174eaf;
+    background: #edf3ff;
+}
+
+.estado-pedido-admin.enviado {
+    color: #6c3ab5;
+    background: #f0e8fc;
+}
+
+.estado-pedido-admin.entregado {
+    color: #16802d;
+    background: #e7f7eb;
+}
+
+.estado-pedido-admin.cancelado {
+    color: #b42318;
+    background: #fde8e7;
+}
+
+.estado-pedido-admin.otro {
+    color: #555555;
+    background: #eeeeee;
+}
+
+.boton-ver-pedido {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 35px;
+    padding: 8px 12px;
+
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: bold;
+    text-decoration: none;
+
+    background: #174eaf;
+    border-radius: 6px;
+}
+
+.boton-ver-pedido:visited {
+    color: #ffffff;
+}
+
+.boton-ver-pedido:hover {
+    color: #ffffff;
+    background: #103a85;
+}
+
+
+
+.pedido-detalle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.tarjeta-detalle-pedido {
+    padding: 23px;
+
+    background: #ffffff;
+    border: 1px solid #e1e6ef;
+    border-radius: 13px;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.06);
+}
+
+.tarjeta-detalle-pedido h3 {
+    margin: 0 0 6px;
+    color: #174eaf;
+}
+
+.tarjeta-detalle-pedido > p {
+    margin: 0 0 20px;
+    color: #666666;
+}
+
+.dato-pedido-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    margin-top: 15px;
+}
+
+.dato-pedido-admin span {
+    color: #777777;
+    font-size: 0.78rem;
+}
+
+.dato-pedido-admin strong {
+    color: #333333;
+    line-height: 1.45;
+}
+
+.total-pedido-destacado {
+    color: #174eaf !important;
+    font-size: 1.25rem;
+}
+
+
+.formulario-estado-pedido {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formulario-estado-pedido label {
+    color: #333333;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.formulario-estado-pedido select {
+    min-height: 42px;
+    padding: 9px 12px;
+
+    color: #222222;
+
+    background: #ffffff;
+    border: 1px solid #ccd5e3;
+    border-radius: 7px;
+}
+
+.formulario-estado-pedido button {
+    min-height: 42px;
+    padding: 10px 15px;
+
+    color: #ffffff;
+    font-weight: bold;
+
+    background: #174eaf;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.formulario-estado-pedido button:hover {
+    background: #103a85;
+}
+
+
+
+.titulo-tabla-pedido {
+    padding: 22px 24px;
+    border-bottom: 1px solid #e5e9f0;
+}
+
+.titulo-tabla-pedido h3 {
+    margin: 0;
+    color: #174eaf;
+}
+
+.tabla-detalle-pedido {
+    min-width: 850px;
+}
+
+.talla-pedido-admin {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 38px;
+    min-height: 32px;
+    padding: 5px 9px;
+
+    color: #174eaf;
+    font-weight: bold;
+
+    background: #edf3ff;
+    border-radius: 6px;
+}
+
+
+
+@media screen and (max-width: 1150px) {
+
+    .resumen-pedidos-admin {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .pedido-detalle-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+@media screen and (max-width: 750px) {
+
+    .resumen-pedidos-admin {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .formulario-filtros-pedidos {
+        grid-template-columns: 1fr;
+        max-width: none;
+    }
+
+    .pedido-detalle-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media screen and (max-width: 500px) {
+
+    .resumen-pedidos-admin {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+
+.nota-estado-pedido {
+    margin: 14px 0 0;
+    padding: 10px 12px;
+
+    color: #666666;
+    font-size: 0.78rem;
+    line-height: 1.5;
+
+    background: #f4f6fb;
+    border-left: 3px solid #174eaf;
+    border-radius: 6px;
+}
+
+.titulo-tabla-pedido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.total-tabla-pedido {
+    color: #174eaf;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 650px) {
+
+    .titulo-tabla-pedido {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .total-tabla-pedido {
+        white-space: normal;
+    }
+
+}
